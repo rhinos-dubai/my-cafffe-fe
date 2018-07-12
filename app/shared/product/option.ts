@@ -1,5 +1,7 @@
 export class Option {
-    name:string;
-    selected:boolean;
-    price:number; 
+    constructor(
+        name:string,
+        selected:boolean,
+        price:number,
+    ){}
 }
