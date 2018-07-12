@@ -1,29 +1,20 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
-let default_1 = class {
-};
-default_1 = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'app-checkout',
-        templateUrl: './checkout.component.html',
-        styleUrls: ['./checkout.component.scss']
-    })
-], default_1);
- %  > core_1.Component;
-implements;
-core_1.OnInit;
-{
-    constructor();
-    { }
-    ngOnInit();
-    { }
-}
-//# sourceMappingURL=__name__.component.js.map
+var core_1 = require("@angular/core");
+var CheckoutComponent = /** @class */ (function () {
+    function CheckoutComponent() {
+    }
+    CheckoutComponent.prototype.ngOnInit = function () { };
+    CheckoutComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'app-checkout',
+            templateUrl: './checkout.component.html',
+            styleUrls: ['./checkout.component.scss']
+        }),
+        __metadata("design:paramtypes", [])
+    ], CheckoutComponent);
+    return CheckoutComponent;
+}());
+exports.CheckoutComponent = CheckoutComponent;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hlY2tvdXQuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2hlY2tvdXQuY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsc0NBQWtEO0FBUWxEO0lBRUU7SUFBZ0IsQ0FBQztJQUVqQixvQ0FBUSxHQUFSLGNBQWEsQ0FBQztJQUpILGlCQUFpQjtRQU43QixnQkFBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLE1BQU0sQ0FBQyxFQUFFO1lBQ25CLFFBQVEsRUFBRSxjQUFjO1lBQ3hCLFdBQVcsRUFBRSwyQkFBMkI7WUFDeEMsU0FBUyxFQUFFLENBQUMsMkJBQTJCLENBQUM7U0FDekMsQ0FBQzs7T0FDVyxpQkFBaUIsQ0FNN0I7SUFBRCx3QkFBQztDQUFBLEFBTkQsSUFNQztBQU5ZLDhDQUFpQiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCwgT25Jbml0IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbkBDb21wb25lbnQoe1xuICBtb2R1bGVJZDogbW9kdWxlLmlkLFxuICBzZWxlY3RvcjogJ2FwcC1jaGVja291dCcsXG4gIHRlbXBsYXRlVXJsOiAnLi9jaGVja291dC5jb21wb25lbnQuaHRtbCcsXG4gIHN0eWxlVXJsczogWycuL2NoZWNrb3V0LmNvbXBvbmVudC5zY3NzJ11cbn0pXG5leHBvcnQgY2xhc3MgQ2hlY2tvdXRDb21wb25lbnQgaW1wbGVtZW50cyBPbkluaXQge1xuXG4gIGNvbnN0cnVjdG9yKCkgeyB9XG5cbiAgbmdPbkluaXQoKSB7IH1cblxufVxuIl19

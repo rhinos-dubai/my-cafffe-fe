@@ -1,29 +1,20 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = require("@angular/core");
-let default_1 = class {
-};
-default_1 = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'app-shop',
-        templateUrl: './shop.component.html',
-        styleUrls: ['./shop.component.scss']
-    })
-], default_1);
- %  > core_1.Component;
-implements;
-core_1.OnInit;
-{
-    constructor();
-    { }
-    ngOnInit();
-    { }
-}
-//# sourceMappingURL=__name__.component.js.map
+var core_1 = require("@angular/core");
+var ShopComponent = /** @class */ (function () {
+    function ShopComponent() {
+    }
+    ShopComponent.prototype.ngOnInit = function () { };
+    ShopComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'app-shop',
+            templateUrl: './shop.component.html',
+            styleUrls: ['./shop.component.scss']
+        }),
+        __metadata("design:paramtypes", [])
+    ], ShopComponent);
+    return ShopComponent;
+}());
+exports.ShopComponent = ShopComponent;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2hvcC5jb21wb25lbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzaG9wLmNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLHNDQUFrRDtBQVFsRDtJQUVFO0lBQWdCLENBQUM7SUFFakIsZ0NBQVEsR0FBUixjQUFhLENBQUM7SUFKSCxhQUFhO1FBTnpCLGdCQUFTLENBQUM7WUFDVCxRQUFRLEVBQUUsTUFBTSxDQUFDLEVBQUU7WUFDbkIsUUFBUSxFQUFFLFVBQVU7WUFDcEIsV0FBVyxFQUFFLHVCQUF1QjtZQUNwQyxTQUFTLEVBQUUsQ0FBQyx1QkFBdUIsQ0FBQztTQUNyQyxDQUFDOztPQUNXLGFBQWEsQ0FNekI7SUFBRCxvQkFBQztDQUFBLEFBTkQsSUFNQztBQU5ZLHNDQUFhIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ29tcG9uZW50LCBPbkluaXQgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcblxuQENvbXBvbmVudCh7XG4gIG1vZHVsZUlkOiBtb2R1bGUuaWQsXG4gIHNlbGVjdG9yOiAnYXBwLXNob3AnLFxuICB0ZW1wbGF0ZVVybDogJy4vc2hvcC5jb21wb25lbnQuaHRtbCcsXG4gIHN0eWxlVXJsczogWycuL3Nob3AuY29tcG9uZW50LnNjc3MnXVxufSlcbmV4cG9ydCBjbGFzcyBTaG9wQ29tcG9uZW50IGltcGxlbWVudHMgT25Jbml0IHtcblxuICBjb25zdHJ1Y3RvcigpIHsgfVxuXG4gIG5nT25Jbml0KCkgeyB9XG5cbn1cbiJdfQ==
