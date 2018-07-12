@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 @Component({
   selector: "my-app",
   template: `<Label text='Hello coffee world'></Label> 
-  <Image src="~/assets/apple.jpg"></Image>
+  <Image src="~/images/apple.jpg"></Image>
   `,
   styles: [`
     @keyframes spin {
