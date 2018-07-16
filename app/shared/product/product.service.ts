@@ -18,6 +18,26 @@ export class ProductService {
   constructor(private http: HttpClient, private zone: NgZone) { }
   allItems:Array<Product>;
 
+  private favItems = new Array<Product>({
+    id:1,
+    name:"Latte",
+    price: 20,
+  },
+  {
+    id:2,
+    name:"Cappachino",
+    price: 20
+  },
+  {
+    id:3,
+    name:"Chai Latte",
+    price: 20
+  })
+
+  getFavItems(): Product[] {
+    return this.favItems;
+}
+
   getCategories(level:number){
     
   }

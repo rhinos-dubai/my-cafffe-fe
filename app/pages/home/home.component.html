@@ -1,7 +1,112 @@
-<ActionBar title="My Cafffe">
-</ActionBar>
+<RadSideDrawer tkExampleTitle tkToggleNavButton>
+  <StackLayout tkDrawerContent class="sideStackLayout">
+      <StackLayout class="sideTitleStackLayout" style="color:white;font-weight: 600">
+          <Label text="Navigation Menu"></Label>
+      </StackLayout>
+      <StackLayout class="sideStackLayout" style="color:white;font-weight: 600">
+          
+          <Label text="Login or Register" class="sideLabel"></Label>
+          <Label text="Help" class="sideLabel"></Label>
+          
+          <Label text="About US" class="sideLabel"></Label>
+          <Label text="Info" class="sideLabel"></Label>
+      </StackLayout>
+  </StackLayout>
+  <StackLayout tkMainContent>
 
-<StackLayout margin="10">
-  <Label class="h1 title"
-    text="home Is working"></Label>
-</StackLayout>
+      <ActionBar title="Home">
+         
+          <ActionItem  ios.position="left" (tap)="openDrawer()"  >
+              <Button text="&#xf0c9;" class="font-awesome" ></Button>
+          </ActionItem>
+        
+        <ActionItem  ios.position="true">
+            <Button text="&#xf007;"  class="font-awesome" ></Button>
+        </ActionItem>
+      </ActionBar>
+      
+      <StackLayout margin="5" verticalAlignment="top">
+          <StackLayout>
+              <GridLayout class="m-10" rows="150" columns="*,*">
+                  <CardView class="cardStyle" margin="05" elevation="0" radius="5" row="0" col="0" [nsRouterLink]="['/drink']">
+                    <StackLayout>
+                      <GridLayout rows="90,50" columns="auto,auto" horizontalAlignment="center">
+                        <StackLayout  margin="5" col="0" row="0">
+                        <Image src="~/images/coffee/coffee.png"></Image>
+                        </StackLayout>
+        
+                        <StackLayout col="0" row="1" >
+                            <Label  text="Grab a Drink" textWrap="true" ></Label>
+                        </StackLayout>
+                      </GridLayout>
+                    </StackLayout>
+                    </CardView>
+        
+                    <CardView class="cardStyle" margin="05" elevation="0" radius="5" row="0" col="1" >
+                        <StackLayout>
+                        <GridLayout rows="90,50" columns="auto,auto" horizontalAlignment="center">
+                          <StackLayout  margin="5" col="0" row="0">
+                          <Image src="~/images/coffee/menu.png"></Image>
+                          </StackLayout>
+          
+                          <StackLayout col="0" row="1" >
+                              <Label  text="Eat Something" textWrap="true" ></Label>
+                          </StackLayout>
+                        </GridLayout>
+                        </StackLayout>
+                      </CardView>
+              </GridLayout>   
+          </StackLayout>
+      </StackLayout>
+
+      <StackLayout margin="5">
+          <CardView class="cardStyle" margin="05" elevation="0" radius="5" row="0" col="1" [nsRouterLink]="['/home']">
+              <GridLayout rows="50" columns="auto,auto" horizontalAlignment="center">
+                  <StackLayout margin="5"  orientation="horizontal">
+                  <Label text="&#xf124; " class="font-awesome text-primary" ></Label>
+                  <Label text="See Nearby Places"></Label>
+                  </StackLayout>
+              </GridLayout>
+            </CardView>
+      </StackLayout>
+
+      <StackLayout margin="5" >
+          <Label margin="05" text="Favourite Items" class="h3"></Label>
+      </StackLayout>
+
+      <StackLayout margin="5" >
+          <StackLayout>
+           <GridLayout >
+                <RadListView [items]="Favitems"  >
+                    <ng-template tkListItemTemplate let-item="item" >
+                        <GridLayout class="listItemTemplateGrid" rows="150">
+                            <CardView class="cardStyle" margin="10" elevation="0" radius="5" >
+                                <StackLayout>
+                                <GridLayout rows="90,20" columns="100,100" horizontalAlignment="center">
+                                  <StackLayout  class="m-10" col="0" row="0">
+                                  <Image [src]="item.image"></Image>
+                                  </StackLayout>
+                  
+                                  <StackLayout col="0" row="1" horizontalAlignment="center">
+                                      <Label  [text]="item.name" textWrap="true" ></Label>
+                                  </StackLayout>
+                                </GridLayout>
+                                  </StackLayout>
+                              </CardView>
+                        </GridLayout>
+                    </ng-template>
+            
+                    <!-- >> angular-listview-item-layouts-grid -->
+                    <ListViewLinearLayout tkListViewLayout scrollDirection="Horizontal" itemHeight="2" spanCount="3"></ListViewLinearLayout>
+                    <!-- << angular-listview-item-layouts-grid -->
+                </RadListView>
+            </GridLayout>
+          </StackLayout>
+
+          <StackLayout>
+              <Label text="123"></Label>
+          </StackLayout>
+      </StackLayout>
+
+  </StackLayout>
+</RadSideDrawer>
