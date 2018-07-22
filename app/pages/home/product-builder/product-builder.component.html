@@ -1,0 +1,27 @@
+<!--<StackLayout margin="2"  orientation="vertical" *ngIf="categories | async as categories">
+    <Label [text]="categories.category" horizontalAlignment="center" class="h3"></Label>
+    <StackLayout *ngFor="let items of categories.products">
+    <Label [text]="items.name" row="0" col="0" verticalAlignment="top"></Label>
+    </StackLayout>
+</StackLayout>-->
+
+
+<StackLayout margin="2" id="view1" row="0" col="0" *ngIf="categories | async as categories">
+    <Label margin="05" [text]="categories.category" class="h3"></Label>
+    <ScrollView orientation="horizontal" scrollBarIndicatorVisible="false">
+        <StackLayout orientation="horizontal"  >
+            
+           <CardView  class="cardStyle" margin="05" elevation="0" radius="5" row="0" col="1" *ngFor="let items of categories.products" >
+                <GridLayout  rows="70,auto" columns="auto,auto" >
+                    <StackLayout margin="10" row="0" col="0">
+                        <Image  src="~/images/coffee/coffee.png"></Image>
+                    </StackLayout>
+                    <StackLayout margin="5" horizontalAlignment="center" row="1" col="0">
+                        <Label [text]="items.name"></Label>
+                    </StackLayout>
+                </GridLayout>
+            </CardView>
+        </StackLayout>
+    </ScrollView>
+</StackLayout>
+

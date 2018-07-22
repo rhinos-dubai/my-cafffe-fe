@@ -15,14 +15,14 @@ button {
 
 .sideStackLayout {
     background-color: #292233;
-    color:fff;
+    color:#fff;
 }
 
 .sideTitleStackLayout {
     height: 56;
     text-align: center;
     vertical-align: center;
-    color:ffffff;
+    color:#ffffff;
 }
 
 .sideLabel {
@@ -36,4 +36,19 @@ button {
 .cardStyle {
     background-color: #3489db;
     color: #fff;
+}
+
+.cardStyleShop{
+    background-color: #fff;
+    color: #000;
+}
+
+.my-button {
+    background-color: orangered;
+    border-radius: 5;
+    color: white;
+    font-family: FontAwesome;
+    font-size: 24;
+    vertical-align: middle;
+    width: 10%;
 }
