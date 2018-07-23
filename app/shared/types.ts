@@ -2,10 +2,10 @@ export type Product = {
     id: number;
     name: string;
     icon: string;
-    //category: SubCategory
+    category: SubCategory
     createdAt: string;
     updatedAt: string;
-    //shops: [Shop]!
+    shops: Shop[];
   }
 
 export type Shop = {
@@ -22,7 +22,19 @@ export type Shop = {
     createdAt: string;
     updatedAt: string;
     products: Product[];
+    properties:Property;
     //categories: [];
+}
+
+export type Property = {
+  id: number;
+  property: string;
+  property_group: string;
+  is_default: boolean;
+  price: number;
+  generic_id: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type Category = {
@@ -47,6 +59,7 @@ export type SubCategory = {
   
   export type Query = {
     getProducts: Product[];
+    getProduct:Product;
     getShops: Shop[];
     getMainCategory: Category;
   }

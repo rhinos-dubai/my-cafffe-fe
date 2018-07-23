@@ -48,11 +48,7 @@
                     <Button text="X"  *ngIf="show" class="my-button" style="horizontal-align:right;" verticalAlignment="top" (tap)="closeAnimation()"></Button>
                     </GridLayout>
                     </StackLayout>
-                    <shop-list-component></shop-list-component>
                     
-                    <StackLayout *ngFor="let item of posts | async">
-                        <Label [text]="item.title"></Label>
-                    </StackLayout>
                 </StackLayout>
             </scroll-view>
         </StackLayout>

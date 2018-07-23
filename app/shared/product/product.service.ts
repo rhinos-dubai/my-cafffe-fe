@@ -7,7 +7,7 @@ import {
 } from "@angular/common/http";
 
 import { Observable, BehaviorSubject ,throwError} from "rxjs";
-import { map, catchError } from "rxjs/operators";
+import { map, catchError, groupBy, mergeMap, toArray } from "rxjs/operators";
 
 import { Config } from "~/shared/config";
 //import { Product } from '~/shared/product/product';
@@ -26,16 +26,17 @@ export class ProductService {
 
   constructor(private http: HttpClient, private zone: NgZone, private apollo:Apollo) { }
   allItems:Array<Product>;
-  productsRef: QueryRef<Query>;
-  catergoryRef:QueryRef<Query>;
+  Ref: QueryRef<Query>;
+  //catergoryRef:QueryRef<Query>;
   categories:Observable<Category>;
   products: Observable<Product[]>;
+  product: Observable<Product>;
   AllPosts:Array<any>;
 
   
 
    getAllProducts(){
-    this.productsRef = this.apollo.watchQuery<Query>({
+    this.Ref = this.apollo.watchQuery<Query>({
       query: gql`
       { 
         getProducts {
@@ -47,7 +48,7 @@ export class ProductService {
       `,
     });
     
-        this.products = this.productsRef
+        this.products = this.Ref
         .valueChanges
         .pipe(map(r =>{ console.log(r.data.getProducts); return r.data.getProducts}),
               catchError(this.handleErrors))
@@ -72,7 +73,7 @@ export class ProductService {
 
   getCategories(level:string){
     console.log("getCategories ==== "+level);
-    this.catergoryRef = this.apollo.watchQuery<Query>({
+    this.Ref = this.apollo.watchQuery<Query>({
       query: gql`
       {
         getMainCategory(id:${level}) {
@@ -91,7 +92,7 @@ export class ProductService {
       `,
     });
 
-    this.categories = this.catergoryRef.valueChanges
+    this.categories = this.Ref.valueChanges
     .pipe(map(results =>{ console.log(results.data.getMainCategory); return results.data.getMainCategory}),
           catchError(this.handleErrors));
 
@@ -100,7 +101,52 @@ export class ProductService {
           return this.categories;
           //return this.catergoryRef.valueChanges.subscribe(r => {console.log(r)});
   }
-  getProducts(category:number){
+  getProduct(id:number){
+
+    this.Ref = this.apollo.watchQuery<Query>({
+      query: gql`
+      {
+        getProduct(id:${id}){
+          name
+          id
+          generic_properties{
+            property
+            id
+          }
+          shops{
+            properties{
+              generic_id
+              price
+              property
+            }
+            shop{
+              name
+              id
+            }
+            base_price
+            addons{
+              addon
+            }
+          }
+        }   
+      } 
+      `,
+    });
+    console.log(id);
+    this.product = this.Ref
+        .valueChanges
+        .pipe(map(r => { console.log(r.data.getProduct);  return r.data.getProduct}))
+              //mergeMap(r => r.pipe(toArray())))
+           //{ //console.log(r.data.getProduct);
+           //return r.data.getProduct}),
+              //catchError(this.handleErrors));
+        
+
+        return this.product;
+
+
+
+
     /*const params = new HttpParams();
     params.append("sort", "{\"_kmd.lmt\": -1}");
 

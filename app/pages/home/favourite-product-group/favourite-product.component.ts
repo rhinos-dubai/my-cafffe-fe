@@ -27,10 +27,6 @@ export class FavouriteProductComponent implements OnInit {
     ngOnInit() { 
 
          this.Favitems =  this.productService.getAllProducts();
-        setTimeout(()=>{
-            //console.log(this.Favitems);
-        }, 3000)
-        //
 
         //console.log();
     }

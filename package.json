@@ -25,15 +25,15 @@
     "apollo-angular": "^1.0.0-beta.1",
     "apollo-angular-link-http": "1.0.0-beta.1",
     "apollo-cache-inmemory": "^1.0.0",
-    "nativescript-ui-listview": "^3.5.9",
-    "nativescript-ui-sidedrawer": "^4.1.1",
-    "nativescript-cardview": "^3.1.1",
     "apollo-client": "^2.0.1",
     "apollo-link": "^1.0.0",
     "graphql": "^0.11.7",
     "graphql-tag": "^2.5.0",
     "nativescript-angular": "~4.4.1",
+    "nativescript-cardview": "^3.1.1",
     "nativescript-theme-core": "~1.0.4",
+    "nativescript-ui-listview": "^3.5.9",
+    "nativescript-ui-sidedrawer": "^4.1.1",
     "reflect-metadata": "~0.1.8",
     "rxjs": "~6.1.0",
     "rxjs-compat": "~6.1.0",
@@ -46,6 +46,7 @@
     "babylon": "6.18.0",
     "lazy": "1.0.11",
     "nativescript-dev-typescript": "~0.7.0",
+    "tslint-config-airbnb": "^5.9.2",
     "typescript": "~2.7.2"
   }
 }

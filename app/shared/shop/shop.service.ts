@@ -22,28 +22,13 @@ import gql from 'graphql-tag';
 import { Product,Shop, Query } from '~/shared/types';
 @Injectable()
 export class ShopService {
-  shopsRef: QueryRef<Query>;
+  Ref: QueryRef<Query>;
   shops: Observable<Shop[]>;
   constructor(private apollo:Apollo) { }
 
-  /*private AllShops = new Array<Shop>({
-    id:1,
-    name:"Starbucks",
-    image:"~/images/shop.jpg",
-    description:"123",
-    location:{Lat:"123",Lng:"123"}
-  },{
-    id:1,
-    name:"Costa",
-    image:"~/images/caffe.jpg",
-    description:"123",
-    location:{Lat:"123",Lng:"123"}
-  })*/
-
-
 
   getAllShops(){
-    this.shopsRef = this.apollo.watchQuery<Query>({
+    this.Ref = this.apollo.watchQuery<Query>({
       query: gql`
       { 
         getShops {
@@ -58,7 +43,7 @@ export class ShopService {
       `
     });
 
-    this.shops = this.shopsRef
+    this.shops = this.Ref
     .valueChanges
     .pipe(map(r => r.data.getShops))
 
@@ -68,8 +53,49 @@ export class ShopService {
   getShopsNearme(){
 
   }
-  getShopsHavingProduct(product:Product){
+  getShopsHavingProduct(){
+    this.Ref = this.apollo.watchQuery<Query>({
+      query: gql`
+      {
+        getProduct(id:2){
+          name,
+          generic_properties{
+            property
+            id
+          }
+          shops{
+            properties{
+              generic_id
+              price
+              property
+            }
+            shop{
+              name
+              id
+              isActive
+            }
+            base_price
+            addons{
+              addon
+            }
+          }
+        }   
+      } 
+      `,
+    });
+    //console.log("SHops");
+    this.shops = this.Ref
+        .valueChanges
+        .pipe(map(r =>{ console.log(r.data.getProduct.shops.filter(result => result.name === "c"))
+        //r.data.getProduct.shops.filter(r => )
+        return r.data.getProduct.shops}))
+              //mergeMap(r => r.pipe(toArray())))
+           //{ //console.log(r.data.getProduct);
+           //return r.data.getProduct}),
+              //catchError(this.handleErrors));
+        
 
+        return this.shops;
   }
 
 

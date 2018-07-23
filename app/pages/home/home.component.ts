@@ -133,7 +133,7 @@ export class HomeComponent implements  AfterViewInit, OnInit {
   animateForDrink(product) {
 
         //console.log("GO Away");
-        this.show = true;
+    this.show = true;
     let definitions = new Array<AnimationDefinition>();
     let a1: AnimationDefinition = {
         target: view1,
