@@ -1,68 +1,59 @@
-import {Component, Input , OnInit, AfterViewInit} from '@angular/core';
-import {Label} from 'ui/label';
-import { CardView } from 'nativescript-cardview';
+import {AfterViewInit, Component, Input , OnInit } from "@angular/core";
 import { ProductService } from "~/shared/product/product.service";
-import { ShopService } from "~/shared/shop/shop.service"
-import { Product,Category,Shop } from '~/shared/types';
-import { Observable } from 'rxjs';
-import {AnimationCurve} from "ui/enums";
-import { Animation, AnimationDefinition } from "ui/animation";
-import { View } from "ui/core/view";
-import { Page } from "ui/page";
-import { StackLayout } from '../../../../node_modules/tns-core-modules/ui/layouts/stack-layout/stack-layout';
+import { ShopService } from "~/shared/shop/shop.service";
+import { Category , Product, Shop } from "~/shared/types";
 
-let viewDrinks: View;
+import { Observable } from "rxjs";
 
 @Component({
     moduleId: module.id,
-    selector: 'product-builder-component',
-    templateUrl: './product-builder.component.html',
-    styleUrls: ['./product-builder.component.scss']
+    selector: "product-builder-component",
+    styleUrls: ["./product-builder.component.scss"],
+    templateUrl: "./product-builder.component.html",
+
 })
 
 export class ProductBuilderComponent implements AfterViewInit, OnInit {
-    constructor(private productService:ProductService, private shopService:ShopService, private page: Page) {}
-    builderText;
-    drinks: Observable<Product[]>;
-    categories: Observable<Category>;
-    product:Observable<Product>;
-    generic_property_id;
-    generic_shop;
-    shops:Observable<Shop[]>
+    public builderText;
+    public drinks: Observable<Product[]>;
+    public categories: Observable<Category>;
+    public product: Observable<Product>;
+    // public generic_property_id;
+    // public generic_shop;
+    public shops: Observable<Shop[]>;
     @Input()
-    builder: string;
+    public builder: string;
 
-     ngOnInit() { 
-        //alert(this.builder);
-        //this.builderText = this.builder;
+    constructor(private productService: ProductService, private shopService: ShopService) {}
+
+    public ngOnInit() {
+        // alert(this.builder);
+        // this.builderText = this.builder;
         this.categories = this.productService.getCategories(this.builder);
-        //console.log(this.drinks);
-        //await this.tt();
-        //console.log(this.categories);
-        //console.log(this.builder)
+        // console.log(this.drinks);
+        // await this.tt();
+        // console.log(this.categories);
+        // console.log(this.builder)
 
     }
 
-    ngAfterViewInit() {
+    // tslint:disable-next-line:no-empty
+    public ngAfterViewInit() {}
 
-    }
-
-    productID(id){
-        //this.ngAfterViewInit();
-        console.log(id);
+    public productID(id) {
+        // this.ngAfterViewInit();
+        // console.log(id);
         this.product = this.productService.getProduct(id);
-        
     }
 
-    propertyID(id,shop){
-        //console.log(id);
+    public propertyID(id) {
+        // console.log(id);
         // console.log(shop);
-        this.generic_property_id = id;
-        console.log(this.generic_property_id);
+        // this.generic_property_id = id;
+        // console.log(this.generic_property_id);
 
-        //this.generic_shop = shop;
-        this.shops = this.shopService.getShopsHavingProduct();
+        // this.generic_shop = shop;
+        this.shops = this.shopService.getShopsHavingProduct(id);
+        // console.log(this.shops);
     }
-
-
 }

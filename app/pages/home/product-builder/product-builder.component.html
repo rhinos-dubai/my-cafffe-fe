@@ -6,15 +6,16 @@
 </StackLayout>-->
 
 
-<StackLayout margin="2"  row="0" col="0" *ngIf="categories | async as categories" >
-    <Label margin="05" [text]="categories.category" class="h3" ></Label>
+<StackLayout margin="2" row="0" col="0" *ngIf="categories | async as categories">
+    <Label margin="05" [text]="categories.category" class="h3"></Label>
     <ScrollView orientation="horizontal" scrollBarIndicatorVisible="false">
         <StackLayout orientation="horizontal">
 
-           <CardView id="viewDrinks"  class="cardStyle" margin="05" elevation="0" radius="5" row="0" col="1" *ngFor="let items of categories.products" (tap)="productID(items.id);">
-                <GridLayout  rows="70,auto" columns="auto,auto" >
+            <CardView id="viewDrinks" class="cardStyle" margin="05" elevation="0" radius="5" row="0" col="1" *ngFor="let items of categories.products"
+                (tap)="productID(items.id);">
+                <GridLayout rows="70,auto" columns="auto,auto">
                     <StackLayout margin="10" row="0" col="0">
-                        <Image  src="~/images/coffee/coffee.png"></Image>
+                        <Image src="~/images/coffee/coffee.png"></Image>
                     </StackLayout>
                     <StackLayout margin="5" horizontalAlignment="center" row="1" col="0">
                         <Label [text]="items.name"></Label>
@@ -25,35 +26,33 @@
         </StackLayout>
     </ScrollView>
 
-    <StackLayout orientation="vertical"  *ngIf="product | async as product">
-        <StackLayout  *ngIf="product.generic_properties.length != 0">
+    <StackLayout orientation="vertical" *ngIf="product | async as product">
+        <StackLayout *ngIf="product.generic_properties.length != 0">
             <Label horizontalAlignment="Center" text="Choose your options" padding="10"></Label>
             <StackLayout *ngFor="let items of product.shops" padding="5">
-                    <StackLayout *ngFor="let item of items.properties" padding="5">
-                            <Button class="btn btn-outline btn-active" [text]="item.property" (tap)="propertyID(item.generic_id)"></Button>
-                    </StackLayout>
-                
+                <StackLayout *ngFor="let item of items.properties" padding="5">
+                    <Button class="btn btn-outline btn-active" [text]="item.property" (tap)="propertyID(product.id)"></Button>
+                </StackLayout>
 
-                    
+
+
             </StackLayout>
         </StackLayout>
-        <StackLayout  *ngIf="shops | async as shops">
+        <StackLayout>
             <ScrollView orientation="Vertical" scrollBarIndicatorVisible="false">
-                <StackLayout *ngFor="let items of product.shops">
-                    <!-- *ngIf="product.generic_properties == generic_property" -->
-                    <CardView class="cardStyleShop" margin="05" elevation="0" radius="5" row="0" col="1"  >
-                            <GridLayout rows="120, auto, auto,auto" columns="*, *" >
-                                <Image src="~/images/shop.jpg" stretch="aspectFill" margin="02" colSpan="2" row="0" ></Image>
-                                <Label [text]="items.shop.name" class="info" textWrap="true" margin="10" row="1" colSpan="2" horizontalAlignment="center" ></Label>
+                <StackLayout>
 
-                                <Label [text]="'AED ' + items.base_price" class="info" textWrap="true" margin="10" row="2" colSpan="2" horizontalAlignment="left" ></Label>
-                            
+                    <CardView class="cardStyleShop" margin="05" elevation="0" radius="5" row="0" col="1" *ngFor="let items of product.shops">
+                        <GridLayout rows="120, auto, auto,auto" columns="*, *">
+                            <Image src="~/images/shop.jpg" stretch="aspectFill" margin="02" colSpan="2" row="0"></Image>
+                            <Label [text]="items.shop.name" class="info" textWrap="true" margin="10" row="1" colSpan="2" horizontalAlignment="center"></Label>
 
-                            </GridLayout>
+                            <Label [text]="'AED ' + items.base_price" class="info" textWrap="true" margin="10" row="2" colSpan="2" horizontalAlignment="left"></Label>
+
+                        </GridLayout>
                     </CardView>
                 </StackLayout>
             </ScrollView>
         </StackLayout>
     </StackLayout>
 </StackLayout>
-

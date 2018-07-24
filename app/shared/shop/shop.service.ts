@@ -1,36 +1,23 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpErrorResponse,
-  HttpParams,
-} from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable} from "rxjs";
+import { map } from "rxjs/operators";
 
-import { Observable, BehaviorSubject ,throwError} from "rxjs";
-import { map, catchError } from "rxjs/operators";
+import {Apollo, QueryRef} from "apollo-angular";
 
-import { Config } from "~/shared/config";
+import gql from "graphql-tag";
 
-import {ApolloModule, Apollo, QueryRef} from 'apollo-angular';
-import {HttpLinkModule, HttpLink} from 'apollo-angular-link-http';
-import {InMemoryCache} from 'apollo-cache-inmemory';
-import gql from 'graphql-tag';
+import { Query, Shop } from "~/shared/types";
 
-
-//import { Product } from '~/shared/product/product';
-//import { Shop } from '~/shared/shop/shop';
-import { Product,Shop, Query } from '~/shared/types';
 @Injectable()
 export class ShopService {
-  Ref: QueryRef<Query>;
-  shops: Observable<Shop[]>;
-  constructor(private apollo:Apollo) { }
+  public Ref: QueryRef<Query>;
+  public shops: Observable<Shop[]>;
+  constructor(private apollo: Apollo) { }
 
-
-  getAllShops(){
+  public getAllShops() {
     this.Ref = this.apollo.watchQuery<Query>({
       query: gql`
-      { 
+      {
         getShops {
         name
         id
@@ -40,24 +27,24 @@ export class ShopService {
         	}
         }
       }
-      `
+      `,
     });
 
     this.shops = this.Ref
     .valueChanges
-    .pipe(map(r => r.data.getShops))
+    .pipe(map((r) => r.data.getShops));
 
     return this.shops;
   }
 
-  getShopsNearme(){
-
+  public getShopsNearme() {
+    return null;
   }
-  getShopsHavingProduct(){
+  public getShopsHavingProduct(id) {
     this.Ref = this.apollo.watchQuery<Query>({
       query: gql`
       {
-        getProduct(id:2){
+        getProduct(id:${id}){
           name,
           generic_properties{
             property
@@ -79,24 +66,16 @@ export class ShopService {
               addon
             }
           }
-        }   
-      } 
+        }
+      }
       `,
     });
-    //console.log("SHops");
+    // console.log("SHops");
     this.shops = this.Ref
         .valueChanges
-        .pipe(map(r =>{ console.log(r.data.getProduct.shops.filter(result => result.name === "c"))
-        //r.data.getProduct.shops.filter(r => )
-        return r.data.getProduct.shops}))
-              //mergeMap(r => r.pipe(toArray())))
-           //{ //console.log(r.data.getProduct);
-           //return r.data.getProduct}),
-              //catchError(this.handleErrors));
-        
+        .pipe(map((r) => r.data.getProduct.shops));
 
-        return this.shops;
+    return this.shops;
+
   }
-
-
 }
