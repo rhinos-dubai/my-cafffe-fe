@@ -73,7 +73,7 @@ export class HomeComponent implements  AfterViewInit, OnInit {
     animationSet.play().then(() => {
         // console.log("Animation finished");
     })
-        .catch((e) => {
+        .catch(() => {
            // console.log(e.message);
         });
 
@@ -106,7 +106,7 @@ export class HomeComponent implements  AfterViewInit, OnInit {
           //  console.log("Animation finished");
         })
             // tslint:disable-next-line:no-empty
-            .catch((e) => {
+            .catch(() => {
 
             });
 
@@ -147,7 +147,7 @@ export class HomeComponent implements  AfterViewInit, OnInit {
         animationSet.play().then(() => {
            // console.log("Animation finished");
         })
-            .catch((e) => {
+            .catch(() => {
                 // console.log(e.message);
             });
 

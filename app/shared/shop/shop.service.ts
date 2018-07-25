@@ -40,42 +40,7 @@ export class ShopService {
   public getShopsNearme() {
     return null;
   }
-  public getShopsHavingProduct(id) {
-    this.Ref = this.apollo.watchQuery<Query>({
-      query: gql`
-      {
-        getProduct(id:${id}){
-          name,
-          generic_properties{
-            property
-            id
-          }
-          shops{
-            properties{
-              generic_id
-              price
-              property
-            }
-            shop{
-              name
-              id
-              isActive
-            }
-            base_price
-            addons{
-              addon
-            }
-          }
-        }
-      }
-      `,
-    });
-    // console.log("SHops");
-    this.shops = this.Ref
-        .valueChanges
-        .pipe(map((r) => r.data.getProduct.shops));
-
-    return this.shops;
-
+  public getShopsHavingProduct() {
+    return null;
   }
 }

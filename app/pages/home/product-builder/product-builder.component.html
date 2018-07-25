@@ -12,7 +12,7 @@
         <StackLayout orientation="horizontal">
 
             <CardView id="viewDrinks" class="cardStyle" margin="05" elevation="0" radius="5" row="0" col="1" *ngFor="let items of categories.products"
-                (tap)="productID(items.id);">
+                (tap)="getProductInfo(items.id,1);">
                 <GridLayout rows="70,auto" columns="auto,auto">
                     <StackLayout margin="10" row="0" col="0">
                         <Image src="~/images/coffee/coffee.png"></Image>
@@ -27,17 +27,22 @@
     </ScrollView>
 
     <StackLayout orientation="vertical" *ngIf="product | async as product">
-        <StackLayout *ngIf="product.generic_properties.length != 0">
-            <Label horizontalAlignment="Center" text="Choose your options" padding="10"></Label>
+        <StackLayout  *ngIf="genericProperties | async as genericProperties">
+                
+                    
+                
+        </StackLayout>
+        <!--<StackLayout >
+            <Label horizontalAlignment="Center" text="product.generic_properties.property_group"  padding="10"></Label>
             <StackLayout *ngFor="let items of product.shops" padding="5">
                 <StackLayout *ngFor="let item of items.properties" padding="5">
-                    <Button class="btn btn-outline btn-active" [text]="item.property" (tap)="propertyID(product.id)"></Button>
+                    <Button class="btn btn-outline btn-active" [text]="item.property" (tap)="getProductInfo(product.id,item.generic_id)"></Button>
                 </StackLayout>
 
 
 
             </StackLayout>
-        </StackLayout>
+        </StackLayout>-->
         <StackLayout>
             <ScrollView orientation="Vertical" scrollBarIndicatorVisible="false">
                 <StackLayout>
