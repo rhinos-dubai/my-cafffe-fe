@@ -58,7 +58,7 @@ export class ProductBuilderComponent implements AfterViewInit, OnInit {
         setTimeout(() => {
          this.genericProperties = this.productService.groupItems(id, this.filters);
          // tslint:disable-next-line:no-console
-         // console.log(this.genericProperties);
+         console.log(this.genericProperties);
          // tslint:disable-next-line:no-console
          // console.log(this.genericProperties);
         }, 1000);
