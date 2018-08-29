@@ -18,15 +18,16 @@ export class ShopService {
     this.Ref = this.apollo.watchQuery<Query>({
       query: gql`
       {
-        getShops {
-        name
-        id
-        products {
+        getClosestShops(
+          latitude: 33.3
+          longitude: 32
+          maxDistance: 10000
+        ) {
           id
-          base_price
-        	}
+          name
+          address
         }
-      }
+      }   
       `,
     });
 
@@ -38,7 +39,30 @@ export class ShopService {
   }
 
   public getShopsNearme() {
-    return null;
+    this.Ref = this.apollo.watchQuery<Query>({
+      query: gql`
+      {
+        getClosestShops(
+          latitude: 33.3
+          longitude: 32
+          maxDistance: 10000
+        ) {
+          id
+          name
+          address
+        }
+      }   
+      `,
+    });
+
+    this.shops = this.Ref
+    .valueChanges
+    .pipe(map((r) => {
+      // console.log(r.data.getClosestShops);
+      return r.data.getClosestShops;
+    }));
+
+    return this.shops;
   }
   public getShopsHavingProduct() {
     return null;

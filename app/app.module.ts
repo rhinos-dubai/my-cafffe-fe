@@ -13,14 +13,21 @@ import { HttpLink, HttpLinkModule } from "apollo-angular-link-http";
 
 import { InMemoryCache } from "apollo-cache-inmemory";
 
+import { GridViewModule } from 'nativescript-grid-view/angular';
+
 import { ProductService } from "./shared/product/product.service";
 import { ShopService } from "./shared/shop/shop.service";
+import { SelectItemComponent } from "./pages/select-item/select-item.component";
+import { ItemGridlistComponent } from "./shared/components/item-gridlist/item-gridlist.component";
+import { LocationListComponent } from "./shared/components/location-list/location-list.component";
+
+
 
 import { AppComponent } from "./app.component";
 
 import {HomeComponent} from "./pages/home/home.component";
 
-const uri = "http://192.168.100.147:4001/my-cafffe-api";
+const uri = "http://142.93.129.34:4001/my-cafffe-api/";
 
 @NgModule({
   imports: [
@@ -30,12 +37,16 @@ const uri = "http://192.168.100.147:4001/my-cafffe-api";
     NativeScriptHttpClientModule,
     ApolloModule,
     HttpLinkModule,
+    GridViewModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   // tslint:disable-next-line:object-literal-sort-keys
   declarations: [
     AppComponent,
     HomeComponent,
+    SelectItemComponent,
+    ItemGridlistComponent,
+    LocationListComponent
   ],
   providers: [ProductService, ShopService],
   bootstrap: [AppComponent],

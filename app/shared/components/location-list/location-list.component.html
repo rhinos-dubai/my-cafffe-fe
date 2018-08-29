@@ -1,0 +1,12 @@
+<CardView  class="cardStyleShop" margin="02" elevation="0" radius="5" *ngFor="let item of Locations">
+    <StackLayout>
+        <GridLayout rows="200, auto," columns="*, *">
+            
+                <Image src="~/images/shop.jpg" stretch="aspectFill" margin="10" colSpan="2" row="0"></Image>
+            
+            
+                <Label  [text]="item.name" textWrap="true" row="1" ></Label>
+            
+        </GridLayout>
+    </StackLayout>
+</CardView>

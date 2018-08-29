@@ -2,18 +2,12 @@
         <StackLayout  orientation="vertical">
             <scroll-view>
                 <ActionBar title="Home">
-                    <ActionItem  ios.position="left" (tap)="openDrawer()"  >
-                        <Button text="&#xf0c9;" class="font-awesome" ></Button>
-                    </ActionItem>
-                    <ActionItem  ios.position="true" >
-                        <Button  text="&#xf007;"  class="font-awesome" ></Button>
-                    </ActionItem>
                 </ActionBar>
                 <StackLayout margin="1" verticalAlignment="top"  >
                     <StackLayout margin="2" >
                         <StackLayout *ngIf="!show">
                             <GridLayout class="m-10" rows="90" columns="*,*" >
-                                <CardView    class="cardStyle" margin="05" elevation="0" radius="5" row="0" col="0" (tap)="animateForDrink('1')">
+                                <CardView    class="cardStyle" margin="05" elevation="0" radius="5" row="0" col="0" (tap)="routeToSelectItem()">
                                     <StackLayout >
                                         <GridLayout rows="50,40" columns="auto,auto" horizontalAlignment="center">
                                             <StackLayout  margin="5" col="0" row="0">
@@ -25,7 +19,7 @@
                                         </GridLayout>
                                     </StackLayout>
                                 </CardView>
-                                <CardView  class="cardStyle" margin="05" elevation="0" radius="5" row="0" col="1" (tap)="animateForEat('2')">
+                                <CardView  class="cardStyle" margin="05" elevation="0" radius="5" row="0" col="1" >
                                     <StackLayout>
                                         <GridLayout rows="50,40" columns="auto,auto" horizontalAlignment="center">
                                             <StackLayout  margin="5" col="0" row="0">
@@ -41,9 +35,7 @@
                         </StackLayout>
                     </StackLayout>
                     <StackLayout >
-                    <GridLayout rows="*,*,*" columns="*" >
-                    
-                    </GridLayout>
+                        <location-list [Locations]="locations"></location-list>
                     </StackLayout>
                     
                 </StackLayout>

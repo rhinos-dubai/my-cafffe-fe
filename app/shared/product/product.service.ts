@@ -6,16 +6,12 @@ import { Injectable } from "@angular/core";
 
 import { from, Observable, throwError} from "rxjs";
 
-// import { from } from "rxjs/observable/from";
 
 import { catchError, groupBy, map, mergeMap, toArray } from "rxjs/operators";
 
-// import { Config } from "~/shared/config";
-// import { Product } from '~/shared/product/product';
 
 import {Apollo, QueryRef} from "apollo-angular";
-// import {HttpLinkModule, HttpLink} from 'apollo-angular-link-http';
-// import {InMemoryCache} from 'apollo-cache-inmemory';
+
 
 import gql from "graphql-tag";
 
@@ -38,12 +34,15 @@ export class ProductService {
     this.Ref = this.apollo.watchQuery<Query>({
       query: gql`
       {
-        getProducts {
-        name
-        id
-        icon
+        getProducts{
+          id
+          name
+          icon
+          generic_properties{
+            property
+          }
         }
-      }
+      } 
       `,
     });
 

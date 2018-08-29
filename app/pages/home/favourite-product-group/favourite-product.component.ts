@@ -30,4 +30,6 @@ export class FavouriteProductComponent implements OnInit {
 
         //console.log();
     }
+
+    
 }

@@ -1,0 +1,9 @@
+<GridLayout class="page">
+  <GridView [items]="data" colWidth="50%" rowHeight="100">
+    <ng-template let-item="item" let-odd="odd">
+      <StackLayout margin="10" [nsRouterLink]="['/item', item.id]" borderColor="blue" borderWidth="2" borderRadius="5" verticalAlignment="stretch" class="list-group-item" [class.odd]="odd">
+        <Label verticalAlignment="center" [text]="item.name" class="list-group-item-text" textWrap="true"></Label>
+      </StackLayout>
+    </ng-template>
+  </GridView>
+</GridLayout>
