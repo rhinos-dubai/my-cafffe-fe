@@ -9,7 +9,7 @@ import { Component,Input, OnInit } from '@angular/core';
 export class LocationListComponent implements OnInit {
 
   @Input() Locations: any;
-
+  @Input() filteredShops;
   constructor() { }
 
   ngOnInit() { }

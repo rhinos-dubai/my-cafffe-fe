@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable} from "rxjs";
+import { Observable, BehaviorSubject} from "rxjs";
 import { map } from "rxjs/operators";
 
 import {Apollo, QueryRef} from "apollo-angular";
@@ -12,6 +12,15 @@ import { Query, Shop } from "~/shared/types";
 export class ShopService {
   public Ref: QueryRef<Query>;
   public shops: Observable<Shop[]>;
+
+  private availableShops = new BehaviorSubject(null);
+  filteredShops = this.availableShops.asObservable();
+
+  changeAvailableShops(shops: Array<any>){
+    this.availableShops.next(shops);
+  }
+
+
   constructor(private apollo: Apollo) { }
 
   public getAllShops() {

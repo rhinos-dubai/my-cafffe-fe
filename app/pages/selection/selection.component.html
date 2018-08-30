@@ -1,0 +1,18 @@
+<StackLayout>
+  <label class="h3 p-15" horizontalAlignment="center"
+    [text]="selectedItem.name"></label>
+
+    <Label class="h4 m-t-5 p-15" horizontalAlignment="center" text="Filters"></Label>
+
+    <item-filters [filters]="genericProperties_values"> </item-filters>
+    
+    <StackLayout>
+
+    <location-list [Locations]="locationList | async" [filteredShops]="filteredShops"></location-list>
+
+  
+    </StackLayout>
+
+
+    
+</StackLayout>

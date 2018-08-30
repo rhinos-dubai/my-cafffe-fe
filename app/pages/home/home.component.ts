@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   constructor( private router:Router, private shopService:ShopService) {}
 
   locations;
+  filteredShops = false;
 
   public ngOnInit() {
     this.shopService.getShopsNearme().subscribe(result => {

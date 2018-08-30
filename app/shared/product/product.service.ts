@@ -4,7 +4,7 @@ import {
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
-import { from, Observable, throwError} from "rxjs";
+import { from, Observable, throwError, BehaviorSubject} from "rxjs";
 
 
 import { catchError, groupBy, map, mergeMap, toArray } from "rxjs/operators";
@@ -28,6 +28,18 @@ export class ProductService {
   public genericProperties;
   public AllPosts: any[];
   public genereic: any[] = [];
+
+  private itemSource = new BehaviorSubject(0);
+  currentItem = this.itemSource.asObservable();
+
+  changeSelectedItemID(id: number) {
+    this.itemSource.next(id)
+  }
+
+
+
+
+
   constructor(private apollo: Apollo) { }
 
    public getAllProducts() {
@@ -66,151 +78,61 @@ export class ProductService {
     return null;
   }
 
-  public getCategories(level: string) {
-    // console.log("getCategories ==== "+level);
+  public getSelectedItem(id,filters) {
     this.Ref = this.apollo.watchQuery<Query>({
-      query: gql`
-      {
-        getMainCategory(id:${level}) {
-         id
-         category
-         products{
-           name
-           id
-           generic_properties {
-             property
-             property_group
-           }
-         }
-       }
-     }
-      `,
-    });
-
-    this.categories = this.Ref.valueChanges
-    .pipe(map((results) => results.data.getMainCategory),
-          catchError(this.handleErrors));
-
-          // console.log(this.catergoryRef.valueChanges.subscribe())
-          // console.log("getCategories ==== "+level);
-    return this.categories;
-          // return this.catergoryRef.valueChanges.subscribe(r => {console.log(r)});
-  }
-  public getProduct(id: number, filters: number[]) {
-    // tslint:disable-next-line:no-console
-    console.log(filters);
-    this.Ref = this.apollo.watchQuery<Query>({
-      query: gql`
-      {
-        getProduct(id:${id}){
-          name
-          id
-    generic_properties {
-      id
-      property
-      property_group
-    }
-    shops(
-      includeInactive:true
-      filters:${filters}
-    ) {
-      base_price
-      addons(includeInactive: false) {
-        addon
-      }
-      properties(includeInactive: true) {
-        property_group
-        property
-        generic_id
-      }
-      shop {
-        id
-        name
-        longitude
-        latitude
-      }
-    }
-  }
-}
-      `,
-      // tslint:disable-next-line:object-literal-sort-keys
-      fetchPolicy: "network-only",
-      pollInterval: 1000,
-    });
-    // console.log(id);
-    this.product = this.Ref
+        query: gql`
+        {
+            getProduct(id:${id}){
+              id
+              name
+              icon
+            shops(
+                  includeInactive:true
+                  filters:[${filters}]
+                ) {
+                  base_price
+                  addons(includeInactive: false) {
+                    addon
+                    id
+                  }
+                  properties(includeInactive: true) {
+                    property_group
+                    property
+                    generic_id
+                  }
+                  shop {
+                    id
+                    name
+                    longitude
+                    latitude
+                    address
+                  }
+                }
+              generic_properties{
+                property
+                property_group
+                id
+              }
+            }
+        }            
+        `,
+      });
+  
+      this.product = this.Ref
         .valueChanges
-        .pipe(map((r) =>  r.data.getProduct),
-      );
-
-    return this.product;
-  }
-
-  public groupItems(id: number, filters: number[]) {
-    this.Ref = this.apollo.watchQuery<Query>({
-      query: gql`
-      {
-        getProduct(id:${id}){
-          name
-          id
-    generic_properties {
-      id
-      property
-      property_group
-    }
-    shops(
-      includeInactive:true
-      filters:${filters}
-    ) {
-      base_price
-      addons(includeInactive: false) {
-        addon
-      }
-      properties(includeInactive: true) {
-        property_group
-        property
-        generic_id
-      }
-      shop {
-        id
-        name
-        longitude
-        latitude
-      }
-    }
-  }
+        .pipe(map(r => {
+            // console.log(r.data.getProduct);
+            // getLocationListWithItems(r.data.getShops);
+            // console.log(r.data);
+            // this.changeAvailableShops(r.data.getProduct.shops);
+            return r.data.getProduct;
+            
+        }));
+        
+        return this.product
 }
-      `,
-      // tslint:disable-next-line:object-literal-sort-keys
-      fetchPolicy: "network-only",
-      pollInterval: 1000,
-    });
 
-    // console.log(id);
-    this.genericProperties = this.Ref
-        .valueChanges
-        .pipe(map((r) =>  {
-          const source = from(r.data.getProduct.generic_properties);
-          const example = source.pipe(
-            groupBy((result) => {
-              return result.property_group; }),
-              mergeMap((group) => group.pipe(toArray())),
-          );
-          // tslint:disable-next-line:no-console
-          const subscribe = example.subscribe((val) => console.log(val));
-          return subscribe ; }),
-      );
 
-    // tslint:disable-next-line:no-console
-    return this.genericProperties;
-  }
-
-  /* private getCommonHeaders() {
-    return new HttpHeaders({
-      "Authorization": "Kinvey " + Config.token,
-      "Content-Type": "application/json",
-    });
-  } */
 
   private handleErrors(error: HttpErrorResponse) {
     // console.log(error);
