@@ -3,14 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/operators';
+import {AnimationCurve} from "ui/enums";
 
 
 import { Page } from "ui/page";
 import { View } from "ui/core/view";
 import { Animation, AnimationDefinition } from "ui/animation";
 
-import {ProductService} from "~/shared/product/product.service"
-import { ShopService } from "~/shared/shop/shop.service"
+let view1: View;
+
+import {ProductService} from "~/shared/services/product/product.service"
+import { ShopService } from "~/shared/services/shop/shop.service"
 
 @Component({
   moduleId: module.id,
@@ -24,6 +27,8 @@ export class SelectionComponent implements OnInit {
   tempItemsService: any;
   genericProperties_values: Array<any> = [];
 
+  
+
   constructor(private page: Page, private route: ActivatedRoute, private productService:ProductService, private shopService:ShopService) { }
 
   id: number;
@@ -33,6 +38,11 @@ export class SelectionComponent implements OnInit {
   locationList = this.shopService.filteredShops;
 
   ngOnInit() { 
+
+    view1 = this.page.getViewById<View>("view1");
+    view1.translateY = -100;
+
+
     this.route.params.subscribe(params => {
       this.id = +params['id'];
       this.productService.changeSelectedItemID(this.id);
@@ -66,6 +76,27 @@ export class SelectionComponent implements OnInit {
       // console.log(this.locations);
       this.filteredShops = true;
     })
+  }
+
+  animate() {
+        
+    let definitions = new Array<AnimationDefinition>();
+    let a1: AnimationDefinition = {
+        target: view1,
+        translate: { x: 0, y: -500 },
+        curve: AnimationCurve.easeOut,
+        duration: 400
+    };
+    definitions.push(a1);
+
+    let animationSet = new Animation(definitions);
+
+    animationSet.play().then(() => {
+        console.log("Animation finished");
+    })
+        .catch((e) => {
+            console.log(e.message);
+        });
   }
 
   

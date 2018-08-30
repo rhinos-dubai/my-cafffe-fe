@@ -4,7 +4,7 @@ import { registerElement } from "nativescript-angular/element-registry";
 import { CardView } from "nativescript-cardview";
 registerElement("CardView", () => CardView);
 
-import { ShopService } from "~/shared/shop/shop.service"
+import { ShopService } from "~/shared/services/shop/shop.service"
 // import { ProductService } from "~/shared/product/product.service";
 
 

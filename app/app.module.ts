@@ -14,8 +14,8 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 
 import { GridViewModule } from 'nativescript-grid-view/angular';
 
-import { ProductService } from "./shared/product/product.service";
-import { ShopService } from "./shared/shop/shop.service";
+import { ProductService } from "./shared/services/product/product.service";
+import { ShopService } from "./shared/services/shop/shop.service";
 import { SelectItemComponent } from "./pages/select-item/select-item.component";
 import { SelectionComponent } from "./pages/selection/selection.component";
 
