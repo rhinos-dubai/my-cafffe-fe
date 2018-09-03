@@ -1,4 +1,5 @@
 import { Component,Input, OnInit } from '@angular/core';
+import { ShopService } from '~/shared/services/shop/shop.service';
 
 @Component({
   moduleId: module.id,
@@ -10,8 +11,14 @@ export class LocationListComponent implements OnInit {
 
   @Input() Locations: any;
   @Input() filteredShops;
-  constructor() { }
+  isBusy;
+  constructor(private shopService: ShopService) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.shopService.searchedLocation.subscribe(result =>{
+      this.isBusy = result;
+      console.log(this.isBusy);
+    })
+  }
 
 }

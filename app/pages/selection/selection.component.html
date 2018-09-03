@@ -1,4 +1,4 @@
-<GridLayout rows="500, 1000" columns="*" backgroundColor="lightyellow">
+<!--<GridLayout rows="500, 1000" columns="*" backgroundColor="lightyellow">
 
 <StackLayout row="0">
     <Button text="animate" (tap)="animate()"></Button>
@@ -16,4 +16,35 @@
   
 </StackLayout>
 
+
+
+</GridLayout>-->
+
+<GridLayout rows="auto,700,auto">
+        
+            <StackLayout row="0" height="auto" orientation="horizontal" >
+                
+
+                        <StackLayout >
+
+                            <label class="h3 p-15" horizontalAlignment="center"
+                            [text]="selectedItem.name"></label>
+                        
+                            <Label class="h4 m-t-5 p-15" horizontalAlignment="center" text="Filters"></Label>
+                        
+                            <item-filters [filters]="genericProperties_values"> </item-filters>
+                        </StackLayout>
+        
+            </StackLayout>
+        <StackLayout row="1"  id="view1"    width="auto" backgroundColor="LightGray" >
+                
+                <GridLayout rows="*" class="locations" >
+                
+                <location-list row="0" [Locations]="locationList | async" [filteredShops]="filteredShops"></location-list>
+                </GridLayout>
+                
+        </StackLayout>
+        <StackLayout id="floatingButton" height="auto"  row="2" orientation="horizontal"  horizontalAlignment="center">
+                <button text=" | " class="button" (tap)="animate();animateFor = !animateFor" ></button>
+        </StackLayout>
 </GridLayout>

@@ -22,6 +22,7 @@ import { SelectionComponent } from "./pages/selection/selection.component";
 import { ItemGridlistComponent } from "./shared/components/item-gridlist/item-gridlist.component";
 import { LocationListComponent } from "./shared/components/location-list/location-list.component";
 import { ItemFiltersComponent } from "./shared/components/item-filters/item-filters.component";
+import { ItemSwiperComponent } from "./shared/components/item-swiper/item-swiper.component";
 
 
 
@@ -50,7 +51,8 @@ const uri = "http://142.93.129.34:4001/my-cafffe-api/";
     ItemGridlistComponent,
     LocationListComponent,
     SelectionComponent,
-    ItemFiltersComponent
+    ItemFiltersComponent,
+    ItemSwiperComponent
   ],
   providers: [ProductService, ShopService],
   bootstrap: [AppComponent],

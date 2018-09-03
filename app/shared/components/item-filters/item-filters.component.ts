@@ -12,34 +12,41 @@ export class ItemFiltersComponent implements OnInit {
 
   @Input() filters;
   selectedItem;
-  Selectedoptions: Array<any> = [];;
+  Selectedoptions: Array<any> = [];
+  SelectedoptionsName: Object = {data:[]};
+  isBusy: any;
 
   constructor(private productService:ProductService, private shopService:ShopService) { }
 
   ngOnInit() { }
 
-  onSelectionTap(filters){
+  onSelectionTap(filters,filterName){
     this.productService.currentItem.subscribe(result => {
       this.selectedItem = result;
       console.log(this.selectedItem);
     })
     this.Selectedoptions.push(filters);
-    console.log(this.Selectedoptions)
+    this.SelectedoptionsName['data'].push(filterName);
   }
 
   filterProducts(){
 
     // console.log(this.Selectedoptions);
+    this.shopService.changesearchLocationStatus(true);
+    console.log(this.Selectedoptions);
     this.productService.getSelectedItem(this.selectedItem,this.Selectedoptions).subscribe(
         data =>{
             this.shopService.changeAvailableShops(data.shops);
             // console.log(data);
-            this.resetFilters();
+            setTimeout(()=>{    //<<<---    using ()=> syntax
+              this.shopService.changesearchLocationStatus(false);
+            }, 100);
         })
   }
 
   resetFilters(){
     this.Selectedoptions = [];
+    this.SelectedoptionsName = {data:[]}
   }
 
   

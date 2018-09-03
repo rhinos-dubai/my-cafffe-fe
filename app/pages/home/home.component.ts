@@ -5,6 +5,7 @@ import { CardView } from "nativescript-cardview";
 registerElement("CardView", () => CardView);
 
 import { ShopService } from "~/shared/services/shop/shop.service"
+import { ProductService } from '~/shared/services/product/product.service';
 // import { ProductService } from "~/shared/product/product.service";
 
 
@@ -18,14 +19,26 @@ import { ShopService } from "~/shared/services/shop/shop.service"
 
 
 export class HomeComponent implements OnInit {
-  constructor( private router:Router, private shopService:ShopService) {}
+  constructor( private router:Router, private shopService:ShopService, private prodcutServive:ProductService) {}
 
   locations;
   filteredShops = false;
+  products;
 
   public ngOnInit() {
+    this.shopService.changesearchLocationStatus(true);
     this.shopService.getShopsNearme().subscribe(result => {
       this.locations = result;
+      if(this.locations){
+        setTimeout(()=>{    //<<<---    using ()=> syntax
+          this.shopService.changesearchLocationStatus(false);
+        }, 100);
+        
+      }
+    })
+
+    this.prodcutServive.getAllProducts().subscribe( result => {
+      this.products = result;
     })
   }
 

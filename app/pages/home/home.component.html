@@ -1,8 +1,8 @@
 
         <StackLayout  orientation="vertical">
-            <scroll-view>
                 <ActionBar title="Home">
                 </ActionBar>
+                <ScrollView>
                 <StackLayout margin="1" verticalAlignment="top"  >
                     <StackLayout margin="2" >
                         <StackLayout *ngIf="!show">
@@ -34,12 +34,19 @@
                             </GridLayout>
                         </StackLayout>
                     </StackLayout>
+                    <StackLayout margin="10">
+                        <Label text="Most Ordered" class="h3"></Label>
+                        <item-swiper [data]="products" ></item-swiper>
+                    </StackLayout>
+                    <StackLayout margin="10">
+                            <Label text="Fav Items" class="h3"></Label>
+                            <item-swiper [data]="products" ></item-swiper>
+                        </StackLayout>
                     <StackLayout >
                         <location-list [Locations]="locations" [filteredShops]=""></location-list>
                     </StackLayout>
-                    
                 </StackLayout>
-            </scroll-view>
+            </ScrollView>
         </StackLayout>
   
     

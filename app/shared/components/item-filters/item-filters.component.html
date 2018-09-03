@@ -1,20 +1,32 @@
-<GridLayout rows="60 60">
+<ScrollView orientation="horizontal" height="auto">
+<StackLayout orientation="horizontal">
+<Label class="filterSelected"  [text]="item" *ngFor="let item of SelectedoptionsName.data; index as i" margin="5"></Label>
+
+</StackLayout>
+</ScrollView>
+<GridLayout rows="60 60 *">
 
   <GridLayout rows="* *" *ngFor="let item of filters; index as i" [row]="i">
     <GridLayout row="0">
         <Label text="{{item[0].property_group}}"></Label>
     </GridLayout>
 
-    <StackLayout row="1">
-        <GridLayout columns="* * * *" >
+    <StackLayout row="1" >
+        <GridLayout columns="100 100 100 100">
         
-        <Button [col]="i" marginRight="15px" *ngFor="let options of item; index as i"  text="{{options.property}}" (tap)="onSelectionTap(options.id)" class="btn btn-default"></Button>
+        <Button class="btn-custom" [col]="i" marginRight="15px" marginLeft="15" *ngFor="let options of item; index as i"  text="{{options.property}}" (tap)="onSelectionTap(options.id,options.property)" ></Button>
         
         </GridLayout>
     </StackLayout>
     
   </GridLayout>
+
+  <StackLayout row="2" margin="10">
+      <StackLayout orientation="horizontal" horizontalAlignment="center">
+      <Button width="100" text="Apply" (tap)="filterProducts()" class="btn-apply" > </Button>
+      <Button width="100" text="Reset" (tap)="resetFilters()" class="btn-apply" marginLeft="5"> </Button>
+      </StackLayout>
+  </StackLayout>
   
 </GridLayout>
 
-<Button  text="Apply" (tap)="filterProducts()" class="btn btn-primary btn-active" > </Button>

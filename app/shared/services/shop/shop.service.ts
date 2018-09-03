@@ -16,8 +16,16 @@ export class ShopService {
   private availableShops = new BehaviorSubject(null);
   filteredShops = this.availableShops.asObservable();
 
+  private searchLocation = new BehaviorSubject(null);
+  searchedLocation = this.searchLocation.asObservable();
+
   changeAvailableShops(shops: Array<any>){
     this.availableShops.next(shops);
+  }
+
+  changesearchLocationStatus(status: boolean){
+    this.searchLocation.next(status);
+    console.log(status);
   }
 
 
