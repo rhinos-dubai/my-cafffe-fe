@@ -8,6 +8,7 @@
 
 
         <StackLayout *ngIf="!isBusy">
+
             <CardView class="single-outlet-location" *ngFor="let item of Locations"
                       (tap)="getValue(item)">
 

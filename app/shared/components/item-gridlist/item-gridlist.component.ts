@@ -1,4 +1,5 @@
 import { Component,Input, OnInit } from '@angular/core';
+import { ProductService } from '~/shared/services/product/product.service';
 
 @Component({
   moduleId: module.id,
@@ -10,8 +11,12 @@ export class ItemGridlistComponent implements OnInit {
 
   @Input() data: any;
 
-  constructor() { }
+  constructor(private productService:ProductService) { }
 
   ngOnInit() { }
+
+  getSelectedName(name){
+    this.productService.changeSelectedItemName(name);
+  }
 
 }

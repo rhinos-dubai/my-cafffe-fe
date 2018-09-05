@@ -1,6 +1,7 @@
 <ScrollView orientation="horizontal" height="auto">
 <StackLayout orientation="horizontal">
     <CardView class="singleItem" *ngFor="let item of data;" [nsRouterLink]="['/selection',item.id]"  >
+
       <StackLayout >
           <GridLayout rows="60,*,*" columns="*">
               <StackLayout col="0" row="0">
