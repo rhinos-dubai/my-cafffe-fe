@@ -1,4 +1,61 @@
-.cardStyleShop{
-    background-color: #fff;
-    color: #000;
+@import "~/shared/styles/main.scss";
+
+.single-outlet-location{
+    margin: 5;
+    @extend .card-general;
+    Image{
+        height: 80;
+        width: 80;
+        padding: 10;
+    }
+
+    .single-outlet-location-label-list{
+        margin-top: 15;
+
+        Label{
+            @extend .body-text;
+        }
+
+        .single-outlet-location-title{
+            @extend .h5;
+        }
+
+        .single-outlet-location-label{
+            @extend .label-text-gray;
+        }
+
+        .single-outlet-location-price{
+            color:$secondary-color-light;
+        }
+    }
+
+
+
+    .action-buttons{
+        GridLayout{
+            margin-top: 8;
+            margin-bottom:5;
+        }
+        .favourite-icon{
+            color: $danger-color;
+            border-width: 1;
+            border-color: $danger-color;
+            border-radius: 25;
+            padding: 5;
+
+        }
+        .rating-icon{
+            @extend .button-text-light;
+            border-width: 1;
+            border-color: $secondary-color-light;
+            background-color: $secondary-color-light;
+            border-radius: 25;
+            padding: 5;
+
+
+        }
+    }
+
+
+
 }

@@ -1,13 +1,16 @@
 <ScrollView orientation="horizontal" height="auto">
 <StackLayout orientation="horizontal">
-    <CardView class="mostOrdered" margin="05" elevation="0" radius="5" row="0" col="0" *ngFor="let item of data;" [nsRouterLink]="['/selection',item.id]"  >
+    <CardView class="singleItem" *ngFor="let item of data;" [nsRouterLink]="['/selection',item.id]"  >
       <StackLayout >
-          <GridLayout rows="50,40" columns="auto,auto" horizontalAlignment="center">
-              <StackLayout  margin="5" col="0" row="0">
+          <GridLayout rows="60,*,*" columns="*">
+              <StackLayout col="0" row="0">
                   <Image src="~/images/coffee/coffee.png"></Image>
               </StackLayout>
               <StackLayout col="0" row="1" >
-                  <Label  [text]="item.name" textWrap="true" ></Label>
+                  <Label  [text]="item.name" textWrap="false" class="item-name-label text-center"></Label>
+              </StackLayout>
+              <StackLayout col="0" row="2" >
+                  <Label  text="The Stables" textWrap="false" class="item-location-label text-center"></Label>
               </StackLayout>
           </GridLayout>
       </StackLayout>

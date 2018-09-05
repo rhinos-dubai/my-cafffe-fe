@@ -1,16 +1,21 @@
 
-        <StackLayout  orientation="vertical">
-                <ActionBar title="Home">
-                </ActionBar>
-                <ScrollView>
-                <StackLayout margin="1" verticalAlignment="top"  >
-                    <StackLayout margin="2" >
+        <StackLayout  orientation="vertical" class="page">
+
+            <ActionBar title="Home"></ActionBar>
+
+            <ScrollView>
+                <StackLayout verticalAlignment="top"  >
+                    <StackLayout class="seperator-10"></StackLayout>
+
+                    <StackLayout>
                         <StackLayout *ngIf="!show">
-                            <GridLayout class="m-10" rows="90" columns="*,*" >
-                                <CardView    class="cardStyle" margin="05" elevation="0" radius="5" row="0" col="0" (tap)="routeToSelectItem()">
-                                    <StackLayout >
-                                        <GridLayout rows="50,40" columns="auto,auto" horizontalAlignment="center">
-                                            <StackLayout  margin="5" col="0" row="0">
+
+                            <GridLayout rows="120" columns="*,*" >
+
+                                <CardView class="hero-card" row="0" col="0" (tap)="routeToSelectItem()">
+                                    <StackLayout class="inner-card">
+                                        <GridLayout rows="80,30" columns="auto,auto" horizontalAlignment="center">
+                                            <StackLayout  col="0" row="0">
                                                 <Image src="~/images/coffee/coffee.png"></Image>
                                             </StackLayout>
                                             <StackLayout col="0" row="1" >
@@ -19,10 +24,12 @@
                                         </GridLayout>
                                     </StackLayout>
                                 </CardView>
-                                <CardView  class="cardStyle" margin="05" elevation="0" radius="5" row="0" col="1" >
-                                    <StackLayout>
-                                        <GridLayout rows="50,40" columns="auto,auto" horizontalAlignment="center">
-                                            <StackLayout  margin="5" col="0" row="0">
+
+
+                                <CardView  class="hero-card" row="0" col="1" >
+                                    <StackLayout class="inner-card">
+                                        <GridLayout rows="80,30" columns="auto,auto" horizontalAlignment="center">
+                                            <StackLayout col="0" row="0">
                                                 <Image src="~/images/coffee/menu.png"></Image>
                                             </StackLayout>
                                             <StackLayout col="0" row="1" >
@@ -31,20 +38,35 @@
                                         </GridLayout>
                                     </StackLayout>
                                 </CardView>
+
                             </GridLayout>
+
                         </StackLayout>
                     </StackLayout>
-                    <StackLayout margin="10">
-                        <Label text="Most Ordered" class="h3"></Label>
+
+                    <StackLayout class="seperator-30"></StackLayout>
+
+                    <StackLayout>
+                        <Label text="Most Ordered" class="h5"></Label>
+                        <StackLayout class="seperator-10"></StackLayout>
                         <item-swiper [data]="products" ></item-swiper>
                     </StackLayout>
-                    <StackLayout margin="10">
-                            <Label text="Fav Items" class="h3"></Label>
-                            <item-swiper [data]="products" ></item-swiper>
-                        </StackLayout>
-                    <StackLayout >
+                    <StackLayout class="seperator-10"></StackLayout>
+
+                    <StackLayout>
+                        <Label text="Favourite Items" class="h5"></Label>
+                        <StackLayout class="seperator-10"></StackLayout>
+                        <item-swiper [data]="products" ></item-swiper>
+                    </StackLayout>
+                    <StackLayout class="seperator-30"></StackLayout>
+
+
+                    <StackLayout>
+                        <Label text="Featured Outlets" class="h4 text-center"></Label>
+                        <StackLayout class="seperator-10"></StackLayout>
                         <location-list [Locations]="locations" [filteredShops]=""></location-list>
                     </StackLayout>
+
                 </StackLayout>
             </ScrollView>
         </StackLayout>

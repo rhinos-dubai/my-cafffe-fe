@@ -21,9 +21,7 @@ export class LocationListComponent implements OnInit {
   }
 
   getValue(value){
-
     console.log(value)
-
   }
 
 }

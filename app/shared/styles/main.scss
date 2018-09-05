@@ -1,0 +1,28 @@
+@import "~/shared/styles/brandtheme.scss";
+@import "~/shared/styles/variables.scss";
+
+
+//.h1, .h2, .h3, .h4, .h5, .h6, .body, .body-light, .button, .button-light, .label {
+//  font-family: $font-family-regular;
+//}
+.page{
+  margin: 0 10;
+}
+
+
+.card-general{
+  background-color: $white;
+  elevation: 5;
+  radius: 10;
+
+  .inner-card{
+    @extend .border-light;
+  }
+
+}
+
+//.border-card{
+//  border-width: 1;
+//  border-radius: 5;
+//  border-color: $background-color;
+//}

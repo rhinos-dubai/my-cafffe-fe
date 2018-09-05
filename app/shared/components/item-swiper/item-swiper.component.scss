@@ -1,3 +1,28 @@
-.mostOrdered{
-    background:lightblue
+@import "~/shared/styles/main.scss";
+
+.singleItem{
+    @extend .card-general;
+    margin: 5;
+    width: 110;
+
+    GridLayout{
+        padding: 10 10;
+
+
+        Image{
+            height: 50;
+        }
+        Label{
+            @extend .button-text;
+        }
+
+        .item-name-label{
+            width: 100%;
+            //background-color: red;
+        }
+
+        .item-location-label{
+            @extend .label-text-gray;
+        }
+    }
 }

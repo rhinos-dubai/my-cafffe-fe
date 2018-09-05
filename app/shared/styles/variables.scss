@@ -1,0 +1,96 @@
+@import "~/shared/styles/brandtheme.scss";
+
+.h1 {
+  font-size: 32;
+  font-family: $font-family-medium;
+  color: $text-color-dark;
+
+}
+.h2{
+  font-size: 26;
+  font-family: $font-family-medium;
+  color: $text-color-dark;
+
+}
+.h3{
+  font-size: 22;
+  font-family: $font-family-medium;
+  color: $text-color-dark;
+
+}
+.h4{
+  font-size: 18;
+  font-family: $font-family-medium;
+  color: $text-color-dark;
+
+}
+.h5{
+  font-size: 14;
+  font-family: $font-family-medium;
+  color: $text-color-dark;
+
+}
+.h6{
+  font-size: 12;
+  font-family: $font-family-medium;
+  color: $text-color-dark;
+
+}
+
+.body-text{
+  font-size: 12;
+  font-family: $font-family-regular;
+  color: $text-color-dark;
+
+}
+
+.body-text-light{
+  font-size: 12;
+  font-family: $font-family-regular;
+  color: $text-color-light;
+}
+
+.button-text{
+  font-size: 12;
+  font-family: $font-family-bold;
+  color: $text-color-dark;
+}
+
+.button-text-light{
+  font-size: 12;
+  font-family: $font-family-bold;
+  color: $text-color-white;
+}
+
+.label-text-gray {
+  font-size: 12;
+  font-family: $font-family-regular;
+  color: $text-color-gray;
+}
+
+
+
+.seperator-5{
+  height: 5;
+}
+.seperator-10{
+  height: 10;
+}
+.seperator-20{
+  height: 20;
+}
+.seperator-30{
+  height: 30;
+}
+
+
+
+
+.border-light{
+  border-width: 1;
+  border-color: $background-color;
+}
+
+.text-center{text-align: center;}
+
+
