@@ -11,9 +11,11 @@ import { ShopService } from '~/shared/services/shop/shop.service';
 export class ItemFiltersComponent implements OnInit {
 
   @Input() filters;
+  @Input() showActionButtons;
   selectedItem;
   Selectedoptions: Array<any> = [];
   SelectedoptionsName: Object = {data:[]};
+  filtersbyUser: Array<any> = [];
   isBusy: any;
 
   constructor(private productService:ProductService, private shopService:ShopService) { }
@@ -27,6 +29,12 @@ export class ItemFiltersComponent implements OnInit {
     })
     this.Selectedoptions.push(filters);
     this.SelectedoptionsName['data'].push(filterName);
+  }
+
+  filtersSelectedByUser(item){
+    this.filtersbyUser.push(item);
+    // console.log(this.filtersbyUser);
+    this.productService.changeSelectedFilters(this.filtersbyUser);
   }
 
   filterProducts(){
@@ -47,6 +55,8 @@ export class ItemFiltersComponent implements OnInit {
   resetFilters(){
     this.Selectedoptions = [];
     this.SelectedoptionsName = {data:[]}
+    this.productService.changeSelectedFilters([]);
+    this.filtersbyUser = []
   }
 
   

@@ -1,0 +1,16 @@
+<StackLayout>
+    <label class="h3" margin="10" horizontalAlignment="center"
+    text="{{seletedItem | async}}"></label>
+
+    <Label class="h3" margin="10" horizontalAlignment="center"
+    text="{{seletedShop | async}}"></Label>
+
+    <Label class="h4" margin="10" text="AED {{selectedRate | async}}" horizontalAlignment="center"></Label>
+
+    <Label text="Selected Options" margin="10" class="h4" ></Label>
+
+    
+    <item-filters [filters]="selectedFilters" [showActionButtons]="false" > </item-filters>
+    
+
+</StackLayout>

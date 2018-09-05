@@ -32,8 +32,23 @@ export class ProductService {
   private itemSource = new BehaviorSubject(0);
   currentItem = this.itemSource.asObservable();
 
+  private itemName = new BehaviorSubject(null);
+  currentItemName = this.itemName.asObservable();
+
+  private selectedFilters = new BehaviorSubject([]);
+  currentSelectedFilters = this.selectedFilters.asObservable();
+
   changeSelectedItemID(id: number) {
     this.itemSource.next(id)
+  }
+
+  changeSelectedItemName(name: string) {
+    this.itemName.next(name);
+  }
+
+  changeSelectedFilters(filters: Array<any>) {
+    this.selectedFilters.next(filters);
+    console.log(this.selectedFilters);
   }
 
 

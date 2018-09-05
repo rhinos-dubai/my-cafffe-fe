@@ -23,7 +23,7 @@ import { ShopService } from "~/shared/services/shop/shop.service"
   styleUrls: ['./selection.component.scss']
 })
 export class SelectionComponent implements OnInit {
-  selectedItem = {};
+  selectedItem = this.productService.currentItemName;
   genericProperties: any;
   tempItemsService: any;
   genericProperties_values: Array<any> = [];
@@ -62,11 +62,8 @@ export class SelectionComponent implements OnInit {
 
     this.productService.getSelectedItem(this.id,null).subscribe(result => {
 
-                this.selectedItem = result;
                 this.genericProperties = result.generic_properties;
                 this.shopService.changeAvailableShops(result.shops);
-                // console.log(data.shops);
-                // this.locationListItems = data.shops;
                 
                 const source = from(this.genericProperties);
 

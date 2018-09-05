@@ -18,6 +18,7 @@ import { ProductService } from "./shared/services/product/product.service";
 import { ShopService } from "./shared/services/shop/shop.service";
 import { SelectItemComponent } from "./pages/select-item/select-item.component";
 import { SelectionComponent } from "./pages/selection/selection.component";
+import { ConfirmOrderComponent } from "./pages/confirm-order/confirm-order.component";
 
 import { ItemGridlistComponent } from "./shared/components/item-gridlist/item-gridlist.component";
 import { LocationListComponent } from "./shared/components/location-list/location-list.component";
@@ -48,6 +49,7 @@ const uri = "http://142.93.129.34:4001/my-cafffe-api/";
     AppComponent,
     HomeComponent,
     SelectItemComponent,
+    ConfirmOrderComponent,
     ItemGridlistComponent,
     LocationListComponent,
     SelectionComponent,

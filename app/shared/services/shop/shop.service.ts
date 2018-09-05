@@ -19,13 +19,27 @@ export class ShopService {
   private searchLocation = new BehaviorSubject(null);
   searchedLocation = this.searchLocation.asObservable();
 
+  private seletedShop = new BehaviorSubject(null);
+  SeletedShopName = this.seletedShop.asObservable();
+
+  private selectedShopItemRate = new BehaviorSubject(0);
+  currentShopItemRate = this.selectedShopItemRate.asObservable();
+
   changeAvailableShops(shops: Array<any>){
     this.availableShops.next(shops);
   }
 
   changesearchLocationStatus(status: boolean){
     this.searchLocation.next(status);
-    console.log(status);
+  }
+
+  changeSeletedShopName(name: string){
+    this.seletedShop.next(name);
+    console.log(name);
+  }
+
+  changeRatebyShop(rate: number){
+    this.selectedShopItemRate.next(rate);
   }
 
 

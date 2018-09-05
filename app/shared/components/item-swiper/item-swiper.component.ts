@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ProductService } from '~/shared/services/product/product.service';
 
 @Component({
   moduleId: module.id,
@@ -8,9 +9,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ItemSwiperComponent implements OnInit {
 
-  constructor() { }
+  constructor(private productService:ProductService) { }
   @Input() data: any;
 
   ngOnInit() { }
+
+  getSelectedName(name){
+    this.productService.changeSelectedItemName(name);
+  }
 
 }

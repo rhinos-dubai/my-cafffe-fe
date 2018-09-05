@@ -5,6 +5,7 @@ import { Routes } from "@angular/router";
 import {HomeComponent} from "./pages/home/home.component"
 import { SelectItemComponent } from "./pages/select-item/select-item.component";
 import { SelectionComponent } from "./pages/selection/selection.component";
+import { ConfirmOrderComponent } from "./pages/confirm-order/confirm-order.component";
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
     { path: "home", component: HomeComponent },
     { path: "select-item", component: SelectItemComponent },
     { path: "selection/:id", component: SelectionComponent },
+    { path: "confirm-order", component: ConfirmOrderComponent },
     
 
 ];

@@ -1,6 +1,6 @@
 <ScrollView orientation="horizontal" height="auto">
 <StackLayout orientation="horizontal">
-    <CardView class="mostOrdered" margin="05" elevation="0" radius="5" row="0" col="0" *ngFor="let item of data;" [nsRouterLink]="['/selection',item.id]"  >
+    <CardView class="mostOrdered" margin="05" elevation="0" radius="5" row="0" col="0" *ngFor="let item of data;" [nsRouterLink]="['/selection',item.id]" (tap)="getSelectedName(item.name)"  >
       <StackLayout >
           <GridLayout rows="50,40" columns="auto,auto" horizontalAlignment="center">
               <StackLayout  margin="5" col="0" row="0">

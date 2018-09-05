@@ -4,7 +4,7 @@
         <ActivityIndicator  #activityIndicator [busy]="isBusy" width="100" height="100" class="activity-indicator"></ActivityIndicator>
         </StackLayout>
         <StackLayout *ngIf="!isBusy">
-                <CardView class="cardStyleShop" margin="02" elevation="0" radius="5" *ngFor="let item of Locations" (tap)="getValue(item)">
+                <CardView class="cardStyleShop" margin="02" elevation="0" radius="5" *ngFor="let item of Locations" (tap)="changeShopName(item.shop.name,item.base_price)">
     
                         <StackLayout>
                             <GridLayout rows="100, auto,auto" columns="*, *">
@@ -13,8 +13,8 @@
                                 
                                     
                                     <Label *ngIf="!filteredShops" [text]="item.name" textWrap="true" row="1" ></Label>
-                                    <Label *ngIf="filteredShops"  [text]="item.shop.name" textWrap="true" row="1" margin="5"></Label>
-                                    <Label *ngIf="filteredShops"  text="From $ {{item.base_price}}" textWrap="true" row="2" ></Label>
+                                    <Label *ngIf="filteredShops"  [text]="item.shop.name" textWrap="true" row="1" margin="5" ></Label>
+                                    <Label *ngIf="filteredShops"  text="From $ {{item.base_price}}" textWrap="true" row="2" (tap)="getValue(item.base_price)" ></Label>
 
                                     
                                 
