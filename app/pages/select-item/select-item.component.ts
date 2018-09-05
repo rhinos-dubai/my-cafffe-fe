@@ -16,7 +16,6 @@ export class SelectItemComponent implements OnInit {
   ngOnInit() { 
     this.productService.getAllProducts().subscribe(result => {
       this.items = result;
-      console.log(this.items);
     })
   }
 
