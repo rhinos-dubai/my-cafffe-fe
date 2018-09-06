@@ -26,7 +26,8 @@
 
 
                                 <!--Regular List: -->
-                                <Label *ngIf="!filteredShops" [text]="item.name" class="single-outlet-location-title" row="0" colSpan="2"></Label>
+                                <Label *ngIf="!filteredShops" [text]="item.name" class="single-outlet-location-title"
+                                       row="0" colSpan="2"></Label>
                                 <Label *ngIf="!filteredShops" text="Location: " class="single-outlet-location-label"
                                        row="1" col="0"></Label>
                                 <Label *ngIf="!filteredShops" text="Business Bay" row="1" col="1"></Label>
@@ -70,10 +71,6 @@
                             </CardView>
 
 
-
-
-
-
                         </StackLayout>
 
                     </GridLayout>
@@ -81,10 +78,13 @@
 
 
             </CardView>
+
+
         </StackLayout>
 
 
     </StackLayout>
+
 </ScrollView>
 
 <!--

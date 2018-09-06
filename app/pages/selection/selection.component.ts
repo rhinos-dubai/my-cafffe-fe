@@ -29,11 +29,14 @@ export class SelectionComponent implements OnInit {
   genericProperties_values: Array<any> = [];
   products;
   animateFor = true;
+<<<<<<< HEAD
 
   id: number;
   locations;
   filteredShops = false;
   locationList = this.shopService.filteredShops;
+=======
+>>>>>>> a39239b2daaf59818fcd4b65a39a111496654f6c
   locationListSize = [];
   
 
@@ -42,6 +45,7 @@ export class SelectionComponent implements OnInit {
   constructor(private page: Page, private route: ActivatedRoute, private productService:ProductService, private shopService:ShopService) { }
 
 
+<<<<<<< HEAD
   ngOnInit() { 
     setTimeout(()=>{ 
     this.locationList.subscribe(result => {
@@ -54,6 +58,18 @@ export class SelectionComponent implements OnInit {
     })
     }, 2000);
     
+=======
+  ngOnInit() {
+      setTimeout(()=>{
+      this.locationList.subscribe(result => {
+          result.forEach(element => {
+              this.locationListSize.push(element);
+              console.log(this.locationListSize.length)
+          });
+      })
+      }, 2000);
+
+>>>>>>> a39239b2daaf59818fcd4b65a39a111496654f6c
     this.productService.getAllProducts().subscribe( result => {
       this.products = result;
       this.shopService.changesearchLocationStatus(true);
@@ -62,7 +78,7 @@ export class SelectionComponent implements OnInit {
     view1 = this.page.getViewById<View>("view1");
     floatingButton = this.page.getViewById<View>("floatingButton");
     view1.translateY = 0;
-    floatingButton.translateY = -400;
+    floatingButton.translateY = -660;
 
 
     this.route.params.subscribe(params => {
@@ -106,12 +122,21 @@ export class SelectionComponent implements OnInit {
       let definitions = new Array<AnimationDefinition>();
       let a1: AnimationDefinition = {
           target: view1,
-          translate: { x: 0, y: -250 },
+          translate: { x: 0, y: -500 },
           curve: AnimationCurve.easeOut,
           duration: 200
       };
+
+        let a2: AnimationDefinition = {
+            target: floatingButton,
+            rotate: 180,
+            curve: AnimationCurve.easeOut,
+            duration: 200
+        };
+
       definitions.push(a1);
-  
+      definitions.push(a2);
+
       let animationSet = new Animation(definitions);
   
       animationSet.play().then(() => {
@@ -128,10 +153,16 @@ export class SelectionComponent implements OnInit {
           target: view1,
           translate: { x: 0, y: 0 },
           curve: AnimationCurve.easeOut,
-          duration: 200
+          duration: 100
       };
-      definitions.push(a1);
-  
+      let a2: AnimationDefinition = {
+            target: floatingButton,
+            rotate: 0,
+            curve: AnimationCurve.easeOut,
+            duration: 200
+        };
+        definitions.push(a1);
+        definitions.push(a2);
       let animationSet = new Animation(definitions);
   
       animationSet.play().then(() => {

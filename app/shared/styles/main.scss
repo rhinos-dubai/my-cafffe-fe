@@ -6,7 +6,7 @@
 //  font-family: $font-family-regular;
 //}
 .page{
-  margin: 0 10;
+  padding: 0 10;
   background-color: $background-color;
 
 }
@@ -23,8 +23,39 @@ ActionBar{
 
   .inner-card{
     @extend .border-light;
+    border-radius: 4;
   }
 
+}
+
+.btn-pill{
+  @extend .button-text;
+
+  height: 30;
+  margin: 0;
+  margin-right: 5;
+  padding: 0;
+  color: $text-color-gray;
+
+  border-radius: 50;
+  border-width: 1;
+  border-color: $text-color-gray;
+  text-transform:capitalize;
+}
+
+.btn-pill-active{
+  color: $secondary-color;
+  border-color: $secondary-color;
+
+}
+
+.btn-circle{
+  width: 60;
+  height: 60;
+  background-color: $secondary-color;
+  color: $background-color;
+  border-radius: 50;
+  font-size: 20;
 }
 
 //.border-card{
@@ -32,3 +63,4 @@ ActionBar{
 //  border-radius: 5;
 //  border-color: $background-color;
 //}
+

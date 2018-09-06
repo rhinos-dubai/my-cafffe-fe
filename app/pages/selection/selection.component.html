@@ -1,29 +1,56 @@
+<StackLayout class="page">
 
-<GridLayout rows="auto,700,auto">
-        
-            <StackLayout row="0" height="auto" orientation="horizontal" >
-                
+    <app-action-bar title="Select Options"></app-action-bar>
 
-                        <StackLayout >
+    <GridLayout rows="auto,700,auto">
 
-                            <label class="h3 p-15" horizontalAlignment="center"
-                            [text]="selectedItem | async"></label>
-                        
-                            <Label class="h4 m-t-5 p-15" horizontalAlignment="center" text="Filters"></Label>
-                        
-                            <item-filters [filters]="genericProperties_values" [showActionButtons]="true"> </item-filters>
-                        </StackLayout>
-        
+        <ScrollView row="0" orientation="vertical" height="500">
+
+            <StackLayout height="auto" orientation="vertical">
+
+                <!--<label class="h3 p-15" horizontalAlignment="center"-->
+                <!--[text]="selectedItem | async"></label>-->
+                <!---->
+                <!--<Label horizontalAlignment="center" text="Filters"></Label>-->
+
+                <item-filters [filters]="genericProperties_values" [showActionButtons]="true"></item-filters>
+
             </StackLayout>
-        <StackLayout row="1"  id="view1"    width="auto" backgroundColor="LightGray" >
-                
-                <GridLayout rows="*" class="locations" >
-                
-                <location-list row="0" [Locations]="locationList | async" [filteredShops]="filteredShops"></location-list>
+        </ScrollView>
+
+
+        <StackLayout row="1" id="view1" width="auto" class="location-list">
+            <StackLayout class="seperator-10"></StackLayout>
+
+            <GridLayout height="30" verticalAlignment="center">
+                <Label text="Select an Outlet" class="h4 text-center"></Label>
+                <Label [text]="locationListSize.length + ' results'"  class="label-text-gray text-right"></Label>
+
+            </GridLayout>
+
+            <ScrollView orientation="vertical" height="500">
+                <GridLayout rows="*" class="locations">
+                    <location-list row="0" [Locations]="locationList | async"
+                                   [filteredShops]="filteredShops"></location-list>
                 </GridLayout>
-                
+
+
+            </ScrollView>
+
         </StackLayout>
-        <StackLayout id="floatingButton" height="auto"  row="2" orientation="horizontal"  horizontalAlignment="center">
-                <button text=" | " class="button" (tap)="animate();animateFor = !animateFor" ></button>
+
+
+        <StackLayout id="floatingButton" height="auto" row="2" orientation="horizontal" horizontalAlignment="center" width="100%" (tap)="animate();animateFor = !animateFor">
+
+            <button text="&#xf062;" class="btn-circle font-awesome" (tap)="animate();animateFor = !animateFor"></button>
+
+
         </StackLayout>
-</GridLayout>
+
+
+
+    </GridLayout>
+
+
+</StackLayout>
+

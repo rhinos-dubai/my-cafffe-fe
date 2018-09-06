@@ -1,13 +1,17 @@
-.h3{
-    font-size: 32px;
-    font-weight: 600;
+@import "~/shared/styles/main.scss";
+.location-list{
+    background-color: $background-color;
 }
-
-.h4{
-    font-size: 24px;
-    font-weight: 500;
-}
-
-.button{
-    background:lightblue;
-}
+//.h3{
+//    font-size: 32px;
+//    font-weight: 600;
+//}
+//
+//.h4{
+//    font-size: 24px;
+//    font-weight: 500;
+//}
+//
+//.button{
+//    background:lightblue;
+//}

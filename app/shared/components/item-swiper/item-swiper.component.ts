@@ -14,8 +14,10 @@ export class ItemSwiperComponent implements OnInit {
 
   ngOnInit() { }
 
-  getSelectedName(name){
+  getSelectedName(name, id){
     this.productService.changeSelectedItemName(name);
+    // console.log('ID is:' +id);
+  //    temporary get id for Selection component design
   }
 
 }

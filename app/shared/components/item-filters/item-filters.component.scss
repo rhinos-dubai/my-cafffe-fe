@@ -1,21 +1,31 @@
-.btn-custom{
-    background-color:lightBlue;
-}
+@import "~/shared/styles/main.scss";
 
-.btn-apply{
-    background-color: black;
-    color: #ffffff;
-}
+//.btn-custom{
+//    background-color:lightBlue;
+//}
+//
+//.btn-apply{
+//    background-color: black;
+//    color: #ffffff;
+//}
+//
+//.filterSelected{
+//    background: lightblue;
+//    border-color: lightblue lightblue lightblue lightblue   ;
+//    border-width: 5 5 5 5;
+//    border-radius: 15px;
+//}
+//
+//.borders{
+//    border-color: lightblue lightblue lightblue lightblue   ;
+//    border-width: 5 5 5 5;
+//    border-radius: 15px;
+//}
 
-.filterSelected{
-    background: lightblue;
-    border-color: lightblue lightblue lightblue lightblue   ;
-    border-width: 5 5 5 5;
-    border-radius: 15px;
-}
+.single-filter{
+    @extend .card-general;
 
-.borders{
-    border-color: lightblue lightblue lightblue lightblue   ;
-    border-width: 5 5 5 5;
-    border-radius: 15px;
+    GridLayout{
+        padding: 15 10;
+    }
 }
