@@ -30,8 +30,9 @@ import { ItemSwiperComponent } from "./shared/components/item-swiper/item-swiper
 import { AppComponent } from "./app.component";
 
 import {HomeComponent} from "./pages/home/home.component";
+import {ActionBarComponent} from '~/shared/components/action-bar/action-bar.component';
 
-const uri = "http://142.93.129.34:4001/my-cafffe-api/";
+const uri = "http://142.93.129.34:4000/my-cafffe-graphql-api";
 
 @NgModule({
   imports: [
@@ -54,7 +55,8 @@ const uri = "http://142.93.129.34:4001/my-cafffe-api/";
     LocationListComponent,
     SelectionComponent,
     ItemFiltersComponent,
-    ItemSwiperComponent
+    ItemSwiperComponent,
+    ActionBarComponent
   ],
   providers: [ProductService, ShopService],
   bootstrap: [AppComponent],
