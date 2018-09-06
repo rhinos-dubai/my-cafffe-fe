@@ -27,6 +27,7 @@ export class LocationListComponent implements OnInit {
 
   changeShopName(name, price){
     console.log(price);
+    console.log(name)
     this.shopService.changeSeletedShopName(name);
     this.shopService.changeRatebyShop(price);
     this.router.navigate(["confirm-order"]);
