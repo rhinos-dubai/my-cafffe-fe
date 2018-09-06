@@ -46,18 +46,21 @@ export class ItemFiltersComponent implements OnInit {
     this.productService.getSelectedItem(this.selectedItem,this.Selectedoptions).subscribe(
         data =>{
             this.shopService.changeAvailableShops(data.shops);
-            // console.log(data);
-            setTimeout(()=>{    //<<<---    using ()=> syntax
+            setTimeout(()=>{    
               this.shopService.changesearchLocationStatus(false);
             }, 100);
         })
   }
 
   resetFilters(){
+    setTimeout(()=>{   
+    this.filterProducts();
+    }, 1000);
     this.Selectedoptions = [];
     this.SelectedoptionsName = {data:[]}
     this.productService.changeSelectedFilters([]);
     this.filtersbyUser = []
+    
   }
 
   

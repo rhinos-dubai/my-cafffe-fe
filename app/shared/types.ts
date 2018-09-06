@@ -78,5 +78,6 @@ export type Query = {
     getShops: Shop[];
     getMainCategory: Category;
     getClosestShops:Shop[];
+    getShop:Shop[];
 // tslint:disable-next-line:eofline
 };

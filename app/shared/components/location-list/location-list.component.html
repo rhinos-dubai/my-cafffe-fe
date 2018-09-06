@@ -10,7 +10,7 @@
         <StackLayout *ngIf="!isBusy">
 
             <CardView class="single-outlet-location" *ngFor="let item of Locations"
-                      (tap)="changeShopName(item.shop.name,item.base_price)">
+                      (tap)="changeShopName(item,item.base_price,filteredShops)">
 
                 <StackLayout>
 

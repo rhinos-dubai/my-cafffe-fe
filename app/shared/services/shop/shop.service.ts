@@ -12,6 +12,7 @@ import { Query, Shop } from "~/shared/types";
 export class ShopService {
   public Ref: QueryRef<Query>;
   public shops: Observable<Shop[]>;
+  public shop:Observable<Shop>;
 
   private availableShops = new BehaviorSubject(null);
   filteredShops = this.availableShops.asObservable();
@@ -97,5 +98,51 @@ export class ShopService {
   }
   public getShopsHavingProduct() {
     return null;
+  }
+
+
+  public getShop(id){
+
+    this.Ref = this.apollo.watchQuery<Query>({
+      query: gql`
+      {
+        getShop(id:${id}) {
+          id
+          isActive
+          name
+          phone
+          address
+          image
+          full_time
+          opensAt
+          closesAt
+          longitude
+          latitude
+          shop_distance
+          currency
+          createdAt
+          updatedAt
+          categories{
+            category
+          }
+          products {
+            id
+            isActive
+            product {
+              name
+              id
+            }
+          }
+        }
+      }
+      `,
+    });
+
+    this.shops = this.Ref
+    .valueChanges
+    .pipe(map((r) => r.data.getShop));
+
+    return this.shops;
+
   }
 }

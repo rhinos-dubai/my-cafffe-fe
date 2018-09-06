@@ -1,14 +1,17 @@
-<!--<GridLayout class="page">-->
-<StackLayout  orientation="vertical" class="page">
+<ActionBar title="Home"></ActionBar>
 
-  <ActionBar title="Home"></ActionBar>
+<!--<GridLayout class="page">-->
+
+<GridLayout  orientation="vertical" class="page">
+
+
 
   <GridView [items]="data" colWidth="32%" rowHeight="100">
 
 
     <ng-template let-item="item" let-odd="odd">
 
-      <CardView class="singleItem" >
+      <GridLayout class="singleItem" >
 
         <StackLayout  (tap)="getSelectedName(item.name)" [nsRouterLink]="['/selection', item.id]" verticalAlignment="stretch" class="list-group-item" [class.odd]="odd">
 
@@ -19,7 +22,7 @@
 
         </StackLayout>
 
-      </CardView>
+      </GridLayout>
 
     </ng-template>
 
@@ -28,4 +31,4 @@
   </GridView>
 <!--</GridLayout>-->
 
-  </StackLayout>
+  </GridLayout>

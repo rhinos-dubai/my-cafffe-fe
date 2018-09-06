@@ -1,4 +1,19 @@
 <StackLayout>
-  <Label class="h1 title"
-    text="shop Is working"></Label>
+
+    <Image [src]="shopCover"></Image>
+
+    <label class="H3" margin="10" horizontalAlignment="center"
+    text="{{shop.name}}"></label>
+
+    <Label class="H3" margin="10" horizontalAlignment="center"
+    text="Location : {{shop.address}}"></Label>
+
+    <Label class="H3" margin="10" horizontalAlignment="center"
+    text="Timings: {{shop.opensAt}} - {{shop.closesAt}}"></Label>
+    
+    <item-gridlist [data]="product"></item-gridlist>
+
+
+
+
 </StackLayout>

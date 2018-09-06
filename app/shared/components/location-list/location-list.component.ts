@@ -25,12 +25,17 @@ export class LocationListComponent implements OnInit {
     console.log(value)
   }
 
-  changeShopName(name, price){
-    console.log(price);
-    console.log(name)
-    this.shopService.changeSeletedShopName(name);
-    this.shopService.changeRatebyShop(price);
-    this.router.navigate(["confirm-order"]);
+  changeShopName(item, price, checkComponent){
+    console.log(item.name)
+    if(!checkComponent){
+      this.router.navigate(["shop", item.id]);
+    }
+    else{
+      this.shopService.changeSeletedShopName(item.shop.name);
+      this.shopService.changeRatebyShop(price);
+      this.router.navigate(["confirm-order"]);
+    }
+
   }
 
 }

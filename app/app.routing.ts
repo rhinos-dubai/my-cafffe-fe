@@ -6,6 +6,7 @@ import {HomeComponent} from "./pages/home/home.component"
 import { SelectItemComponent } from "./pages/select-item/select-item.component";
 import { SelectionComponent } from "./pages/selection/selection.component";
 import { ConfirmOrderComponent } from "./pages/confirm-order/confirm-order.component";
+import { ShopComponent } from "./pages/shop/shop.component";
 
 
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
     { path: "select-item", component: SelectItemComponent },
     { path: "selection/:id", component: SelectionComponent },
     { path: "confirm-order", component: ConfirmOrderComponent },
-    
+    { path: "shop/:id", component: ShopComponent },
 
 ];
 

@@ -19,6 +19,7 @@ import { ShopService } from "./shared/services/shop/shop.service";
 import { SelectItemComponent } from "./pages/select-item/select-item.component";
 import { SelectionComponent } from "./pages/selection/selection.component";
 import { ConfirmOrderComponent } from "./pages/confirm-order/confirm-order.component";
+import { ShopComponent } from "./pages/shop/shop.component";
 
 import { ItemGridlistComponent } from "./shared/components/item-gridlist/item-gridlist.component";
 import { LocationListComponent } from "./shared/components/location-list/location-list.component";
@@ -31,7 +32,7 @@ import { AppComponent } from "./app.component";
 
 import {HomeComponent} from "./pages/home/home.component";
 
-const uri = "http://142.93.129.34:4001/my-cafffe-api/";
+const uri = "http://142.93.129.34:4000/my-cafffe-graphql-api";
 
 @NgModule({
   imports: [
@@ -54,7 +55,8 @@ const uri = "http://142.93.129.34:4001/my-cafffe-api/";
     LocationListComponent,
     SelectionComponent,
     ItemFiltersComponent,
-    ItemSwiperComponent
+    ItemSwiperComponent,
+    ShopComponent
   ],
   providers: [ProductService, ShopService],
   bootstrap: [AppComponent],
