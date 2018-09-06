@@ -7,8 +7,14 @@
 //}
 .page{
   margin: 0 10;
+  background-color: $background-color;
+
 }
 
+ActionBar{
+  background-color: $primary-color;
+  color:$text-color-dark;
+}
 
 .card-general{
   background-color: $white;

@@ -1,0 +1,25 @@
+@import "~/shared/styles/main.scss";
+
+
+.singleItem{
+  @extend .card-general;
+  margin: 10;
+  //width: 110;
+
+  Image{
+    height: 50;
+    margin: 10;
+  }
+  Label{
+    @extend .button-text;
+  }
+
+  .item-name-label{
+    width: 100%;
+    //background-color: red;
+  }
+
+  .item-location-label{
+    @extend .label-text-gray;
+  }
+}

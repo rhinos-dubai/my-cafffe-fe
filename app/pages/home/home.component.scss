@@ -1,11 +1,4 @@
 @import "~/shared/styles/main.scss";
-.page{
-    background-color: $background-color;
-}
-ActionBar{
-    background-color: $primary-color;
-    color:$text-color-dark;
-}
 
 .hero-card {
     @extend .card-general;

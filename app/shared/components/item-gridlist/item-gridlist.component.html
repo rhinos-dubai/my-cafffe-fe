@@ -1,9 +1,31 @@
-<GridLayout class="page">
-  <GridView [items]="data" colWidth="45%" rowHeight="100">
+<!--<GridLayout class="page">-->
+<StackLayout  orientation="vertical" class="page">
+
+  <ActionBar title="Home"></ActionBar>
+
+  <GridView [items]="data" colWidth="32%" rowHeight="100">
+
+
     <ng-template let-item="item" let-odd="odd">
-      <StackLayout margin="10"  (tap)="getSelectedName(item.name)" [nsRouterLink]="['/selection', item.id]" borderColor="blue" borderWidth="2" borderRadius="5" verticalAlignment="stretch" class="list-group-item" [class.odd]="odd">
-        <Label verticalAlignment="center" [text]="item.name" class="list-group-item-text" textWrap="true"></Label>
-      </StackLayout>
+
+      <CardView class="singleItem" >
+
+        <StackLayout  (tap)="getSelectedName(item.name)" [nsRouterLink]="['/selection', item.id]" verticalAlignment="stretch" class="list-group-item" [class.odd]="odd">
+
+          <Image src="~/images/coffee/coffee.png"></Image>
+
+          <Label verticalAlignment="center" [text]="item.name+ ' ' + item.name" class="list-group-item-text text-center" textWrap="true">
+          </Label>
+
+        </StackLayout>
+
+      </CardView>
+
     </ng-template>
+
+
+
   </GridView>
-</GridLayout>
+<!--</GridLayout>-->
+
+  </StackLayout>
