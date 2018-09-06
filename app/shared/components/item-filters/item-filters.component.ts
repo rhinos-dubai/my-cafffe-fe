@@ -20,7 +20,8 @@ export class ItemFiltersComponent implements OnInit {
 
   constructor(private productService:ProductService, private shopService:ShopService) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+  }
 
   onSelectionTap(filters,filterName){
     this.productService.currentItem.subscribe(result => {
