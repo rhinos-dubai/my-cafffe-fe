@@ -1,19 +1,85 @@
-<StackLayout>
+<StackLayout class="single-outlet-location-page">
 
-    <Image [src]="shopCover"></Image>
+    <StackLayout height="120" [backgroundImage]="shopCover" class="shopheroimage">
+    </StackLayout>
 
-    <label class="H3" margin="10" horizontalAlignment="center"
-    text="{{shop.name}}"></label>
+    <!--<label class="h3" margin="10" horizontalAlignment="center"-->
+    <!--text="{{shop.name}}"></label>-->
 
-    <Label class="H3" margin="10" horizontalAlignment="center"
-    text="Location : {{shop.address}}"></Label>
+    <!--<Label class="h3" margin="10" horizontalAlignment="center"-->
+    <!--text="Location : {{shop.address}}"></Label>-->
 
-    <Label class="H3" margin="10" horizontalAlignment="center"
-    text="Timings: {{shop.opensAt}} - {{shop.closesAt}}"></Label>
-    
-    <item-gridlist [data]="product"></item-gridlist>
+    <!--<Label class="h3" margin="10" horizontalAlignment="center"-->
+    <!--text="Timings: {{shop.opensAt}} - {{shop.closesAt}}"></Label>-->
+
+    <StackLayout height="80" class="location-info">
+
+        <GridLayout columns="100, *, auto">
+
+            <StackLayout col="0" row="0">
+                <Image src="~/images/shop.jpg" class="shop-logo"></Image>
+            </StackLayout>
+
+            <StackLayout col="1" row="0">
+                <GridLayout columns="auto, auto" rows="auto, auto, auto"
+                            class="single-outlet-location-label-list">
+
+                    <!--Regular List: -->
+                    <Label [text]="shop.name" class="single-outlet-location-title"
+                           row="0" colSpan="2"></Label>
+                    <Label text="Location: " class="single-outlet-location-label"
+                           row="1" col="0"></Label>
+                    <Label text="{{shop.address}}" row="1" col="1"></Label>
+
+                    <Label text="Timings: " class="single-outlet-location-label"
+                           row="2" col="0"></Label>
+                    <Label text="{{shop.opensAt}} - {{shop.closesAt}}" row="2" col="1"></Label>
+
+                </GridLayout>
+            </StackLayout>
+
+            <StackLayout orientation="vertical" col="2" row="0" class="action-buttons">
+
+                <GridLayout columns="auto, auto" rows="auto, auto" width="80" height="80">
+
+                    <GridLayout col="0" row="0" columns="auto" rows="auto" class="single-icon rating-icon text-center">
+                        <Label text="&#xe900;" class="icomoon hexagon" col="0"></Label>
+                        <Label text="4.5" class="button-text-light inner-label" col="0"></Label>
+                    </GridLayout>
+
+                    <GridLayout col="1" row="0" columns="auto" rows="auto" class="single-icon heart-icon text-center">
+                        <Label text="&#xe901;" class="icomoon hexagon" col="0"></Label>
+                        <Label text="&#xe902;" class="icomoon inner-label" col="0"></Label>
+                    </GridLayout>
 
 
+                    <GridLayout col="1" row="1" columns="auto" rows="auto"
+                                class="single-icon location-icon text-center">
+                        <Label text="&#xe900;" class="icomoon hexagon" col="0"></Label>
+                        <Label text="&#xf041;" class="font-awesome inner-label" col="0"></Label>
+                    </GridLayout>
+
+                </GridLayout>
+
+
+            </StackLayout>
+
+        </GridLayout>
+    </StackLayout>
+
+    <StackLayout class="menu-tabs">
+        <TabView selectedIndex="0">
+            <ng-container *ngFor="let item of ['Coffee','Sandwich', 'Croissants', 'Bakery']">
+                <StackLayout *tabItem="{title: item}">
+                        <item-gridlist [data]="product"></item-gridlist>
+                </StackLayout>
+            </ng-container>
+
+        </TabView>
+
+    </StackLayout>
 
 
 </StackLayout>
+
+

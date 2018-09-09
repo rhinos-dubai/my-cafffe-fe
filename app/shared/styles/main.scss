@@ -58,6 +58,13 @@ ActionBar{
   font-size: 20;
 }
 
+.btn-block {
+  @extend .button-text-light;
+
+  background-color: $secondary-color;
+  border-radius: 25;
+}
+
 //.border-card{
 //  border-width: 1;
 //  border-radius: 5;

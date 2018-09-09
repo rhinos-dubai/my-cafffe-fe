@@ -29,14 +29,10 @@ export class SelectionComponent implements OnInit {
   genericProperties_values: Array<any> = [];
   products;
   animateFor = true;
-<<<<<<< HEAD
-
   id: number;
   locations;
   filteredShops = false;
   locationList = this.shopService.filteredShops;
-=======
->>>>>>> a39239b2daaf59818fcd4b65a39a111496654f6c
   locationListSize = [];
   
 
@@ -45,20 +41,6 @@ export class SelectionComponent implements OnInit {
   constructor(private page: Page, private route: ActivatedRoute, private productService:ProductService, private shopService:ShopService) { }
 
 
-<<<<<<< HEAD
-  ngOnInit() { 
-    setTimeout(()=>{ 
-    this.locationList.subscribe(result => {
-      // console.log(result);
-      result.forEach(element => {
-        //console.log(element)
-        this.locationListSize.push(element);
-        console.log(this.locationListSize.length)
-      });
-    })
-    }, 2000);
-    
-=======
   ngOnInit() {
       setTimeout(()=>{
       this.locationList.subscribe(result => {
@@ -69,7 +51,6 @@ export class SelectionComponent implements OnInit {
       })
       }, 2000);
 
->>>>>>> a39239b2daaf59818fcd4b65a39a111496654f6c
     this.productService.getAllProducts().subscribe( result => {
       this.products = result;
       this.shopService.changesearchLocationStatus(true);

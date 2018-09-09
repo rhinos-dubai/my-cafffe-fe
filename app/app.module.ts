@@ -57,11 +57,8 @@ const uri = "http://142.93.129.34:4000/my-cafffe-graphql-api";
     SelectionComponent,
     ItemFiltersComponent,
     ItemSwiperComponent,
-<<<<<<< HEAD
-    ShopComponent
-=======
+    ShopComponent,
     ActionBarComponent
->>>>>>> a39239b2daaf59818fcd4b65a39a111496654f6c
   ],
   providers: [ProductService, ShopService],
   bootstrap: [AppComponent],

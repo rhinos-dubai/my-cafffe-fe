@@ -32,28 +32,54 @@
 
 
     .action-buttons{
-        GridLayout{
-            margin-top: 8;
-            margin-bottom:5;
+
+        .icomoon{
+            font-size: 30;
         }
-        .favourite-icon{
+
+        .heart-icon{
             color: $danger-color;
-            border-width: 1;
-            border-color: $danger-color;
-            border-radius: 25;
-            padding: 5;
+            .inner-label{
+                font-size: 18;
 
+            }
+
+            .hexagon{
+                color: $danger-color;
+            }
         }
+
         .rating-icon{
-            @extend .button-text-light;
-            border-width: 1;
-            border-color: $secondary-color-light;
-            background-color: $secondary-color-light;
-            border-radius: 25;
-            padding: 5;
-
-
+            color: $white;
+            .hexagon{
+                color: $secondary-color-light;
+            }
         }
+
+
+        .inner-label{
+            font-size: 15;
+            margin-top: 7;
+            //margin-left: 9;
+        }
+
+        .location-icon{
+            color: $white;
+
+            .hexagon{
+                color: $secondary-color;
+            }
+        }
+
+
+        .single-icon{
+            padding: 2;
+            margin-top: 5;
+            margin-right: 5;
+        }
+
+
+
     }
 
 
