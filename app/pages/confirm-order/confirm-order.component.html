@@ -1,16 +1,24 @@
 <StackLayout>
-    <label class="h3" margin="10" horizontalAlignment="center"
-    text="{{seletedItem | async}}"></label>
+    <GridLayout rows="200 200">
+        <StackLayout row="0">
 
-    <Label class="h3" margin="10" horizontalAlignment="center"
-    text="{{seletedShop | async}}"></Label>
+                <label class="h3" margin="10" horizontalAlignment="center"
+                    text="{{seletedItem | async}}"></label>
 
-    <Label class="h4" margin="10" text="AED {{selectedRate | async}}" horizontalAlignment="center"></Label>
+                <Label class="h3" margin="10" horizontalAlignment="center"
+                    text="{{seletedShop | async}}"></Label>
 
-    <Label text="Selected Options" margin="10" class="h4" ></Label>
+                <Label class="h4" margin="10" text="AED {{selectedRate | async}}" horizontalAlignment="center"></Label>
 
-    
-    <item-filters [filters]="selectedFilters" [showActionButtons]="false" > </item-filters>
-    
+                <Label text="Selected Options" margin="10" class="h4" ></Label>
+
+        </StackLayout>
+
+        <StackLayout row="1">
+            <ScrollView height="auto" orientation="vertical">
+                <item-filters  [filters]="selectedFilters" [showActionButtons]="false" > </item-filters>
+            </ScrollView>
+        </StackLayout>
+    </GridLayout>
 
 </StackLayout>

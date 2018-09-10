@@ -66,16 +66,20 @@
                     <Button class="btn btn-pill"
                                 *ngFor="let options of item; index as i"
                                 text="{{options.property}}"
-                                (tap)="onSelectionTap(options.id,options.property);filtersSelectedByUser(item[i])"
+                                (tap)="onSelectionTap(options.id,options.property);filtersSelectedByUser(item[i]);filterProducts()"
                                 >
                         </Button>
 
                 </StackLayout>
             </ScrollView>
 
-
         </GridLayout>
     </CardView>
+
+    <StackLayout orientation="horizontal" horizontalAlignment="center" *ngIf="showActionButtons">
+            
+            <Button width="100" text="Reset" (tap)="resetFilters()" class="btn-apply" marginLeft="5"> </Button>
+    </StackLayout>
 
 
 

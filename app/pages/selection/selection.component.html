@@ -4,7 +4,7 @@
 
     <GridLayout rows="auto,700,auto">
 
-        <ScrollView row="0" orientation="vertical" height="500">
+        <ScrollView row="0" orientation="vertical" height="auto">
 
             <StackLayout height="auto" orientation="vertical">
 
@@ -13,7 +13,7 @@
                 <!---->
                 <!--<Label horizontalAlignment="center" text="Filters"></Label>-->
 
-                <item-filters [filters]="genericProperties_values" [showActionButtons]="true"></item-filters>
+                <item-filters [filters]="genericProperties_values" [showActionButtons]="false"></item-filters>
 
             </StackLayout>
         </ScrollView>

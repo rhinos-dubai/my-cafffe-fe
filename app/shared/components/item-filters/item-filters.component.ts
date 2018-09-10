@@ -17,6 +17,7 @@ export class ItemFiltersComponent implements OnInit {
   SelectedoptionsName: Object = {data:[]};
   filtersbyUser: Array<any> = [];
   isBusy: any;
+  showOptionButtons = false;;
 
   constructor(private productService:ProductService, private shopService:ShopService) { }
 
@@ -24,6 +25,7 @@ export class ItemFiltersComponent implements OnInit {
   }
 
   onSelectionTap(filters,filterName){
+    this.showActionButtons = true;
     this.productService.currentItem.subscribe(result => {
       this.selectedItem = result;
       console.log(this.selectedItem);
@@ -60,6 +62,7 @@ export class ItemFiltersComponent implements OnInit {
     this.SelectedoptionsName = {data:[]}
     this.productService.changeSelectedFilters([]);
     this.filtersbyUser = []
+    this.showActionButtons = false;
     
   }
 

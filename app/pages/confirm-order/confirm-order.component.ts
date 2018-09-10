@@ -4,6 +4,8 @@ import { ShopService } from '~/shared/services/shop/shop.service';
 import { from } from 'rxjs';
 import { groupBy, mergeMap, toArray } from 'rxjs/operators';
 
+let LS = require( "nativescript-localstorage" );
+
 @Component({
   moduleId: module.id,
   selector: 'app-confirm-order',
@@ -11,6 +13,7 @@ import { groupBy, mergeMap, toArray } from 'rxjs/operators';
   styleUrls: ['./confirm-order.component.scss']
 })
 export class ConfirmOrderComponent implements OnInit {
+  showCart: boolean = false;
 
   constructor(private productService:ProductService, private shopService: ShopService) { }
 
@@ -18,6 +21,9 @@ export class ConfirmOrderComponent implements OnInit {
   seletedShop = this.shopService.SeletedShopName;
   selectedRate = this.shopService.currentShopItemRate;
   selectedFilters: Array<any> = []; 
+  cart: Object = {};
+  
+  
 
   ngOnInit() {
     this.productService.currentSelectedFilters.subscribe(result => {
@@ -32,10 +38,11 @@ export class ConfirmOrderComponent implements OnInit {
         );
 
         const subscribeToProperties = groupByProperties.subscribe(val => {
-          console.log(val);
+         
           this.selectedFilters.push(val);
         });
     })
    }
+
 
 }

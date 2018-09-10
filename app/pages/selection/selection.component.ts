@@ -29,14 +29,11 @@ export class SelectionComponent implements OnInit {
   genericProperties_values: Array<any> = [];
   products;
   animateFor = true;
-<<<<<<< HEAD
 
   id: number;
   locations;
   filteredShops = false;
   locationList = this.shopService.filteredShops;
-=======
->>>>>>> a39239b2daaf59818fcd4b65a39a111496654f6c
   locationListSize = [];
   
 
@@ -45,23 +42,11 @@ export class SelectionComponent implements OnInit {
   constructor(private page: Page, private route: ActivatedRoute, private productService:ProductService, private shopService:ShopService) { }
 
 
-<<<<<<< HEAD
-  ngOnInit() { 
-    setTimeout(()=>{ 
-    this.locationList.subscribe(result => {
-      // console.log(result);
-      result.forEach(element => {
-        //console.log(element)
-        this.locationListSize.push(element);
-        console.log(this.locationListSize.length)
-      });
-    })
-    }, 2000);
-    
-=======
   ngOnInit() {
       setTimeout(()=>{
+
       this.locationList.subscribe(result => {
+        this.locationListSize = [];
           result.forEach(element => {
               this.locationListSize.push(element);
               console.log(this.locationListSize.length)
@@ -69,7 +54,6 @@ export class SelectionComponent implements OnInit {
       })
       }, 2000);
 
->>>>>>> a39239b2daaf59818fcd4b65a39a111496654f6c
     this.productService.getAllProducts().subscribe( result => {
       this.products = result;
       this.shopService.changesearchLocationStatus(true);
@@ -78,7 +62,7 @@ export class SelectionComponent implements OnInit {
     view1 = this.page.getViewById<View>("view1");
     floatingButton = this.page.getViewById<View>("floatingButton");
     view1.translateY = 0;
-    floatingButton.translateY = -660;
+    floatingButton.translateY = -325;
 
 
     this.route.params.subscribe(params => {
@@ -122,7 +106,7 @@ export class SelectionComponent implements OnInit {
       let definitions = new Array<AnimationDefinition>();
       let a1: AnimationDefinition = {
           target: view1,
-          translate: { x: 0, y: -500 },
+          translate: { x: 0, y: -150 },
           curve: AnimationCurve.easeOut,
           duration: 200
       };
