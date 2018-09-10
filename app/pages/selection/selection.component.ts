@@ -29,7 +29,6 @@ export class SelectionComponent implements OnInit {
   genericProperties_values: Array<any> = [];
   products;
   animateFor = true;
-
   id: number;
   locations;
   filteredShops = false;
@@ -43,6 +42,7 @@ export class SelectionComponent implements OnInit {
 
 
   ngOnInit() {
+      console.log("back to Selection")
       setTimeout(()=>{
 
       this.locationList.subscribe(result => {

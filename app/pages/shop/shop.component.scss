@@ -1,9 +1,114 @@
-.h3{
-    font-size: 20px;
-    font-weight: 600;
+@import "~/shared/styles/main.scss";
+
+
+
+
+
+.single-outlet-location-page{
+
+    .location-info{
+        margin: 5;
+        background-color: $white;
+    }
+    .shop-logo{
+        height: 90;
+        width: 90;
+    }
+
+    .shopheroimage{
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size:cover;
+        background-attachment:fixed;
+
+    }
+
+    .single-outlet-location-label-list{
+        margin-top: 15;
+
+        Label{
+            @extend .body-text;
+        }
+
+        .single-outlet-location-title{
+            @extend .h5;
+        }
+
+        .single-outlet-location-label{
+            @extend .label-text-gray;
+        }
+
+        .single-outlet-location-price{
+            color:$secondary-color-light;
+        }
+    }
+
+
+
+
+
 }
 
-.h4{
-    font-size: 18px;
-    font-weight: 500;
+.action-buttons{
+
+    .icomoon{
+        font-size: 30;
+    }
+
+    .heart-icon{
+        color: $danger-color;
+        .inner-label{
+            font-size: 18;
+
+        }
+
+        .hexagon{
+            color: $danger-color;
+        }
+    }
+
+    .rating-icon{
+        color: $white;
+        .hexagon{
+            color: $secondary-color-light;
+        }
+    }
+
+
+    .inner-label{
+        font-size: 15;
+        margin-top: 7;
+        //margin-left: 9;
+    }
+
+    .location-icon{
+        color: $white;
+
+        .hexagon{
+            color: $secondary-color;
+        }
+    }
+
+
+    .single-icon{
+        padding: 2;
+        margin-top: 5;
+        margin-right: 5;
+    }
+
+
+
+}
+
+.menu-tabs{
+    TabView{
+
+        tab-text-color: $text-color-gray;
+        tab-background-color: $primary-color-light;
+        //highlighted-color: $primary-color;
+        android-selected-tab-highlight-color: $secondary-color;
+
+        selected-tab-text-color: $text-color-dark;
+
+    }
 }

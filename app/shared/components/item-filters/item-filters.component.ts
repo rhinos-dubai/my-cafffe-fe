@@ -28,8 +28,7 @@ export class ItemFiltersComponent implements OnInit {
     this.showActionButtons = true;
     this.productService.currentItem.subscribe(result => {
       this.selectedItem = result;
-      console.log(this.selectedItem);
-    })
+        })
     this.Selectedoptions.push(filters);
     this.SelectedoptionsName['data'].push(filterName);
   }
@@ -44,7 +43,6 @@ export class ItemFiltersComponent implements OnInit {
 
     // console.log(this.Selectedoptions);
     this.shopService.changesearchLocationStatus(true);
-    console.log(this.Selectedoptions);
     this.productService.getSelectedItem(this.selectedItem,this.Selectedoptions).subscribe(
         data =>{
             this.shopService.changeAvailableShops(data.shops);

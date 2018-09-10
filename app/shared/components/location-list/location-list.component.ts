@@ -18,6 +18,7 @@ export class LocationListComponent implements OnInit {
   ngOnInit() { 
     this.shopService.searchedLocation.subscribe(result =>{
       this.isBusy = result;
+      console.log(result);
     })
   }
 

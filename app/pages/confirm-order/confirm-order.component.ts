@@ -20,10 +20,11 @@ export class ConfirmOrderComponent implements OnInit {
   seletedItem = this.productService.currentItemName;
   seletedShop = this.shopService.SeletedShopName;
   selectedRate = this.shopService.currentShopItemRate;
-  selectedFilters: Array<any> = []; 
-  cart: Object = {};
-  
-  
+  selectedFilters: Array<any> = [];
+  genericProperties: any;
+  genericProperties_values: Array<any> = [];
+
+
 
   ngOnInit() {
     this.productService.currentSelectedFilters.subscribe(result => {
@@ -41,7 +42,27 @@ export class ConfirmOrderComponent implements OnInit {
          
           this.selectedFilters.push(val);
         });
-    })
+    });
+    // Temporary Start
+      this.productService.getSelectedItem(1,null).subscribe(result => {
+
+          this.genericProperties = result.generic_properties;
+          this.shopService.changeAvailableShops(result.shops);
+
+          const source = from(this.genericProperties);
+
+          const groupByProperties = source.pipe(
+              groupBy(result => result['property_group']),
+              // return each item in group as array
+              mergeMap(group => group.pipe(toArray()))
+          );
+
+          const subscribeToProperties = groupByProperties.subscribe(val => {
+              // console.log(val);
+              this.genericProperties_values.push(val);
+          });
+      });
+    // Temporary End
    }
 
 

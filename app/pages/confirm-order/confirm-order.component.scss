@@ -1,21 +1,74 @@
-.cardStyle {
-    background-color: #3489db;
-    color: #fff;
+@import "~/shared/styles/main.scss";
+
+//.cardStyle {
+//    background-color: #3489db;
+//    color: #fff;
+//}
+//
+//.h3{
+//    font-size: 20px;
+//    font-weight: 600;
+//}
+//
+//.h4{
+//    font-size: 18px;
+//    font-weight: 500;
+//}
+//
+//.filterSelected{
+//    background: lightblue;
+//    border-color: lightblue lightblue lightblue lightblue   ;
+//    border-width: 5 5 5 5;
+//    border-radius: 15px;
+//}
+
+.mainpage{
+  background-color: $background-color;
+}
+.inner-scroll-page{
+  margin: 5 10 0 10;
 }
 
-.h3{
-    font-size: 20px;
-    font-weight: 600;
+.action-bar-bottom{
+  height: 120;
+  padding: 0 10;
+  background-color: $white;
+  border-color: $secondary-color;
+  border-top-width: 2;
+
+  GridLayout{
+    background-color: $white;
+    border-color: $border-secondary-light;
+    border-bottom-width: 1;
+    padding: 5 0;
+
+  }
 }
 
-.h4{
-    font-size: 18px;
-    font-weight: 500;
-}
+.edit-button{
+  @extend .button-text;
 
-.filterSelected{
-    background: lightblue;
-    border-color: lightblue lightblue lightblue lightblue   ;
-    border-width: 5 5 5 5;
-    border-radius: 15px;
+  margin: 5 0;
+
+  .edit-icon{
+    color: $primary-color-dark;
+    background-color: $primary-color;
+    padding: 15 0;
+
+    border-color: $primary-color;
+    border-width: 2;
+    border-radius: 25 0 0 25;
+
+  }
+
+
+  .edit-text{
+    background-color: $white;
+    padding: 15 0;
+    border-color: $primary-color;
+    border-width: 2;
+    border-radius: 0 25 25 0;
+
+  }
+
 }
