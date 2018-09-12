@@ -10,6 +10,8 @@ import { Page } from "ui/page";
 import { View } from "ui/core/view";
 import { Animation, AnimationDefinition } from "ui/animation";
 
+
+
 let view1: View;
 let floatingButton: View;
 
@@ -34,9 +36,9 @@ export class SelectionComponent implements OnInit {
   filteredShops = false;
   locationList = this.shopService.filteredShops;
   locationListSize = [];
-  pageNumber = 1;
+  pageNumber;
   shops: Array<any> = [];
-  noMoreShops: boolean = false;
+  MoreShops: boolean = false;
   selectedFilters: any[];
   selectedFilterOptions: Array<any> = [];
   
@@ -47,10 +49,15 @@ export class SelectionComponent implements OnInit {
 
 
   ngOnInit() {
+      this.shopService.changeShopsAvailbilityStatus(true);
 
       this.productService.currentPageNumber.subscribe(result => {
         this.pageNumber = result;
-        console.log(this.pageNumber);
+      })
+
+      this.shopService.checkForAvailableShops.subscribe(result => {
+        this.MoreShops = result;
+        console.log(this.MoreShops);
       })
       
       setTimeout(()=>{
@@ -112,11 +119,10 @@ export class SelectionComponent implements OnInit {
   getLocations(){
     this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(result => {
       this.shopService.changeAvailableShops(result.shops);
-      // console.log(result.shops);
+      let image = result.shops;
       if(result.shops == ''){
         console.log("no More Shops");
         this.productService.changePageNumber(1);
-        this.noMoreShops = true;
         // this.shopsDemo = true;
         // close LoadMore Button
       };
@@ -145,12 +151,12 @@ export class SelectionComponent implements OnInit {
   loadMore(){
     this.pageNumber += 1;
     this.getSelectedFilters();
-    console.log(this.id);
-    console.log(this.selectedFilterOptions)
+    // console.log(this.id);
+    // console.log(this.selectedFilterOptions)
     this.productService.getSelectedItem(this.id, this.selectedFilterOptions,this.pageNumber).subscribe(result => {
       // this.shopService.changeAvailableShops(result.shops);
       this.shops.push(result.shops);
-      // console.log(result.shops);
+      console.log(result.shops);
       setTimeout(()=>{
         result.shops.forEach(element => {
           this.shopService.addPagination(element);
@@ -160,7 +166,7 @@ export class SelectionComponent implements OnInit {
       if(result.shops.length == 0){
         alert('No More Shops');
         this.pageNumber = 0;
-        this.noMoreShops = true;
+        this.shopService.changeShopsAvailbilityStatus(false);
       }
     })
     // console.log(this.pageNumber);

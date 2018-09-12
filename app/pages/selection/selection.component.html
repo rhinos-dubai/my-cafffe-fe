@@ -28,15 +28,10 @@
 
             </GridLayout>
 
-            <ScrollView orientation="vertical" height="500">
-                <GridLayout rows="* * *" class="locations">
+            <ScrollView orientation="vertical" height="auto" >
+                <GridLayout rows="350" class="locations">
                     <location-list row="0" [Locations]="locationList | async"
                                    [filteredShops]="filteredShops"></location-list>
-                    
-                    <StackLayout row="1" >
-                        <Button text="Load More" (tap)="loadMore()" *ngIf="!noMoreShops" ></Button>
-                    </StackLayout>
-
                 </GridLayout>
 
 
@@ -47,7 +42,7 @@
 
         <StackLayout id="floatingButton" height="auto" row="2" orientation="horizontal" horizontalAlignment="center" width="100%" (tap)="animate();animateFor = !animateFor">
 
-            <button text="&#xf062;" class="btn-circle font-awesome" (tap)="animate();animateFor = !animateFor"></button>
+            <!--<button text="&#xf062;" class="btn-circle font-awesome" (tap)="animate();animateFor = !animateFor"></button>-->
 
 
         </StackLayout>

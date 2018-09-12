@@ -24,11 +24,13 @@ export class ItemFiltersComponent implements OnInit {
   constructor(private productService:ProductService, private shopService:ShopService) { }
 
   ngOnInit() { 
-    this.pageNumber = 1;
+    this.productService.currentPageNumber.subscribe(result => {
+      this.pageNumber = result;
+    })
   }
 
   onSelectionTap(filters,filterName){
-
+    this.productService.changePageNumber(1);
     this.showActionButtons = true;
     this.productService.currentItem.subscribe(result => {
       this.selectedItem = result;
@@ -44,7 +46,7 @@ export class ItemFiltersComponent implements OnInit {
   }
 
   filterProducts(){
-    
+    this.shopService.changeShopsAvailbilityStatus(true);
     console.log(this.Selectedoptions);
     this.shopService.changesearchLocationStatus(true);
     this.productService.getSelectedItem(this.selectedItem,this.Selectedoptions,this.pageNumber).subscribe(
@@ -66,7 +68,7 @@ export class ItemFiltersComponent implements OnInit {
     this.productService.changeSelectedFilters([]);
     this.filtersbyUser = []
     this.showActionButtons = false;
-    this.pageNumber = 1;
+    this.productService.changePageNumber(1);
   }
 
 

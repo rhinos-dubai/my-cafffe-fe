@@ -37,7 +37,7 @@
                                 <Label *ngIf="filteredShops" [text]="item.shop.name" row="0" colSpan="2"></Label>
                                 <Label *ngIf="filteredShops" text="Location: " class="single-outlet-location-label"
                                        row="1" col="0"></Label>
-                                <Label *ngIf="filteredShops" text="Business Bay" row="1" col="1"></Label>
+                                <Label *ngIf="filteredShops" [text]="item.shop.address" row="1" col="1"></Label>
 
 
                                 <Label *ngIf="filteredShops" text="From: " class="single-outlet-location-label" row="2"
@@ -52,7 +52,12 @@
                                 <!--class="single-outlet-location-price" row="2"></Label>-->
 
                             </GridLayout>
+
+
+            
                         </StackLayout>
+
+
 
                         <StackLayout orientation="vertical" col="2" row="0" class="action-buttons">
 
@@ -85,6 +90,10 @@
 
 
             </CardView>
+
+                        <StackLayout>
+                                <Button background="lightblue" width="300" class="btn btn-pill"  text="Load More" (tap)="loadMoreItems()" *ngIf="MoreShops"  ></Button>
+                        </StackLayout>
 
 
 

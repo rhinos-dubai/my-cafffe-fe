@@ -15,13 +15,35 @@ export class LocationListComponent implements OnInit {
   @Input() filteredShops;
   isBusy;
   pageNumber;
+  selectedFilters: any[];
+  selectedFilterOptions: Array<any> = [];
+  id;
+  shops: Array<any> = [];
+  MoreShops: boolean = false;
+
+
   constructor(private shopService: ShopService,private productService: ProductService, private router:Router) { }
 
   ngOnInit() { 
     this.shopService.searchedLocation.subscribe(result =>{
       this.isBusy = result;
       // console.log(result);
-    })
+    });
+
+
+
+    this.productService.currentItem.subscribe(result => {
+      this.id = result;
+    });
+
+    this.productService.currentPageNumber.subscribe(result => {
+      this.pageNumber = result;
+    });
+
+    this.shopService.checkForAvailableShops.subscribe(result => {
+      this.MoreShops = result;
+      console.log(this.MoreShops);
+    });
   }
 
   getValue(value){
@@ -41,6 +63,41 @@ export class LocationListComponent implements OnInit {
 
   }
 
+  getSelectedFilters(){
+    this.selectedFilterOptions = [];
+    this.productService.currentSelectedFilters.subscribe(result => {
+      this.selectedFilters = result;
+      this.selectedFilters.forEach(element => {
+        this.selectedFilterOptions.push(element.id);
+      });
+    })
+  }
+  
 
+  loadMoreItems(){
+    this.pageNumber += 1;
+    this.getSelectedFilters();
+    // console.log(this.id);
+    // console.log(this.selectedFilterOptions)
+    this.productService.getSelectedItem(this.id, this.selectedFilterOptions,this.pageNumber).subscribe(result => {
+      // this.shopService.changeAvailableShops(result.shops);
+      this.shops.push(result.shops);
+      console.log(result.shops);
+      setTimeout(()=>{
+        result.shops.forEach(element => {
+          this.shopService.addPagination(element);
+        });
+      
+      }, 1000);
+      if(result.shops.length == 0){
+        alert('No More Shops');
+        this.pageNumber = 0;
+        this.shopService.changeShopsAvailbilityStatus(false);
+      }
+    })
+    // console.log(this.pageNumber);
+    // this.getLocations();
+  }
+  
 
 }

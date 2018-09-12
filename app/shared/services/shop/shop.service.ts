@@ -27,13 +27,19 @@ export class ShopService {
   currentShopItemRate = this.selectedShopItemRate.asObservable();
   pagninationItems: Array<any> = [];
 
+  private isShopsAvailable = new BehaviorSubject(true);
+  checkForAvailableShops = this.isShopsAvailable.asObservable();
+
+  changeShopsAvailbilityStatus(status:boolean){
+    this.isShopsAvailable.next(status);
+  }
+
   changeAvailableShops(shops: Array<any>){
     this.availableShops.next(shops);
   }
 
   addPagination(item) {
     const currentValue = this.availableShops.value;
-    console.log(item);
     let updatedValue = [...currentValue, item];
     this.availableShops.next(updatedValue);
   }
@@ -44,7 +50,6 @@ export class ShopService {
 
   changeSeletedShopName(name: string){
     this.seletedShop.next(name);
-    console.log(name);
   }
 
   changeRatebyShop(rate: number){
