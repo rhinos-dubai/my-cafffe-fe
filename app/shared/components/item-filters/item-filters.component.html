@@ -1,4 +1,4 @@
-<ScrollView orientation="horizontal" height="auto">
+<!--<ScrollView orientation="horizontal" height="auto">
 
     <StackLayout orientation="horizontal">
 
@@ -6,7 +6,7 @@
                margin="5"></Label>
 
     </StackLayout>
-</ScrollView>
+</ScrollView>-->
 
 
 <!--<GridLayout rows="* * * * * * *">-->
@@ -53,7 +53,7 @@
 <!--New Template-->
 <StackLayout orientation="vertical">
 
-    <CardView class="single-filter" *ngFor="let item of filters; index as i" margin="5">
+    <CardView class="single-filter" *ngFor="let item of filters;let j = index" margin="5">
         <GridLayout columns="80, *" rows="*" class="inner-card">
 
             <StackLayout row="0" col="0" verticalAlignment="center">
@@ -63,10 +63,18 @@
             <ScrollView orientation="horizontal" row="0" col="1" scrollBarIndicatorVisible="false">
                 <StackLayout orientation="horizontal">
 
-                    <Button width="75" class="btn btn-pill" 
+                    <!--<Button  class="btn btn-pill" -->
+                                <!--*ngFor="let options of item; index as i"-->
+                                <!--text="{{options.property}}"-->
+                                <!--(tap)="onSelectionTap(options.id,options.property,j);filtersSelectedByUser(item[i]);filterProducts();"-->
+                                <!--&gt;-->
+                    <!--</Button> -->
+
+                    <Button width="75"  [ngClass]="{ 'btn-pill-active': (options.id == Selectedoptions[j]), 'btn btn-pill': (options.id != Selectedoptions[j])}"
                                 *ngFor="let options of item; index as i"
                                 text="{{options.property}}"
-                                (tap)="onSelectionTap(options.id,options.property);filtersSelectedByUser(item[i]);filterProducts();">
+                                (tap)="onSelectionTap(options.id,options.property,j);filtersSelectedByUser(item[i]);filterProducts();"
+                                >
                     </Button>
 
                 </StackLayout>

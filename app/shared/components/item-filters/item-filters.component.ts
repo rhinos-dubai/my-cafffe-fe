@@ -29,14 +29,34 @@ export class ItemFiltersComponent implements OnInit {
     })
   }
 
-  onSelectionTap(filters,filterName){
+    
+  onSelectionTap(filters,filterName,itemIndex){
     this.productService.changePageNumber(1);
     this.showActionButtons = true;
     this.productService.currentItem.subscribe(result => {
       this.selectedItem = result;
         });
-    this.Selectedoptions.push(filters);
-    this.SelectedoptionsName['data'].push(filterName);
+    console.log('filters: ' + filters);
+    console.log('itemIndex: ' + itemIndex);
+    // this.Selectedoptions.push(filters);
+
+      if(this.Selectedoptions[itemIndex] == filters) {
+          // this.Selectedoptions[itemIndex] = null;
+          this.Selectedoptions.splice(itemIndex, 1);
+      } else {
+          this.Selectedoptions[itemIndex] = filters;
+      }
+
+      // this.SelectedoptionsName['data'].push(filterName);
+
+      if(this.SelectedoptionsName[itemIndex] == filters) {
+          // this.Selectedoptions[itemIndex] = null;
+          this.SelectedoptionsName['data'][itemIndex] = null;
+
+      } else {
+          this.SelectedoptionsName['data'][itemIndex] = filterName;
+      }
+
   }
 
   filtersSelectedByUser(item){
