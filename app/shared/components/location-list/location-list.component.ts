@@ -1,6 +1,7 @@
 import { Component,Input, OnInit } from '@angular/core';
 import { ShopService } from '~/shared/services/shop/shop.service';
 import {Router} from "@angular/router";
+import { ProductService } from '~/shared/services/product/product.service';
 
 @Component({
   moduleId: module.id,
@@ -13,21 +14,22 @@ export class LocationListComponent implements OnInit {
   @Input() Locations: any;
   @Input() filteredShops;
   isBusy;
-  constructor(private shopService: ShopService, private router:Router) { }
+  pageNumber;
+  constructor(private shopService: ShopService,private productService: ProductService, private router:Router) { }
 
   ngOnInit() { 
     this.shopService.searchedLocation.subscribe(result =>{
       this.isBusy = result;
-      console.log(result);
+      // console.log(result);
     })
   }
 
   getValue(value){
-    console.log(value)
+    // console.log(value)
   }
 
   changeShopName(item, price, checkComponent){
-    console.log(item.name)
+    // console.log(item.name)
     if(!checkComponent){
       this.router.navigate(["shop", item.id]);
     }
@@ -38,5 +40,7 @@ export class LocationListComponent implements OnInit {
     }
 
   }
+
+
 
 }

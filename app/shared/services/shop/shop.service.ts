@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, BehaviorSubject} from "rxjs";
-import { map } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
 
 import {Apollo, QueryRef} from "apollo-angular";
 
@@ -14,8 +14,8 @@ export class ShopService {
   public shops: Observable<Shop[]>;
   public shop:Observable<Shop>;
 
-  private availableShops = new BehaviorSubject(null);
-  filteredShops = this.availableShops.asObservable();
+  private availableShops: BehaviorSubject<Array<any>>  = new BehaviorSubject([]);
+  filteredShops: Observable<any> = this.availableShops.asObservable();
 
   private searchLocation = new BehaviorSubject(null);
   searchedLocation = this.searchLocation.asObservable();
@@ -25,9 +25,17 @@ export class ShopService {
 
   private selectedShopItemRate = new BehaviorSubject(0);
   currentShopItemRate = this.selectedShopItemRate.asObservable();
+  pagninationItems: Array<any> = [];
 
   changeAvailableShops(shops: Array<any>){
     this.availableShops.next(shops);
+  }
+
+  addPagination(item) {
+    const currentValue = this.availableShops.value;
+    console.log(item);
+    let updatedValue = [...currentValue, item];
+    this.availableShops.next(updatedValue);
   }
 
   changesearchLocationStatus(status: boolean){
@@ -78,6 +86,9 @@ export class ShopService {
           latitude: 33.3
           longitude: 32
           maxDistance: 10000
+          perPage:10
+          paginate:true
+          pageNumber:1
         ) {
           id
           name

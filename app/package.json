@@ -1,5 +1,6 @@
 {
   "main": "main.js",
   "name": "my-cafffe",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "maxLogcatObjectSize": 9000
 }

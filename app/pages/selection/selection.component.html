@@ -29,9 +29,14 @@
             </GridLayout>
 
             <ScrollView orientation="vertical" height="500">
-                <GridLayout rows="*" class="locations">
+                <GridLayout rows="* * *" class="locations">
                     <location-list row="0" [Locations]="locationList | async"
                                    [filteredShops]="filteredShops"></location-list>
+                    
+                    <StackLayout row="1" >
+                        <Button text="Load More" (tap)="loadMore()" *ngIf="!noMoreShops" ></Button>
+                    </StackLayout>
+
                 </GridLayout>
 
 

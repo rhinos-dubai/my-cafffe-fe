@@ -22,8 +22,7 @@ ActionBar{
   radius: 10;
 
   .inner-card{
-    @extend .border-light;
-    border-radius: 4;
+    border-radius: 0;
   }
 
 }

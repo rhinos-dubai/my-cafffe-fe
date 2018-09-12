@@ -63,12 +63,12 @@
             <ScrollView orientation="horizontal" row="0" col="1" scrollBarIndicatorVisible="false">
                 <StackLayout orientation="horizontal">
 
-                    <Button class="btn btn-pill"
+                    <Button  class="btn btn-pill" 
                                 *ngFor="let options of item; index as i"
                                 text="{{options.property}}"
-                                (tap)="onSelectionTap(options.id,options.property);filtersSelectedByUser(item[i]);filterProducts()"
+                                (tap)="onSelectionTap(options.id,options.property);filtersSelectedByUser(item[i]);filterProducts();"
                                 >
-                        </Button>
+                    </Button>
 
                 </StackLayout>
             </ScrollView>

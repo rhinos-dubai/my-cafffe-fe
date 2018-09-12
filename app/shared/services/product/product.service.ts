@@ -38,6 +38,9 @@ export class ProductService {
   private selectedFilters = new BehaviorSubject([]);
   currentSelectedFilters = this.selectedFilters.asObservable();
 
+  private PageNumber = new BehaviorSubject(1);
+  currentPageNumber = this.PageNumber.asObservable();
+
   changeSelectedItemID(id: number) {
     this.itemSource.next(id)
   }
@@ -48,7 +51,10 @@ export class ProductService {
 
   changeSelectedFilters(filters: Array<any>) {
     this.selectedFilters.next(filters);
-    console.log(this.selectedFilters);
+  }
+
+  changePageNumber(pageNumberFromComponent: number){
+    this.PageNumber.next(pageNumberFromComponent);
   }
 
 
@@ -93,7 +99,7 @@ export class ProductService {
     return null;
   }
 
-  public getSelectedItem(id,filters) {
+  public getSelectedItem(id,filters,pageNumber) {
     this.Ref = this.apollo.watchQuery<Query>({
         query: gql`
         {
@@ -104,6 +110,9 @@ export class ProductService {
             shops(
                   includeInactive:true
                   filters:[${filters}]
+                  perPage:15
+              		paginate:true
+              		pageNumber:${pageNumber}
                 ) {
                   base_price
                   addons(includeInactive: false) {

@@ -34,6 +34,11 @@ export class SelectionComponent implements OnInit {
   filteredShops = false;
   locationList = this.shopService.filteredShops;
   locationListSize = [];
+  pageNumber = 1;
+  shops: Array<any> = [];
+  noMoreShops: boolean = false;
+  selectedFilters: any[];
+  selectedFilterOptions: Array<any> = [];
   
 
   
@@ -42,14 +47,19 @@ export class SelectionComponent implements OnInit {
 
 
   ngOnInit() {
-      console.log("back to Selection")
+
+      this.productService.currentPageNumber.subscribe(result => {
+        this.pageNumber = result;
+        console.log(this.pageNumber);
+      })
+      
       setTimeout(()=>{
 
       this.locationList.subscribe(result => {
         this.locationListSize = [];
           result.forEach(element => {
               this.locationListSize.push(element);
-              console.log(this.locationListSize.length)
+              // console.log(this.locationListSize.length)
           });
       })
       }, 2000);
@@ -68,37 +78,93 @@ export class SelectionComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = +params['id'];
       this.productService.changeSelectedItemID(this.id);
-      console.log(this.id);
+      // console.log(this.id);
     });
 
-    this.productService.getSelectedItem(this.id,null).subscribe(result => {
+    this.getGenericProperties();
+    this.getLocations();
+    this.getSelectedFilters();
+  }
 
-                this.genericProperties = result.generic_properties;
-                this.shopService.changeAvailableShops(result.shops);
-                
-                const source = from(this.genericProperties);
+  getGenericProperties(){
 
-                const groupByProperties = source.pipe(
-                    groupBy(result => result['property_group']),
-                    // return each item in group as array
-                    mergeMap(group => group.pipe(toArray()))
-                  );
+    this.productService.getSelectedItem(this.id,null,this.pageNumber).subscribe(result => {
 
-                  const subscribeToProperties = groupByProperties.subscribe(val => {
-                    // console.log(val);
-                    this.genericProperties_values.push(val);
-                  });
+      this.genericProperties = result.generic_properties;
+      this.shopService.changeAvailableShops(result.shops);
+      
+      const source = from(this.genericProperties);
+
+      const groupByProperties = source.pipe(
+          groupBy(result => result['property_group']),
+          // return each item in group as array
+          mergeMap(group => group.pipe(toArray()))
+        );
+
+        const subscribeToProperties = groupByProperties.subscribe(val => {
+          // console.log(val);
+          this.genericProperties_values.push(val);
+        });
     });
 
-    this.productService.getSelectedItem(this.id,[]).subscribe(result => {
-      this.shopService.changeAvailableShops(result.shops);    
-      // console.log(this.locations);
+  }
+
+  getLocations(){
+    this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(result => {
+      this.shopService.changeAvailableShops(result.shops);
+      // console.log(result.shops);
+      if(result.shops == ''){
+        console.log("no More Shops");
+        this.productService.changePageNumber(1);
+        this.noMoreShops = true;
+        // this.shopsDemo = true;
+        // close LoadMore Button
+      };
+      result.shops.forEach(element => {
+        // this.shops.push(element);
+      });
+      // console.log(this.shops);
       setTimeout(()=>{ 
         this.shopService.changesearchLocationStatus(false);
       }, 100);
       
       this.filteredShops = true;
     })
+  }
+
+  getSelectedFilters(){
+    this.selectedFilterOptions = [];
+    this.productService.currentSelectedFilters.subscribe(result => {
+      this.selectedFilters = result;
+      this.selectedFilters.forEach(element => {
+        this.selectedFilterOptions.push(element.id);
+      });
+    })
+  }
+
+  loadMore(){
+    this.pageNumber += 1;
+    this.getSelectedFilters();
+    console.log(this.id);
+    console.log(this.selectedFilterOptions)
+    this.productService.getSelectedItem(this.id, this.selectedFilterOptions,this.pageNumber).subscribe(result => {
+      // this.shopService.changeAvailableShops(result.shops);
+      this.shops.push(result.shops);
+      // console.log(result.shops);
+      setTimeout(()=>{
+        result.shops.forEach(element => {
+          this.shopService.addPagination(element);
+        });
+      
+      }, 1000);
+      if(result.shops.length == 0){
+        alert('No More Shops');
+        this.pageNumber = 0;
+        this.noMoreShops = true;
+      }
+    })
+    // console.log(this.pageNumber);
+    // this.getLocations();
   }
 
   animate() {
@@ -124,7 +190,7 @@ export class SelectionComponent implements OnInit {
       let animationSet = new Animation(definitions);
   
       animationSet.play().then(() => {
-          console.log("Animation finished");
+          // console.log("Animation finished");
       })
           .catch((e) => {
               console.log(e.message);
@@ -150,10 +216,10 @@ export class SelectionComponent implements OnInit {
       let animationSet = new Animation(definitions);
   
       animationSet.play().then(() => {
-          console.log("Animation finished");
+          // console.log("Animation finished");
       })
           .catch((e) => {
-              console.log(e.message);
+             //  console.log(e.message);
           });
     }
  

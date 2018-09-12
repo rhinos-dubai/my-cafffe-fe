@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     this.shopService.getShopsNearme().subscribe(result => {
       this.locations = result;
       if(this.locations){
-        setTimeout(()=>{    //<<<---    using ()=> syntax
+        setTimeout(()=>{    
           this.shopService.changesearchLocationStatus(false);
         }, 100);
         
