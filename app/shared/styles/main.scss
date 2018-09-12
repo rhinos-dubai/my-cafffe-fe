@@ -43,6 +43,7 @@ ActionBar{
 }
 
 .btn-pill-active{
+  @extend .btn-pill;
   color: $secondary-color;
   border-color: $secondary-color;
 

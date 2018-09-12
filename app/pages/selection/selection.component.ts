@@ -9,9 +9,14 @@ import {AnimationCurve} from "ui/enums";
 import { Page } from "ui/page";
 import { View } from "ui/core/view";
 import { Animation, AnimationDefinition } from "ui/animation";
+const platformModule = require("tns-core-modules/platform");
+// import { screen, ScreenMetrics } from "platform";
+// let screenScale = screen.mainScreen.scale;
 
-let view1: View;
+let filterListView: View;
+let shopListView: View;
 let floatingButton: View;
+
 
 import {ProductService} from "~/shared/services/product/product.service"
 import { ShopService } from "~/shared/services/shop/shop.service"
@@ -23,7 +28,8 @@ import { ShopService } from "~/shared/services/shop/shop.service"
   styleUrls: ['./selection.component.scss']
 })
 export class SelectionComponent implements OnInit {
-  selectedItem = this.productService.currentItemName;
+    shopListHeight = platformModule.screen.mainScreen.heightDIPs;
+    selectedItem = this.productService.currentItemName;
   genericProperties: any;
   tempItemsService: any;
   genericProperties_values: Array<any> = [];
@@ -69,10 +75,11 @@ export class SelectionComponent implements OnInit {
       this.shopService.changesearchLocationStatus(true);
     });
 
-    view1 = this.page.getViewById<View>("view1");
+    filterListView = this.page.getViewById<View>("filterlist");
+    shopListView = this.page.getViewById<View>("locationList");
     floatingButton = this.page.getViewById<View>("floatingButton");
-    view1.translateY = 0;
-    floatingButton.translateY = -325;
+    // locationList.translateY = 0;
+    // floatingButton.translateY = -325
 
 
     this.route.params.subscribe(params => {
@@ -171,11 +178,15 @@ export class SelectionComponent implements OnInit {
     if(this.animateFor){
       let definitions = new Array<AnimationDefinition>();
       let a1: AnimationDefinition = {
-          target: view1,
-          translate: { x: 0, y: -150 },
+          target: shopListView,
+          // translate: { x: 0, y: -filterListView.getMeasuredHeight() / screenScale },
+          translate: { x: 0, y: -filterListView.getActualSize().height },
+          // scale: {x: 0, y: 0},
           curve: AnimationCurve.easeOut,
           duration: 200
       };
+      // console.log('Y: ' + -filterListView.getMeasuredHeight() / screenScale);
+      console.log('getActualSize(): ' + -filterListView.getActualSize().height);
 
         let a2: AnimationDefinition = {
             target: floatingButton,
@@ -200,8 +211,10 @@ export class SelectionComponent implements OnInit {
     else if(!this.animateFor){
       let definitions = new Array<AnimationDefinition>();
       let a1: AnimationDefinition = {
-          target: view1,
+          target: shopListView,
           translate: { x: 0, y: 0 },
+          // scale: {x: 1, y: 1},
+
           curve: AnimationCurve.easeOut,
           duration: 100
       };
