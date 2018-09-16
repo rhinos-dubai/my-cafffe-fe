@@ -1,5 +1,5 @@
-<ScrollView orientation="vertical">
-    <StackLayout>
+<ScrollView orientation="vertical" >
+    <StackLayout >
 
         <StackLayout *ngIf="isBusy">
             <ActivityIndicator #activityIndicator [busy]="isBusy" width="100" height="100"
@@ -9,15 +9,104 @@
 
         <StackLayout *ngIf="!isBusy">
 
-            <CardView class="single-outlet-location" *ngFor="let item of Locations"
+                <GridLayout  rows="*">
+                        <RadListView row="0" [items]="Locations" height="500" loadOnDemandMode="Auto" (loadMoreDataRequested)="loadMoreItems($event)">
+                            <ng-template  let-item="item">
+                                <StackLayout orientation="vertical">
+                                        <CardView class="single-outlet-location" *ngFor="let item of Locations"
+                                        (tap)="changeShopName(item,item.base_price,filteredShops)">
+                  
+                                  <StackLayout>
+                  
+                                      <GridLayout columns="100, *, auto" row="*">
+                  
+                                          <StackLayout col="0" row="0" >
+                                              <Image src="{{item.shop.image.secure_url}}"></Image>
+                                              
+                                          </StackLayout>
+                  
+                                          <StackLayout col="1" row="0">
+                                              <GridLayout columns="auto, auto" rows="auto, auto, auto"
+                                                          class="single-outlet-location-label-list">
+                  
+                  
+                                                  
+                                                  <Label *ngIf="!filteredShops" [text]="item.name" class="single-outlet-location-title"
+                                                         row="0" colSpan="2"></Label>
+                                                  <Label *ngIf="!filteredShops" text="Location: " class="single-outlet-location-label"
+                                                         row="1" col="0"></Label>
+                                                  <Label *ngIf="!filteredShops" [text]="item.address" row="1" col="1"></Label>
+                  
+                  
+                                                  
+                                                  <Label *ngIf="filteredShops" [text]="item.shop.name" row="0" colSpan="2"></Label>
+                                                  <Label *ngIf="filteredShops" text="Location: " class="single-outlet-location-label"
+                                                         row="1" col="0"></Label>
+                                                  <Label *ngIf="filteredShops" [text]="item.shop.address" row="1" col="1"></Label>
+                  
+                  
+                                                  <Label *ngIf="filteredShops" text="From: " class="single-outlet-location-label" row="2"
+                                                         col="0"></Label>
+                                                  <Label *ngIf="filteredShops" text="AED {{item.base_price}}"
+                                                         class="single-outlet-location-price" row="2"
+                                                         col="1"></Label>
+                  
+                  
+                  
+                                              </GridLayout>
+                  
+                  
+                              
+                                          </StackLayout>
+                  
+                  
+                  
+                                          <StackLayout orientation="vertical" col="2" row="0" class="action-buttons">
+                  
+                                              <GridLayout columns="auto, auto" rows="auto, auto" width="80" height="80">
+                  
+                                                  <GridLayout col="0" row="0" columns="auto" rows="auto" class="single-icon rating-icon text-center">
+                                                      <Label text="&#xe900;" class="icomoon hexagon" col="0"></Label>
+                                                      <Label text="4.5" class="button-text-light inner-label" col="0"></Label>
+                                                  </GridLayout>
+                  
+                                                  <GridLayout col="1" row="0" columns="auto" rows="auto" class="single-icon heart-icon text-center">
+                                                      <Label text="&#xe901;" class="icomoon hexagon" col="0"></Label>
+                                                      <Label text="&#xe902;" class="icomoon inner-label" col="0"></Label>
+                                                  </GridLayout>
+                  
+                  
+                                                  <GridLayout col="1" row="1" columns="auto" rows="auto"
+                                                              class="single-icon location-icon text-center">
+                                                      <Label text="&#xe900;" class="icomoon hexagon" col="0"></Label>
+                                                      <Label text="&#xf041;" class="font-awesome inner-label" col="0"></Label>
+                                                  </GridLayout>
+                  
+                                              </GridLayout>
+                  
+                  
+                                          </StackLayout>
+                  
+                                      </GridLayout>
+                                  </StackLayout>
+                  
+                  
+                              </CardView>
+                                </StackLayout>
+                            </ng-template>
+                        </RadListView>
+                </GridLayout>
+
+            <!--<CardView class="single-outlet-location" *ngFor="let item of Locations"
                       (tap)="changeShopName(item,item.base_price,filteredShops)">
 
                 <StackLayout>
 
                     <GridLayout columns="100, *, auto" row="*">
 
-                        <StackLayout col="0" row="0">
-                            <Image src="~/images/shop.jpg"></Image>
+                        <StackLayout col="0" row="0" >
+                            <Image src="{{item.shop.image.secure_url}}"></Image>
+                            
                         </StackLayout>
 
                         <StackLayout col="1" row="0">
@@ -25,7 +114,7 @@
                                         class="single-outlet-location-label-list">
 
 
-                                <!--Regular List: -->
+                                
                                 <Label *ngIf="!filteredShops" [text]="item.name" class="single-outlet-location-title"
                                        row="0" colSpan="2"></Label>
                                 <Label *ngIf="!filteredShops" text="Location: " class="single-outlet-location-label"
@@ -33,7 +122,7 @@
                                 <Label *ngIf="!filteredShops" [text]="item.address" row="1" col="1"></Label>
 
 
-                                <!--Filtered List: -->
+                                
                                 <Label *ngIf="filteredShops" [text]="item.shop.name" row="0" colSpan="2"></Label>
                                 <Label *ngIf="filteredShops" text="Location: " class="single-outlet-location-label"
                                        row="1" col="0"></Label>
@@ -47,9 +136,6 @@
                                        col="1"></Label>
 
 
-                                <!--<Label *ngIf="filteredShops" [text]="item.shop.name" row="1" margin="5"></Label>-->
-                                <!--<Label *ngIf="filteredShops" text="From $ {{item.base_price}}"-->
-                                <!--class="single-outlet-location-price" row="2"></Label>-->
 
                             </GridLayout>
 
@@ -89,11 +175,11 @@
                 </StackLayout>
 
 
-            </CardView>
+            </CardView>-->
 
-                        <StackLayout>
+                        <!--<StackLayout>
                                 <Button background="lightblue" width="300" class="btn btn-pill"  text="Load More" (tap)="loadMoreItems()" *ngIf="MoreShops"  ></Button>
-                        </StackLayout>
+                        </StackLayout>-->
 
 
 

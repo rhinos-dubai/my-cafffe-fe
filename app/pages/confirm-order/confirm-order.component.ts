@@ -44,7 +44,7 @@ export class ConfirmOrderComponent implements OnInit {
         });
     });
     // Temporary Start
-      this.productService.getSelectedItem(1,null).subscribe(result => {
+      this.productService.getSelectedItem(1,null,null).subscribe(result => {
 
           this.genericProperties = result.generic_properties;
           this.shopService.changeAvailableShops(result.shops);

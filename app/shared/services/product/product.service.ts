@@ -130,7 +130,9 @@ export class ProductService {
                     longitude
                     latitude
                     address
-                    image
+                    image{
+                      secure_url
+                    }
                   }
                 }
               generic_properties{

@@ -34,6 +34,7 @@
 		"nativescript-grid-view": "^4.1.1",
 		"nativescript-localstorage": "^1.1.5",
 		"nativescript-theme-core": "~1.0.4",
+		"nativescript-ui-listview": "^3.6.1",
 		"reflect-metadata": "~0.1.8",
 		"rxjs": "~6.1.0",
 		"tns-core-modules": "^4.3.0-2018-08-31-01",

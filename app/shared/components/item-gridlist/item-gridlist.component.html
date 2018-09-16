@@ -5,23 +5,25 @@
 <GridLayout  orientation="vertical" class="page">
 
 
-  <GridView [items]="data" colWidth="32%" rowHeight="100">
+  <GridView [items]="data" colWidth="33%" rowHeight="120">
 
 
     <ng-template let-item="item" let-odd="odd">
 
-      <GridLayout class="singleItem" >
 
-        <StackLayout  (tap)="getSelectedName(item.name)" [nsRouterLink]="['/selection', item.id]" verticalAlignment="stretch" class="list-group-item" [class.odd]="odd">
+        <CardView class="singleItem" shadowOffsetWidth="0" shadowOffsetHeight="0"  [nsRouterLink]="['/selection',item.id]"  >
 
-          <Image src="~/images/coffee/coffee.png"></Image>
-
-          <Label verticalAlignment="center" [text]="item.name+ ' ' + item.name" class="list-group-item-text text-center" textWrap="true">
-          </Label>
-
-        </StackLayout>
-
-      </GridLayout>
+          <StackLayout >
+              <GridLayout rows="60,*" columns="*">
+                  <StackLayout col="0" row="0">
+                      <Image src="~/images/coffee/coffee.png"></Image>
+                  </StackLayout>
+                  <StackLayout col="0" row="1"  >
+                      <Label  [text]="item.name" marginTop="15" textWrap="false" class="item-name-label text-center"></Label>
+                  </StackLayout>
+              </GridLayout>
+          </StackLayout>
+        </CardView>
 
 
 

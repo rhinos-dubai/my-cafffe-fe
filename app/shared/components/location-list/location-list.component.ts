@@ -2,6 +2,9 @@ import { Component,Input, OnInit } from '@angular/core';
 import { ShopService } from '~/shared/services/shop/shop.service';
 import {Router} from "@angular/router";
 import { ProductService } from '~/shared/services/product/product.service';
+import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
+
+
 
 @Component({
   moduleId: module.id,
@@ -11,7 +14,7 @@ import { ProductService } from '~/shared/services/product/product.service';
 })
 export class LocationListComponent implements OnInit {
 
-  @Input() Locations: any;
+  @Input() Locations: ObservableArray<any>;
   @Input() filteredShops;
   isBusy;
   pageNumber;
@@ -42,7 +45,6 @@ export class LocationListComponent implements OnInit {
 
     this.shopService.checkForAvailableShops.subscribe(result => {
       this.MoreShops = result;
-      console.log(this.MoreShops);
     });
   }
 
@@ -72,9 +74,14 @@ export class LocationListComponent implements OnInit {
       });
     })
   }
+
+  onLoadMoreItemsRequested(event){
+    console.log(event);
+    console.log("loading More");
+  }
   
 
-  loadMoreItems(){
+  loadMoreItems(event){
     this.pageNumber += 1;
     this.getSelectedFilters();
     // console.log(this.id);
@@ -82,13 +89,9 @@ export class LocationListComponent implements OnInit {
     this.productService.getSelectedItem(this.id, this.selectedFilterOptions,this.pageNumber).subscribe(result => {
       // this.shopService.changeAvailableShops(result.shops);
       this.shops.push(result.shops);
-      console.log(result.shops);
-      setTimeout(()=>{
         result.shops.forEach(element => {
           this.shopService.addPagination(element);
         });
-      
-      }, 1000);
       if(result.shops.length == 0){
         alert('No More Shops');
         this.pageNumber = 0;
@@ -98,6 +101,8 @@ export class LocationListComponent implements OnInit {
     // console.log(this.pageNumber);
     // this.getLocations();
   }
+
+  
   
 
 }

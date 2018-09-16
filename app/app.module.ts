@@ -25,6 +25,7 @@ import { ItemGridlistComponent } from "./shared/components/item-gridlist/item-gr
 import { LocationListComponent } from "./shared/components/location-list/location-list.component";
 import { ItemFiltersComponent } from "./shared/components/item-filters/item-filters.component";
 import { ItemSwiperComponent } from "./shared/components/item-swiper/item-swiper.component";
+import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 
 
 
@@ -43,7 +44,8 @@ const uri = "http://142.93.129.34:4000/my-cafffe-graphql-api";
     NativeScriptHttpClientModule,
     ApolloModule,
     HttpLinkModule,
-    GridViewModule
+    GridViewModule,
+    NativeScriptUIListViewModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   // tslint:disable-next-line:object-literal-sort-keys
@@ -58,7 +60,8 @@ const uri = "http://142.93.129.34:4000/my-cafffe-graphql-api";
     ItemFiltersComponent,
     ItemSwiperComponent,
     ShopComponent,
-    ActionBarComponent
+    ActionBarComponent,
+    
   ],
   providers: [ProductService, ShopService],
   bootstrap: [AppComponent],

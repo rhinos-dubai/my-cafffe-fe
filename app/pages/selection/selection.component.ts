@@ -58,30 +58,27 @@ export class SelectionComponent implements OnInit {
   ngOnInit() {
       this.shopService.changeShopsAvailbilityStatus(true);
 
+      this.productService.getAllProducts().subscribe( result => {
+        this.products = result;
+        this.shopService.changesearchLocationStatus(true);
+      });
+
       this.productService.currentPageNumber.subscribe(result => {
         this.pageNumber = result;
       })
 
       this.shopService.checkForAvailableShops.subscribe(result => {
         this.MoreShops = result;
-        console.log(this.MoreShops);
       })
-      
-      setTimeout(()=>{
-
+    
       this.locationList.subscribe(result => {
         this.locationListSize = [];
           result.forEach(element => {
               this.locationListSize.push(element);
-              // console.log(this.locationListSize.length)
           });
       })
-      }, 2000);
 
-    this.productService.getAllProducts().subscribe( result => {
-      this.products = result;
-      this.shopService.changesearchLocationStatus(true);
-    });
+
 
     filterListView = this.page.getViewById<View>("filterlist");
     shopListView = this.page.getViewById<View>("locationList");
@@ -127,20 +124,13 @@ export class SelectionComponent implements OnInit {
   getLocations(){
     this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(result => {
       this.shopService.changeAvailableShops(result.shops);
-      let image = result.shops;
       if(result.shops == ''){
         console.log("no More Shops");
         this.productService.changePageNumber(1);
-        // this.shopsDemo = true;
-        // close LoadMore Button
       };
-      result.shops.forEach(element => {
-        // this.shops.push(element);
-      });
-      // console.log(this.shops);
-      setTimeout(()=>{ 
+
         this.shopService.changesearchLocationStatus(false);
-      }, 100);
+
       
       this.filteredShops = true;
     })
@@ -165,12 +155,9 @@ export class SelectionComponent implements OnInit {
       // this.shopService.changeAvailableShops(result.shops);
       this.shops.push(result.shops);
       console.log(result.shops);
-      setTimeout(()=>{
         result.shops.forEach(element => {
           this.shopService.addPagination(element);
         });
-      
-      }, 1000);
       if(result.shops.length == 0){
         alert('No More Shops');
         this.pageNumber = 0;
