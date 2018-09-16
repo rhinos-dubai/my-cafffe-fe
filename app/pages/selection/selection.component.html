@@ -22,7 +22,7 @@
           <Label [text]="locationListSize.length + ' results'" class="label-text-gray text-right"></Label>
         </GridLayout>
         <StackLayout orientation="vertical" [height]="shopListHeight/1.45">
-          <ScrollView orientation="vertical" row="1">
+          <ScrollView orientation="vertical" row="1" scrollBarIndicatorVisible="false">
             <StackLayout orientation="vertical">
               <location-list [Locations]="locationList | async"
                       [filteredShops]="filteredShops"></location-list>

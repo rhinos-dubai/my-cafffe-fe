@@ -12,12 +12,15 @@
         Image{
             height: 50;
         }
-        Label{
-            @extend .button-text;
+        .item-icon{
+            font-size: 50;
+            color:$icons-color;
         }
 
         .item-name-label{
             width: 100%;
+            @extend .button-text;
+
             //background-color: red;
         }
 

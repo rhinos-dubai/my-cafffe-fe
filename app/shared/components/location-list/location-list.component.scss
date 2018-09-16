@@ -1,46 +1,61 @@
 @import "~/shared/styles/main.scss";
 
 .single-outlet-location{
-    margin: 5;
+    margin: 10 0;
+
     @extend .card-general;
+
+    .single-outlet-location-main-div{
+        padding: 5 10;
+        //border-width: 1;
+        //border-color: $border-secondary-light;
+        //border-color: $secondary-color-light;
+        //border-radius: 5;
+    }
     Image{
         height: 80;
-        width: 80;
-        padding: 10;
+        width: 80 ;
     }
 
     .single-outlet-location-label-list{
+        margin-left: 10;
         margin-top: 15;
 
-        Label{
-            @extend .body-text;
-        }
+        //Label{
+        //    @extend .body-text;
+        //}
 
         .single-outlet-location-title{
-            @extend .h5;
+            margin-bottom: 5;
+            //@extend .button-text;
         }
 
         .single-outlet-location-label{
-            @extend .label-text-gray;
+            margin-bottom: 1;
+            //@extend .label-text-gray;
+            //margin-bottom: 5;
+
         }
 
         .single-outlet-location-price{
+            font-family: $font-family-bold;
             color:$secondary-color-light;
+
         }
     }
-
 
 
     .action-buttons{
 
-        .icomoon{
+        .hexagon{
             font-size: 30;
         }
 
         .heart-icon{
             color: $danger-color;
             .inner-label{
-                font-size: 18;
+                font-size: 15;
+                margin: 7 0;
 
             }
 
@@ -51,16 +66,24 @@
 
         .rating-icon{
             color: $white;
+
             .hexagon{
                 color: $secondary-color-light;
             }
-        }
+
+            .inner-label{
+
+                //margin:  5 10;
+                //width: 30;
+                //height: 26;
+                //width: 30;
+                //height: 26;
+                //background-color: red;
+                //clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
+                line-height:13;
 
 
-        .inner-label{
-            font-size: 15;
-            margin-top: 7;
-            //margin-left: 9;
+            }
         }
 
         .location-icon{
@@ -68,6 +91,12 @@
 
             .hexagon{
                 color: $secondary-color;
+            }
+
+            .inner-label{
+                font-size: 15;
+                //line-height:30;
+                margin: 7 0;
             }
         }
 
@@ -77,8 +106,6 @@
             margin-top: 5;
             margin-right: 5;
         }
-
-
 
     }
 
