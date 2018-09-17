@@ -8,11 +8,11 @@
 
         <StackLayout *ngIf="!isBusy">
 
-                        <RadListView [items]="Locations" height="500" loadOnDemandMode="Auto" (loadMoreDataRequested)="onLoadMoreItemsRequested($event)">
+    <RadListView [items]="Locations" class="background-rad" height="500" loadOnDemandMode="Auto" (loadMoreDataRequested)="onLoadMoreItemsRequested($event)">
                             <ng-template  let-item="item">
 
                                 <StackLayout orientation="vertical">
-                                        <CardView class="single-outlet-location" *ngFor="let item of Locations"
+                                        <CardView class="single-outlet-location" 
                                         (tap)="changeShopName(item,item.base_price,filteredShops)">
                   
                                   <StackLayout>

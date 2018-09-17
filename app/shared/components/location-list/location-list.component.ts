@@ -2,7 +2,6 @@ import { Component,Input, OnInit } from '@angular/core';
 import { ShopService } from '~/shared/services/shop/shop.service';
 import {Router} from "@angular/router";
 import { ProductService } from '~/shared/services/product/product.service';
-import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
 
 
 
@@ -14,7 +13,7 @@ import { ObservableArray } from 'tns-core-modules/data/observable-array/observab
 })
 export class LocationListComponent implements OnInit {
 
-  @Input() Locations: ObservableArray<any>;
+  @Input() Locations: any;
   @Input() filteredShops;
   isBusy;
   pageNumber;
@@ -76,12 +75,12 @@ export class LocationListComponent implements OnInit {
   }
 
   onLoadMoreItemsRequested(event){
-    console.log(event);
     console.log("loading More");
   }
   
 
   loadMoreItems(event){
+    console.log(event);
     this.pageNumber += 1;
     this.getSelectedFilters();
     // console.log(this.id);
