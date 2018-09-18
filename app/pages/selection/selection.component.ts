@@ -121,20 +121,21 @@ export class SelectionComponent implements OnInit {
 
   }
 
-  getLocations(){
-    this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(result => {
-      this.shopService.changeAvailableShops(result.shops);
-      if(result.shops == ''){
-        console.log("no More Shops");
-        this.productService.changePageNumber(1);
-      };
+    getLocations(){
+        this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(data => {
+            // console.log(data.shops.result);
+            this.shopService.changeAvailableShops(data.shops.result);
+            if(data.shops == ''){
+                console.log("no More Shops");
+                this.productService.changePageNumber(1);
+            };
 
-        this.shopService.changesearchLocationStatus(false);
+            this.shopService.changesearchLocationStatus(false);
 
-      
-      this.filteredShops = true;
-    })
-  }
+
+            this.filteredShops = true;
+        })
+    }
 
   getSelectedFilters(){
     this.selectedFilterOptions = [];

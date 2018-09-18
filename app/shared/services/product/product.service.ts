@@ -100,64 +100,66 @@ export class ProductService {
   }
 
   public getSelectedItem(id,filters,pageNumber) {
-    this.Ref = this.apollo.watchQuery<Query>({
-        query: gql`
+        this.Ref = this.apollo.watchQuery<Query>({
+            query: gql`
         {
             getProduct(id:${id}){
-              id
               name
+              id
               icon
-            shops(
-                  includeInactive:true
-                  filters:[${filters}]
-                  perPage:15
-              		paginate:true
-              		pageNumber:${pageNumber}
-                ) {
-                  base_price
-                  addons(includeInactive: false) {
-                    addon
-                    id
-                  }
-                  properties(includeInactive: true) {
-                    property_group
-                    property
-                    generic_id
-                  }
+              generic_properties {
+                property_group
+                property
+                id
+              }
+          
+              shops(
+                includeInactive: false
+                filters: [${filters}]
+                perPage: 15
+                paginate: true
+                pageNumber: ${pageNumber}
+              ) {
+                pageNumber
+                resultCount
+                perPage
+                result {
                   shop {
                     id
                     name
                     longitude
                     latitude
                     address
-                    image{
+                    image {
                       secure_url
                     }
                   }
+                  properties(includeInactive: false) {
+                    generic_property {
+                      id
+                      property
+                    }
+                  }
                 }
-              generic_properties{
-                property
-                property_group
-                id
               }
             }
-        }            
+          }
         `,
-      });
-  
-      this.product = this.Ref
-        .valueChanges
-        .pipe(map(r => {
-            // console.log(r.data.getProduct);
-            // getLocationListWithItems(r.data.getShops);
-            // console.log(r.data);
-            // this.changeAvailableShops(r.data.getProduct.shops);
-            return r.data.getProduct;
-            
-        }));
-        
+        });
+
+        this.product = this.Ref
+            .valueChanges
+            .pipe(map(r => {
+                //console.log(r.data.getProduct);
+                // getLocationListWithItems(r.data.getShops);
+                // console.log(r.data);
+                // this.changeAvailableShops(r.data.getProduct.shops);
+                return r.data.getProduct;
+
+            }));
+
         return this.product
-}
+    }
 
 
 

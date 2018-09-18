@@ -24,17 +24,90 @@
 
 .mainpage{
   background-color: $background-color;
+
 }
+
+.shopheroimage{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.location-info{
+
+  padding-bottom: 5;
+  border-bottom-width: 1;
+  border-color: $border-secondary-light;
+}
+
+.location-details{
+  //padding: 5 0;
+  padding-top: 10;
+}
+
+.rating-icon{
+  color: $primary-color;
+  padding-right: 10;
+}
+.timing-icon{
+  color: $text-color-light;
+  padding-right: 10;
+
+}
+
+
 .inner-scroll-page{
-  margin: 5 10 0 10;
+  //margin: 5 10 0 10;
+  background-color: $background-color;
+}
+
+.item-top-div{
+  padding: 10 15;
+  background-color: $white;
+
+}
+.item-icon{
+  font-size: 50;
+  padding-right: 10;
+  color: $icons-color;
+}
+
+.item-qty{
+  margin: 0 5;
+
+}
+
+.btn-qty-decrease{
+  height: 35;
+  width: 45;
+  margin: 0 5;
+  line-height: 15;
+  border-radius: 25 0 0 25;
+  background-color: $white;
+  border-width: 1;
+  border-color: $icons-color;
+  color: $icons-color;
+}
+
+.btn-qty-increase{
+  height: 35;
+  width: 45;
+  margin: 0 5;
+  line-height: 15;
+  border-radius: 0 25 25 0;
+
+  background-color: $white;
+  border-width: 1;
+  border-color: $icons-color;
+  color: $icons-color;
 }
 
 .action-bar-bottom{
   height: 120;
-  padding: 0 10;
+  margin: 0 10;
   background-color: $white;
-  border-color: $secondary-color;
-  border-top-width: 2;
+  //border-color: $secondary-color;
+  //border-top-width: 2;
 
   GridLayout{
     background-color: $white;
@@ -43,32 +116,66 @@
     padding: 5 0;
 
   }
+
 }
 
 .edit-button{
-  @extend .button-text;
+  @extend .h6;
+  color: $secondary-color-light;
 
   margin: 5 0;
 
-  .edit-icon{
-    color: $primary-color-dark;
-    background-color: $primary-color;
-    padding: 15 0;
+  //.edit-icon{
+  //  color: $primary-color-dark;
+  //  background-color: $primary-color;
+  //  padding: 15 0;
+  //
+  //  border-color: $primary-color;
+  //  border-width: 2;
+  //  border-radius: 25 0 0 25;
+  //
+  //}
+  //
+  //
+  //.edit-text{
+  //  background-color: $white;
+  //  padding: 15 0;
+  //  border-color: $primary-color;
+  //  border-width: 2;
+  //  border-radius: 0 25 25 0;
+  //
+  //}
 
-    border-color: $primary-color;
-    border-width: 2;
-    border-radius: 25 0 0 25;
+}
+
+.selected-options{
+  background-color: $white;
+  border-radius: 10;
+  margin: 10 5;
+  padding: 10 5;
+}
+.addons, .filters{
+  margin: 5 5;
+  padding: 10 5;
+}
+
+.single-filter-selected-label{
+  background-color: $white;
+  margin: 1;
+  padding: 5 5;
+  border-radius: 5;
+  border-width: 1;
+  border-color: $border-secondary-light;
+  color: $secondary-color;
+  Label {
+    text-transform: capitalize;
 
   }
+}
 
-
-  .edit-text{
-    background-color: $white;
-    padding: 15 0;
-    border-color: $primary-color;
-    border-width: 2;
-    border-radius: 0 25 25 0;
-
-  }
-
+.check-btn{
+  @extend .btn-block;
+  //background-color: $success-color;
+  font-family: FontAwesome, fontawesome-webfont;
+  font-size: 25;
 }

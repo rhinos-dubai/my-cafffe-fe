@@ -24,10 +24,17 @@
 
 .single-filter{
     @extend .card-general;
+    radius: 20;
 
-    GridLayout{
-        padding: 15 10;
+    .inner-card{
+            padding: 15 20;
+
+
     }
+
+    //GridLayout{
+    //    padding: 15 10;
+    //}
 }
 
 
