@@ -11,7 +11,7 @@
           <!--[text]="selectedItem | async"></label>-->
           <!---->
           <!--<Label horizontalAlignment="center" text="Filters"></Label>-->
-          <item-filters [filters]="genericProperties_values" [showActionButtons]="false"></item-filters>
+          <!--<item-filters [filters]="genericProperties_values" [showActionButtons]="false"></item-filters>-->
         </StackLayout>
       </ScrollView>
       <StackLayout row="1" id="locationList" width="auto" class="location-list">
@@ -25,7 +25,7 @@
           <ScrollView orientation="vertical" row="1" scrollBarIndicatorVisible="false">
             <StackLayout orientation="vertical">
               <location-list [Locations]="locationList | async"
-                      [filteredShops]="filteredShops"></location-list>
+                       ></location-list>
               <!--<Button text="Load More" (tap)="loadMore()" *ngIf="!noMoreShops"></Button>-->
             </StackLayout>
           </ScrollView>

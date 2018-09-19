@@ -20,12 +20,16 @@ import { SelectItemComponent } from "./pages/select-item/select-item.component";
 import { SelectionComponent } from "./pages/selection/selection.component";
 import { ConfirmOrderComponent } from "./pages/confirm-order/confirm-order.component";
 import { ShopComponent } from "./pages/shop/shop.component";
+import { LoginComponent } from "./pages/login/login.component";
+
 
 import { ItemGridlistComponent } from "./shared/components/item-gridlist/item-gridlist.component";
 import { LocationListComponent } from "./shared/components/location-list/location-list.component";
 import { ItemFiltersComponent } from "./shared/components/item-filters/item-filters.component";
 import { ItemSwiperComponent } from "./shared/components/item-swiper/item-swiper.component";
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
+import { NativeScriptFacebookModule } from "nativescript-facebook/angular";
+
 
 
 
@@ -45,7 +49,8 @@ const uri = "http://142.93.129.34:4000/my-cafffe-graphql-api";
     ApolloModule,
     HttpLinkModule,
     GridViewModule,
-    NativeScriptUIListViewModule
+    NativeScriptUIListViewModule,
+    NativeScriptFacebookModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   // tslint:disable-next-line:object-literal-sort-keys
@@ -61,6 +66,7 @@ const uri = "http://142.93.129.34:4000/my-cafffe-graphql-api";
     ItemSwiperComponent,
     ShopComponent,
     ActionBarComponent,
+    LoginComponent
     
   ],
   providers: [ProductService, ShopService],

@@ -7,15 +7,17 @@ import { SelectItemComponent } from "./pages/select-item/select-item.component";
 import { SelectionComponent } from "./pages/selection/selection.component";
 import { ConfirmOrderComponent } from "./pages/confirm-order/confirm-order.component";
 import { ShopComponent } from "./pages/shop/shop.component";
+import { LoginComponent } from "./pages/login/login.component";
 
 
 const routes: Routes = [
-    { path: "", redirectTo: "/home", pathMatch: "full" },
+    { path: "", redirectTo: "/login", pathMatch: "full" },
     { path: "home", component: HomeComponent },
     { path: "select-item", component: SelectItemComponent },
     { path: "selection/:id", component: SelectionComponent },
     { path: "confirm-order", component: ConfirmOrderComponent },
     { path: "shop/:id", component: ShopComponent },
+    { path: "login", component: LoginComponent },
 
 ];
 

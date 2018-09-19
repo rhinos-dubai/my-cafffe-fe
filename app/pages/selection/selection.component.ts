@@ -23,6 +23,7 @@ let floatingButton: View;
 
 import {ProductService} from "~/shared/services/product/product.service"
 import { ShopService } from "~/shared/services/shop/shop.service"
+import { ScrollEventData } from 'tns-core-modules/ui/scroll-view/scroll-view';
 
 @Component({
   moduleId: module.id,
@@ -71,12 +72,7 @@ export class SelectionComponent implements OnInit {
         this.MoreShops = result;
       })
     
-      this.locationList.subscribe(result => {
-        this.locationListSize = [];
-          result.forEach(element => {
-              this.locationListSize.push(element);
-          });
-      })
+
 
 
 
@@ -96,15 +92,30 @@ export class SelectionComponent implements OnInit {
     this.getGenericProperties();
     this.getLocations();
     this.getSelectedFilters();
+
+    this.getLocationSize();
+
+  }
+
+  getLocationSize() {
+    this.locationList.subscribe(data => {
+      this.locationListSize = [];
+      /*setTimeout(() => {
+          data.forEach(element => {
+          console.log(element.shop);
+          this.locationListSize.push(element.shop);
+        }, 1000)
+      });*/
+    })
   }
 
   getGenericProperties(){
 
-    this.productService.getSelectedItem(this.id,null,this.pageNumber).subscribe(result => {
-
+    this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(result => {
+      setTimeout(() => {
+      this.shopService.changeAvailableShops(result.shops.result);
+      }, 1000)
       this.genericProperties = result.generic_properties;
-      this.shopService.changeAvailableShops(result.shops);
-      
       const source = from(this.genericProperties);
 
       const groupByProperties = source.pipe(
@@ -122,9 +133,10 @@ export class SelectionComponent implements OnInit {
   }
 
   getLocations(){
-    this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(result => {
-      this.shopService.changeAvailableShops(result.shops);
-      if(result.shops == ''){
+    this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(data => {
+      // console.log(data.shops.result)
+      this.shopService.changeAvailableShops(data.shops.result);
+      if(data.shops.result == []){
         console.log("no More Shops");
         this.productService.changePageNumber(1);
       };
@@ -146,27 +158,6 @@ export class SelectionComponent implements OnInit {
     })
   }
 
-  loadMore(){
-    this.pageNumber += 1;
-    this.getSelectedFilters();
-    // console.log(this.id);
-    // console.log(this.selectedFilterOptions)
-    this.productService.getSelectedItem(this.id, this.selectedFilterOptions,this.pageNumber).subscribe(result => {
-      // this.shopService.changeAvailableShops(result.shops);
-      this.shops.push(result.shops);
-      console.log(result.shops);
-        result.shops.forEach(element => {
-          this.shopService.addPagination(element);
-        });
-      if(result.shops.length == 0){
-        alert('No More Shops');
-        this.pageNumber = 0;
-        this.shopService.changeShopsAvailbilityStatus(false);
-      }
-    })
-    // console.log(this.pageNumber);
-    // this.getLocations();
-  }
 
   animate() {
     if(this.animateFor){
