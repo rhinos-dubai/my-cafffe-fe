@@ -33,6 +33,7 @@ import { AppComponent } from "./app.component";
 
 import {HomeComponent} from "./pages/home/home.component";
 import {ActionBarComponent} from '~/shared/components/action-bar/action-bar.component';
+import {AllUiComponent} from '~/pages/all-ui/all-ui.component';
 
 const uri = "http://142.93.129.34:4000/my-cafffe-graphql-api";
 
@@ -61,6 +62,7 @@ const uri = "http://142.93.129.34:4000/my-cafffe-graphql-api";
     ItemSwiperComponent,
     ShopComponent,
     ActionBarComponent,
+    AllUiComponent
     
   ],
   providers: [ProductService, ShopService],

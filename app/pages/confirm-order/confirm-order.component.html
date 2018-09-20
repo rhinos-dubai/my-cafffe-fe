@@ -118,9 +118,9 @@
 
                     <GridLayout columns="10, 100, 10, *" rows="auto" class="selected-options">
 
-                        <GridLayout col="1" row="0" columns="*" rows="auto auto" verticalAlignment="center">
+                        <GridLayout col="1" row="0" columns="*" rows="auto auto" verticalAlignment="center" (tap)="editFilters()">
                             <Label row="0" text="Selected Options: " class="h6" textWrap="true"></Label>
-                            <Label *ngIf="animateFor" row="1" text="Edit" class="edit-button" textWrap="true"(tap)="editFilters()"></Label>
+                            <Label *ngIf="animateFor" row="1" text="Edit" class="edit-button" textWrap="true"></Label>
                             <!--<Button row="1" text="Button" (tap)="animate()"></Button>-->
                         </GridLayout>
 

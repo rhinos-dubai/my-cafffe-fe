@@ -1,0 +1,85 @@
+<app-action-bar title="All UI Action Bar"></app-action-bar>
+
+
+<ScrollView orientation="vertical" scrollBarIndicatorVisible="false">
+    <StackLayout orientation="vertical" class="mainpage">
+
+        <StackLayout orientation="vertical" backgroundColor="white">
+            <!--<StackLayout orientation="vertical" class="seperator-10"></StackLayout>-->
+            <Label text="Individual components with selectors:" class="h3 text-center"></Label>
+            <StackLayout orientation="vertical" class="seperator-10"></StackLayout>
+        </StackLayout>
+
+        <StackLayout orientation="vertical" height="600">
+            <Label text="Item Gridlist" class="h4 text-center"></Label>
+            <item-gridlist [data]="productItems"></item-gridlist>
+        </StackLayout>
+
+        <StackLayout orientation="vertical">
+            <Label text="Item Filters" class="h4 text-center"></Label>
+            <item-filters [filters]="filters"></item-filters>
+        </StackLayout>
+
+        <StackLayout orientation="vertical">
+            <Label text="Item Swiper" class="h4 text-center"></Label>
+            <item-swiper [data]="swiperProducts"></item-swiper>
+        </StackLayout>
+
+        <StackLayout orientation="vertical">
+            <Label text="Location List" class="h4 text-center"></Label>
+            <location-list [Locations]="locationList | async"
+                           [filteredShops]="filteredShops"></location-list>
+        </StackLayout>
+
+        <StackLayout orientation="vertical">
+            <Label text="Inline with classes/styles" class="text-center"></Label>
+        </StackLayout>
+
+        <StackLayout orientation="vertical" backgroundColor="white">
+            <!--<StackLayout orientation="vertical" class="seperator-10"></StackLayout>-->
+            <Label text="Inline elements" class="h3 text-center"></Label>
+            <StackLayout orientation="vertical" class="seperator-10"></StackLayout>
+        </StackLayout>
+
+
+        <StackLayout orientation="vertical" backgroundColor="white">
+            <Label text="Buttons" class="h4 text-center"></Label>
+            <button text="&#xf062;" class="btn-circle font-awesome" marginBottom="5"></button>
+            <Button col="0" row="0" text="Block Button" class="btn-block" marginBottom="5"></Button>
+        </StackLayout>
+
+        <StackLayout orientation="vertical" backgroundColor="white" class="typography">
+            <Label text="Typography" class="h4 text-center"></Label>
+            <Label text="H1 - This is heading text." class="h1"></Label>
+            <Label text="H2 - This is heading text." class="h2"></Label>
+            <Label text="H3 - This is heading text." class="h3"></Label>
+            <Label text="H4 - This is heading text." class="h4"></Label>
+            <Label text="H5 - This is heading text." class="h5"></Label>
+            <Label text="H6 - This is heading text." class="h6"></Label>
+            <Label text="Body - Docker containers wrap a piece of software in a complete filesystem that contains everything needed to run: code, runtime, system tools, system libraries – anything that can be installed on a server.  " class="body-text" textWrap="true"></Label>
+
+            <Label text="Body Text Light - Docker containers wrap a piece of software in a complete filesystem that contains everything needed to run: code, runtime, system tools, system libraries – anything that can be installed on a server.  " class="body-text-light" textWrap="true"></Label>
+
+            <Label text="Button Text" class="button-text"></Label>
+            <Label text="Label Text" class="label-text-gray"></Label>
+        </StackLayout>
+
+
+
+        <StackLayout orientation="vertical" backgroundColor="white">
+            <Label text="Confirm Order" class="h4 text-center"></Label>
+
+            <app-confirm-order></app-confirm-order>
+        </StackLayout>
+
+
+
+
+
+
+
+
+
+    </StackLayout>
+
+</ScrollView>
