@@ -61,7 +61,8 @@ export class ItemFiltersComponent implements OnInit {
 
   filtersSelectedByUser(item){
     this.filtersbyUser.push(item);
-    // console.log(this.filtersbyUser);
+    // console.log(item);
+    console.log(this.filtersbyUser);
     this.productService.changeSelectedFilters(this.filtersbyUser);
   }
 
@@ -71,8 +72,14 @@ export class ItemFiltersComponent implements OnInit {
     this.shopService.changesearchLocationStatus(true);
     this.productService.getSelectedItem(this.selectedItem,this.Selectedoptions,this.pageNumber).subscribe(
         data =>{
-            this.shopService.changeAvailableShops(data.shops);
-            // console.log(data.shops);
+            this.shopService.changeTotalLocations(data.shops.resultCount);
+            this.shopService.changeAvailableShops(data.shops.result);
+            console.log(data.shops.result);
+            data.shops.result.forEach(element => {
+              let count = [];
+              count.push(element);
+              console.log(count.length);
+            });
             setTimeout(()=>{    
               this.shopService.changesearchLocationStatus(false);
             }, 100);

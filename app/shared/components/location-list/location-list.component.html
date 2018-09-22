@@ -1,15 +1,7 @@
-        <StackLayout class="page">
-                    <StackLayout *ngIf="isBusy">
-            <ActivityIndicator #activityIndicator [busy]="isBusy" width="100" height="100"
-                               class="activity-indicator"></ActivityIndicator>
-        </StackLayout>
-
-
-        <StackLayout *ngIf="!isBusy">
-
-                <ListView [items]="shops" (loadMoreItems)="loadMoreItems()" height="900">
-                        <ng-template let-item="item" let-i="index">
-                                <StackLayout orientation="vertical">
+        
+        <RadListView backgroundColor="transparent" [items]="Locations" height="500" loadOnDemandMode="Manual" (loadMoreDataRequested)="onLoadMoreItemsRequested($event)">
+                <ng-template let-item="item" let-i="index">
+                                <StackLayout orientation="vertical" >
                                         <CardView class="single-outlet-location"
                                         (tap)="changeShopName(item,item.base_price,filteredShops)">
                   
@@ -90,33 +82,4 @@
 
                                 </StackLayout>
                     </ng-template>
-                </ListView>
-    
-
-            
-
-                        <!--<StackLayout>
-                                <Button background="lightblue" width="300" class="btn btn-pill"  text="Load More" (tap)="loadMoreItems()" *ngIf="MoreShops"  ></Button>
-                        </StackLayout>-->
-
-
-
-
-        </StackLayout>
-
-
-    </StackLayout>
-
-
-
-<!--
-
-<Image src="~/images/shop.jpg" stretch="aspectFill" colSpan="2" row="0"></Image>
-
-<Label *ngIf="!filteredShops" [text]="item.name" textWrap="true" row="1"></Label>
-
-<Label *ngIf="filteredShops" [text]="item.shop.name" textWrap="true" row="1" margin="5"></Label>
-
-<Label *ngIf="filteredShops" text="From $ {{item.base_price}}" textWrap="true" row="2"></Label>
-
--->
+                </RadListView>

@@ -12,49 +12,182 @@
 <!--<item-filters [filters]="selectedFilters" [showActionButtons]="false" > </item-filters>-->
 
 <!--</StackLayout>-->
-<app-action-bar title="Confirm Selection"></app-action-bar>
 
-<StackLayout orientation="vertical" class="mainpage">
+<StackLayout orientation="vertical">
+
     <GridLayout rows="*, 120">
 
-        <ScrollView row="0" orientation="vertical" class="inner-scroll-page">
+        <ScrollView row="0" orientation="vertical" class="inner-scroll-page" scrollBarIndicatorVisible="false">
             <StackLayout orientation="vertical">
 
+                <!--Shop Div Start-->
+                <StackLayout height="200" orientation="vertical" style="background-image: url('{{Cafe.image}}')"
+                             class="shopheroimage">
+                    <GridLayout columns="*" rows="*, auto" width="70%" height="100%">
 
-                <GridLayout columns="60, *" rows="auto" class="edit-button">
-                    <Label col="0" row="0" class="font-awesome text-center edit-icon" text="&#xf040;"></Label>
-                    <Label col="1" row="0" class="text-center edit-text" text="{{seletedItem | async}}"></Label>
-                </GridLayout>
-
-                <GridLayout columns="60, *" rows="auto" class="edit-button">
-                    <Label col="0" row="0" class="font-awesome text-center edit-icon" text="&#xf040;"></Label>
-                    <Label col="1" row="0" class="text-center edit-text" text="{{seletedShop | async}}"></Label>
-                </GridLayout>
+                        <StackLayout orientation="vertical" row="1" marginBottom="10" padding="10 20"
+                                     backgroundColor="white"
+                                     borderRadius="10">
 
 
-                <item-filters [filters]="selectedFilters" [showActionButtons]="false"></item-filters>
+                            <GridLayout row="1" col="0" columns="*, 80" rows="auto" horizontalAlignment="center"
+                                        class="location-info">
+
+                                <!--Location name and location-->
+                                <GridLayout col="0" columns="*" rows="auto, auto">
+                                    <Label col="0" row="0" [text]="Cafe.name" class="h3"></Label>
+                                    <Label col="0" row="1" [text]="Cafe.location" class="body-text-light"></Label>
+                                </GridLayout>
+
+                                <!--Location Logo Image-->
+                                <!--<GridLayout col="1" row="0">-->
+                                <!--<Image col="0" src="~/images/shop.jpg" height="40" class="shop-logo"></Image>-->
+                                <!--</GridLayout>-->
+
+                            </GridLayout>
+
+
+                            <GridLayout row="2" col="0" columns="*, *" rows="auto" class="location-details">
+
+                                <!--rating-->
+                                <GridLayout col="0" columns="auto, auto" rows="auto">
+                                    <Label col="0" row="0" text="&#xf005;" verticalAlignment="center"
+                                           class="font-awesome rating-icon"></Label>
+                                    <Label col="1" row="0" text="4.5" verticalAlignment="center" class="h5"></Label>
+                                </GridLayout>
+
+                                <!--Timing-->
+                                <GridLayout col="1" columns="auto, auto" rows="auto">
+                                    <Label col="0" row="0" text="&#xf017;" verticalAlignment="center"
+                                           class="font-awesome timing-icon"></Label>
+                                    <Label col="1" row="0" text="6AM - 12PM" verticalAlignment="center"
+                                           class="h5"></Label>
+                                </GridLayout>
+
+                            </GridLayout>
+
+
+                        </StackLayout>
+
+                    </GridLayout>
+                </StackLayout>
+                <!--Shop Div End-->
+
+
+                <!--Item Start -->
+                <StackLayout orientation="horizontal">
+
+                    <GridLayout columns="*, auto" rows="auto" class="item-top-div">
+
+                        <GridLayout col="0" columns="auto, auto" rows="auto" verticalAlignment="center">
+                            <Label col="0" text="&#xe901;" class="icomoon text-center item-icon"
+                                   verticalAlignment="center"></Label>
+                            <Label col="1" [text]="seletedItem | async" textWrap="true" class="h4 text-left"
+                                   verticalAlignment="center"></Label>
+                        </GridLayout>
+
+
+                        <GridLayout col="1" columns="auto, auto, auto" rows="auto" verticalAlignment="center">
+                            <Label [text]="itemQty" col="0" textWrap="true" class="h4 text-left item-qty"
+                                   verticalAlignment="center"></Label>
+                            <Button col="1" text="&#xf068;" (tap)="qtyChange(-1)" class="font-awesome btn-qty-decrease"
+                                    verticalAlignment="center"></Button>
+                            <Button col="2" text="&#xf067;" (tap)="qtyChange(+1)" class="font-awesome btn-qty-increase"
+                                    verticalAlignment="center"></Button>
+
+                        </GridLayout>
+
+                    </GridLayout>
+
+                </StackLayout>
+                <!--Item End-->
+
+
+                <!--Selected Filters and Addons Div Start-->
+
+                <StackLayout col="0" row="0" orientation="vertical" class="filters" id="view-selectedFilters">
+
+                    <Label text="Change Options" class="h5 text-center"></Label>
+                    <item-filters [filters]="genericProperties_values" [showActionButtons]="false"></item-filters>
+
+                </StackLayout>
+
+                <StackLayout col="0" row="0" orientation="vertical" id="view-selectedOptions-addOns">
+
+                    <GridLayout columns="10, 100, 10, *" rows="auto" class="selected-options">
+
+                        <GridLayout col="1" row="0" columns="*" rows="auto auto" verticalAlignment="center">
+                            <Label row="0" text="Selected Options: " class="h6" textWrap="true"></Label>
+                            <Label *ngIf="animateFor" row="1" text="Edit" class="edit-button" textWrap="true"(tap)="editFilters()"></Label>
+                            <!--<Button row="1" text="Button" (tap)="animate()"></Button>-->
+                        </GridLayout>
+
+                        <WrapLayout col="3" orientation="horizontal" *ngIf="!NoSelectedFilters">
+
+                        <GridLayout columns="auto, auto" rows="auto" *ngFor="let option of Cafe.filters"
+                                class="single-filter-selected-label">
+                        <Label col="0" text="{{option.property}}: " class="label-text-gray"></Label>
+                        <Label col="1" text="{{option.property_group}}" class="body-text"></Label>
+                        </GridLayout>
+
+                        </WrapLayout>
+
+                    </GridLayout>
+
+                    <StackLayout *ngFor="let option of Cafe.addons" margin="10">
+                            <GridLayout rows="*" columns="300 auto">
+                                    <CheckBox (touch)="checkedChange($event)" text="{{option.addon}}"></CheckBox>
+                                    <Label row="0" col="1" HorizontalAlignment="right" text="{{option.price}} AED"></Label>
+                            </GridLayout>
+                    </StackLayout>
+
+                    <Button (tap)="getCheckProp()" text="Check Property"></Button>
+
+                </StackLayout>
+
+
+                <!--Selected Filters and Addons Div End-->
+
+
+
+
+
+
+                <!--<GridLayout columns="60, *" rows="auto" class="edit-button">-->
+                <!--<Label col="0" row="0" class="font-awesome text-center edit-icon" text="&#xf040;"></Label>-->
+                <!--<Label col="1" row="0" class="text-center edit-text" text="{{seletedItem | async}}"></Label>-->
+                <!--</GridLayout>-->
+
+                <!--<GridLayout columns="60, *" rows="auto" class="edit-button">-->
+                <!--<Label col="0" row="0" class="font-awesome text-center edit-icon" text="&#xf040;"></Label>-->
+                <!--<Label col="1" row="0" class="text-center edit-text" text="{{seletedShop | async}}"></Label>-->
+                <!--</GridLayout>-->
+
+
             </StackLayout>
 
         </ScrollView>
 
 
-
         <StackLayout row="1" orientation="vertical" verticalAlignment="bottom" class="action-bar-bottom">
 
-            <GridLayout columns="*, *, *, *" rows="auto" marginBottom="25">
+            <GridLayout columns="*, *" rows="auto" marginBottom="10">
 
-                <Label text="Item Price : " row="0" col="0" class="label-text-gray text-left"></Label>
-                <Label text="AED {{selectedRate}}" row="0" col="1" class="body-text text-left"></Label>
-
-                <Label text="Item Subtotal : " row="0" col="2" class="label-text-gray text-right"></Label>
-                <Label text="AED 100" row="0" col="3" class="body-text text-right"></Label>
+                <Label text="Item Total : " row="0" col="0" class="h4 text-left"></Label>
+                <Label text="AED {{selectedRate}}" row="0" col="1" class="h4 text-right"></Label>
 
             </GridLayout>
 
-            <StackLayout orientation="vertical" class="page">
-                <Button text="Add to Cart" tap="{{ onButtonTap }}" class="btn-block" marginBottom="20"></Button>
-            </StackLayout>
+            <GridLayout columns="*" rows="*">
+                <Button *ngIf="!animateFor" col="0" row="0" text="&#xf00c;" (tap)="editFilters()"
+                        class="font-awesome check-btn" marginBottom="10"></Button>
+                <Button *ngIf="animateFor" col="0" row="0" text="Add to Cart" (tap)="editFilters()" class="btn-block" marginBottom="10"></Button>
 
+            </GridLayout>
+
+            <!--<StackLayout orientation="vertical" class="page">-->
+            <!---->
+            <!--</StackLayout>-->
 
         </StackLayout>
 

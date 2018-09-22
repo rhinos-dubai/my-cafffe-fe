@@ -100,8 +100,8 @@ export class ProductService {
   }
 
   public getSelectedItem(id,filters,pageNumber) {
-    this.Ref = this.apollo.watchQuery<Query>({
-        query: gql`
+        this.Ref = this.apollo.watchQuery<Query>({
+            query: gql`
         {
             getProduct(id:${id}){
               name
@@ -116,7 +116,7 @@ export class ProductService {
               shops(
                 includeInactive: false
                 filters: [${filters}]
-                perPage: 2
+                perPage: 10
                 paginate: true
                 pageNumber: ${pageNumber}
               ) {
@@ -124,6 +124,14 @@ export class ProductService {
                 resultCount
                 perPage
                 result {
+                  base_price
+                  id
+                  addons{
+                    id
+                    addon_group
+                    addon
+                    price
+                  }
                   shop {
                     id
                     name
@@ -159,7 +167,7 @@ export class ProductService {
         }));
         
         return this.product
-}
+    }
 
 
 

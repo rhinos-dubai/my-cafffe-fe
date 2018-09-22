@@ -1,14 +1,11 @@
-import { Component,Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component,Input, OnInit  } from '@angular/core';
 import { ShopService } from '~/shared/services/shop/shop.service';
 import {Router} from "@angular/router";
 import { ProductService } from '~/shared/services/product/product.service';
+
 import { ListView } from "tns-core-modules/ui/list-view";
-import { ScrollView, ScrollEventData } from "ui/scroll-view"
-import { Page, View } from 'tns-core-modules/ui/page/page';
-import { GestureEventData } from "tns-core-modules/ui/gestures";
-
-let scroll: ScrollView;
-
+import { isIOS } from 'tns-core-modules/platform/platform';
+import { RadListView } from 'nativescript-ui-listview';
 
 
 @Component({
@@ -30,22 +27,23 @@ export class LocationListComponent implements OnInit {
   MoreShops: boolean = false;
   newShops: Array<any> = [];
   loading: Boolean = false;
-  private listView: ListView;
   scrollHeight: number;
+  differ: any;
+
+  private listView: ListView;
 
 
 
-  constructor(private shopService: ShopService,private productService: ProductService, private router:Router, private page: Page) { }
+
+  constructor(private shopService: ShopService,private productService: ProductService, private router:Router, ) { 
+  }
+
 
   ngOnInit() { 
     this.shopService.searchedLocation.subscribe(result =>{
       this.isBusy = result;
       // console.log(result);
     });
-
-
-
-
 
     this.productService.currentItem.subscribe(result => {
       this.id = result;
@@ -58,27 +56,15 @@ export class LocationListComponent implements OnInit {
     this.shopService.checkForAvailableShops.subscribe(result => {
       this.MoreShops = result;
     });
-
-    setTimeout(() => {
-    this.Locations.forEach(element => {
-      // console.log(element);
-      this.shops.push(element);
-      });
-    }, 5000);
   }
 
 
 
   changeShopName(item, price, checkComponent){
-    console.log(item)
-    if(!checkComponent){
-      this.router.navigate(["shop", item.id]);
-    }
-    else{
+      this.shopService.changeCafe(item);
       this.shopService.changeSeletedShopName(item.shop.name);
-      //this.shopService.changeRatebyShop(price);
+      this.shopService.changeRatebyShop(price);
       this.router.navigate(["confirm-order"]);
-    }
 
   }
 
@@ -93,31 +79,54 @@ export class LocationListComponent implements OnInit {
   }
 
   load(){
-    let  counter = 0
-    counter = counter + 1
-    console.log("Load More", counter);
-  }
-
-  loadMoreItems(){
-    // this.loading = true;
-    //const listView: RadListView = args.object;
-    // console.log("Loading More");
-
+    console.log("loading");
     this.pageNumber += 1;
     this.getSelectedFilters();
-    // this.scrollHeight += 1000;
-    this.productService.getSelectedItem(this.id, this.selectedFilterOptions,this.pageNumber).subscribe(result => {
+      /*this.productService.getSelectedItem(this.id, this.selectedFilterOptions,this.pageNumber).subscribe(result => {
        setTimeout(() => {
          console.log(result.shops.result);
+         if(result.shops.result == ''){
+           alert("No More Shops");
+         }
+         else{
          result.shops.result.forEach(element => {
-         // this.shopService.addPagination(element);
-          //console.log(element);
-           this.shops.push(element);
+          this.shopService.addPagination(element);
+          console.log(element);
+          setTimeout(() => {
+          this.shops.push(element);
+            }, 1000)
           });
-          
+        }          
         }, 1000)
+      });*/
+      
+  }
+
+  onLoadMoreItemsRequested(args){
+    console.log("loaded");
+    this.pageNumber += 1;
+    this.getSelectedFilters();
+
+    this.productService.getSelectedItem(this.id, this.selectedFilterOptions,this.pageNumber).subscribe(result => {
+      setTimeout(() => {
+        console.log(result.shops.result);
+        if(result.shops.result == ''){
+          alert("No More Shops");
+        }
+        else{
+        result.shops.result.forEach(element => {
+         this.shopService.addPagination(element);
+         // console.log(element);
+         //  this.shops.push(element);
+         });
+       }      
+       }, 200)   
     });
 
+    setTimeout(() => {
+    const listView: RadListView = args.object;
+    listView.notifyLoadOnDemandFinished(); 
+    }, 1000) 
   }
 
   

@@ -30,6 +30,9 @@ import { ItemSwiperComponent } from "./shared/components/item-swiper/item-swiper
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 import { NativeScriptFacebookModule } from "nativescript-facebook/angular";
 
+import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
+
+
 
 
 
@@ -50,7 +53,8 @@ const uri = "http://142.93.129.34:4000/my-cafffe-graphql-api";
     HttpLinkModule,
     GridViewModule,
     NativeScriptUIListViewModule,
-    NativeScriptFacebookModule
+    NativeScriptFacebookModule,
+    TNSCheckBoxModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   // tslint:disable-next-line:object-literal-sort-keys

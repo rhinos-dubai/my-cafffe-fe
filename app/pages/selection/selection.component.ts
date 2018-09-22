@@ -49,6 +49,7 @@ export class SelectionComponent implements OnInit {
   MoreShops: boolean = false;
   selectedFilters: any[];
   selectedFilterOptions: Array<any> = [];
+  totalLocations: any = 0;
   
 
   
@@ -100,12 +101,12 @@ export class SelectionComponent implements OnInit {
   getLocationSize() {
     this.locationList.subscribe(data => {
       this.locationListSize = [];
-      /*setTimeout(() => {
+      setTimeout(() => {
           data.forEach(element => {
-          console.log(element.shop);
+          // console.log(element.shop);
           this.locationListSize.push(element.shop);
-        }, 1000)
-      });*/
+        }, 200)
+      });
     })
   }
 
@@ -114,7 +115,7 @@ export class SelectionComponent implements OnInit {
     this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(result => {
       setTimeout(() => {
       this.shopService.changeAvailableShops(result.shops.result);
-      }, 1000)
+      }, 200)
       this.genericProperties = result.generic_properties;
       const source = from(this.genericProperties);
 
@@ -135,18 +136,23 @@ export class SelectionComponent implements OnInit {
   getLocations(){
     this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(data => {
       // console.log(data.shops.result)
+      this.shopService.changeTotalLocations(data.shops.resultCount);
       this.shopService.changeAvailableShops(data.shops.result);
+
+      this.shopService.checkforTotalLocations.subscribe(result => {
+        this.totalLocations = result;
+      })
       if(data.shops.result == []){
         console.log("no More Shops");
         this.productService.changePageNumber(1);
       };
 
-        this.shopService.changesearchLocationStatus(false);
+            this.shopService.changesearchLocationStatus(false);
 
-      
-      this.filteredShops = true;
-    })
-  }
+
+            this.filteredShops = true;
+        })
+    }
 
   getSelectedFilters(){
     this.selectedFilterOptions = [];

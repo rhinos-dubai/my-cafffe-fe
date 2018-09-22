@@ -54,10 +54,10 @@
 <StackLayout orientation="vertical">
 
     <CardView class="single-filter" *ngFor="let item of filters;let j = index" margin="5">
-        <GridLayout columns="80, *" rows="*" class="inner-card">
+        <GridLayout columns="auto , *" rows="*" class="inner-card" width="100%">
 
             <StackLayout row="0" col="0" verticalAlignment="center">
-                <Label text="{{item[0].property_group}} :" class="h6"></Label>
+                <Label text="{{item[0].property_group}} : " class="h6"></Label>
             </StackLayout>
 
             <ScrollView orientation="horizontal" row="0" col="1" scrollBarIndicatorVisible="false">

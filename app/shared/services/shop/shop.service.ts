@@ -30,6 +30,21 @@ export class ShopService {
   private isShopsAvailable = new BehaviorSubject(true);
   checkForAvailableShops = this.isShopsAvailable.asObservable();
 
+  private totalLocations = new BehaviorSubject(0);
+  checkforTotalLocations = this.totalLocations.asObservable();
+
+  private Cafe = new BehaviorSubject([]);
+  selectedCafe = this.Cafe.asObservable();
+
+  changeCafe(cafeNow: Array<any>){
+    this.Cafe.next(cafeNow);
+  }
+
+
+  changeTotalLocations(total: number){
+    this.totalLocations.next(total);
+  }
+
   changeShopsAvailbilityStatus(status:boolean){
     this.isShopsAvailable.next(status);
   }
