@@ -12,7 +12,7 @@ import {SplashScreenComponent} from '~/pages/splash-screen/splash-screen.compone
 
 
 const routes: Routes = [
-    { path: "", redirectTo: "/home", pathMatch: "full" },
+    { path: "", redirectTo: "/splash-screen", pathMatch: "full" },
     { path: "home", component: HomeComponent },
     { path: "select-item", component: SelectItemComponent },
     { path: "selection/:id", component: SelectionComponent },
