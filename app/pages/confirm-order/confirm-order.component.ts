@@ -10,6 +10,10 @@ import { View } from "ui/core/view";
 import { Animation, AnimationDefinition } from "ui/animation";
 import {AnimationCurve} from 'tns-core-modules/ui/enums';
 
+import { ScrollView, ScrollEventData } from 'tns-core-modules/ui/scroll-view';
+import { Image } from 'tns-core-modules/ui/image';
+import { screen } from 'tns-core-modules/platform';
+
 
 let LS = require( "nativescript-localstorage" );
 let selectedFiltersView: View;
@@ -26,7 +30,7 @@ export class ConfirmOrderComponent implements OnInit {
   NoSelectedFilters: boolean = false;
   checkTest: boolean;
 
-  constructor(private productService:ProductService, private shopService: ShopService, private page: Page, private routerExtensions: RouterExtensions) {this.page.actionBarHidden = true; }
+  constructor(private productService:ProductService, private shopService: ShopService, private page: Page, private routerExtensions: RouterExtensions , private _page: Page) {this.page.actionBarHidden = true; }
 
   seletedItem = this.productService.currentItemName;
   seletedShop = this.shopService.SeletedShopName;
@@ -50,11 +54,15 @@ export class ConfirmOrderComponent implements OnInit {
 
     // Temp-Fooqi End
 
-
-
-    public checkedChange(args) {
-        console.log(args);
-    }
+    public checkedChange(modelRef,option) {
+        console.log("checkedChange:", modelRef.checked);
+        if(modelRef.checked){
+            this.selectedRate = this.selectedRate + option.price;
+        }
+        else {
+            this.selectedRate = this.selectedRate - option.price;
+        }
+      }
 
   ngOnInit() {
       
@@ -134,6 +142,21 @@ export class ConfirmOrderComponent implements OnInit {
    }
 
     // Temp-Fooqi Static Data Start
+
+    onScroll(event: ScrollEventData, scrollView: ScrollView, topView: View) {
+        // If the header content is still visiible
+        console.log(scrollView.verticalOffset);
+        if (scrollView.verticalOffset < 200) {
+            const offset = scrollView.verticalOffset / 2;
+            if (scrollView.ios) {
+                // iOS adjust the position with an animation to create a smother scrolling effect. 
+                topView.animate({ translate: { x: 0, y: offset } }).then(() => { }, () => { });
+            } else {
+                // Android, animations are jerky so instead just adjust the position without animation.
+                topView.translateY = Math.floor(offset);
+            }
+        }
+    }
 
     getGenericProperties(){
 

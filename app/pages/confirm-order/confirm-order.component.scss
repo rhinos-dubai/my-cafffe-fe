@@ -55,6 +55,10 @@
 
 }
 
+.scroll-page{
+  background-color: white;
+}
+
 
 .inner-scroll-page{
   //margin: 5 10 0 10;
@@ -157,6 +161,7 @@
 .addons, .filters{
   margin: 5 5;
   padding: 10 5;
+  background-color: $white;
 }
 
 .single-filter-selected-label{

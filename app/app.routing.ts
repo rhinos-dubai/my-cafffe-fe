@@ -8,6 +8,8 @@ import { SelectionComponent } from "./pages/selection/selection.component";
 import { ConfirmOrderComponent } from "./pages/confirm-order/confirm-order.component";
 import { ShopComponent } from "./pages/shop/shop.component";
 import { LoginComponent } from "./pages/login/login.component";
+import {AllUiComponent} from '~/pages/all-ui/all-ui.component';
+import {SplashScreenComponent} from '~/pages/splash-screen/splash-screen.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,8 @@ const routes: Routes = [
     { path: "confirm-order", component: ConfirmOrderComponent },
     { path: "shop/:id", component: ShopComponent },
     { path: "login", component: LoginComponent },
+    { path: "allui", component: AllUiComponent },
+    { path: "splash-screen", component: SplashScreenComponent },
 
 ];
 

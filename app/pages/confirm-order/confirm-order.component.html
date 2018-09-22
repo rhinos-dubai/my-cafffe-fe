@@ -1,27 +1,11 @@
-<!--<StackLayout>-->
-<!--<label class="h3" margin="10" horizontalAlignment="center"-->
-<!--text="{{seletedItem | async}}"></label>-->
 
-<!--<Label class="h3" margin="10" horizontalAlignment="center"-->
-<!--text="{{seletedShop | async}}"></Label>-->
+    <GridLayout rows="*, 120" >
 
-<!--<Label class="h4" margin="10" text="AED {{selectedRate | async}}" horizontalAlignment="center"></Label>-->
-
-<!--<Label text="Selected Options" margin="10" class="h4" ></Label>-->
-<!---->
-<!--<item-filters [filters]="selectedFilters" [showActionButtons]="false" > </item-filters>-->
-
-<!--</StackLayout>-->
-
-<StackLayout orientation="vertical">
-
-    <GridLayout rows="*, 120">
-
-        <ScrollView row="0" orientation="vertical" class="inner-scroll-page" scrollBarIndicatorVisible="false">
-            <StackLayout orientation="vertical">
+        <ScrollView height="auto" #scrollView (scroll)="onScroll($event, scrollView, topView)" row="0" orientation="vertical" class="inner-scroll-page" scrollBarIndicatorVisible="false">
+            <StackLayout orientation="vertical" row="0">
 
                 <!--Shop Div Start-->
-                <StackLayout height="200" orientation="vertical" style="background-image: url('{{Cafe.image}}')"
+                <StackLayout #topView height="250" orientation="vertical" style="background-image: url('{{Cafe.image}}')"
                              class="shopheroimage">
                     <GridLayout columns="*" rows="*, auto" width="70%" height="100%">
 
@@ -116,13 +100,13 @@
 
                     <GridLayout columns="10, 100, 10, *" rows="auto" class="selected-options">
 
-                        <GridLayout col="1" row="0" columns="*" rows="auto auto" verticalAlignment="center">
+                        <GridLayout col="1" row="0" columns="*" rows="auto auto" verticalAlignment="center" (tap)="editFilters()">
                             <Label row="0" text="Selected Options: " class="h6" textWrap="true"></Label>
-                            <Label *ngIf="animateFor" row="1" text="Edit" class="edit-button" textWrap="true"(tap)="editFilters()"></Label>
+                            <Label *ngIf="animateFor" row="1" text="Edit" class="edit-button" textWrap="true"></Label>
                             <!--<Button row="1" text="Button" (tap)="animate()"></Button>-->
                         </GridLayout>
 
-                        <WrapLayout col="3" orientation="horizontal" *ngIf="!NoSelectedFilters">
+                        <WrapLayout col="3" orientation="horizontal" itemWidth="auto">
 
                         <GridLayout columns="auto, auto" rows="auto" *ngFor="let option of Cafe.filters"
                                 class="single-filter-selected-label">
@@ -134,14 +118,12 @@
 
                     </GridLayout>
 
-                    <StackLayout *ngFor="let option of Cafe.addons" margin="10">
+                    <StackLayout *ngFor="let option of Cafe.addons" margin="10" class="addons" >
                             <GridLayout rows="*" columns="300 auto">
-                                    <CheckBox (touch)="checkedChange($event)" text="{{option.addon}}"></CheckBox>
+                                    <CheckBox #modelCheck (checkedChange)="checkedChange(modelCheck,option)" text="{{option.addon}}"></CheckBox>
                                     <Label row="0" col="1" HorizontalAlignment="right" text="{{option.price}} AED"></Label>
                             </GridLayout>
                     </StackLayout>
-
-                    <Button (tap)="getCheckProp()" text="Check Property"></Button>
 
                 </StackLayout>
 
@@ -163,13 +145,15 @@
                 <!--<Label col="1" row="0" class="text-center edit-text" text="{{seletedShop | async}}"></Label>-->
                 <!--</GridLayout>-->
 
+                
+
 
             </StackLayout>
 
         </ScrollView>
 
 
-        <StackLayout row="1" orientation="vertical" verticalAlignment="bottom" class="action-bar-bottom">
+        <!--<StackLayout row="1" orientation="vertical" verticalAlignment="bottom" class="action-bar-bottom">
 
             <GridLayout columns="*, *" rows="auto" marginBottom="10">
 
@@ -185,12 +169,7 @@
 
             </GridLayout>
 
-            <!--<StackLayout orientation="vertical" class="page">-->
-            <!---->
-            <!--</StackLayout>-->
-
-        </StackLayout>
+        </StackLayout>-->
 
 
     </GridLayout>
-</StackLayout>

@@ -1,0 +1,13 @@
+@import "~/shared/styles/main.scss";
+
+.mainpage{
+  background-color: $background-color;
+  padding: 10 5;
+}
+
+.typography{
+  padding: 5 10;
+  Label {
+    margin-bottom: 10;
+  }
+}

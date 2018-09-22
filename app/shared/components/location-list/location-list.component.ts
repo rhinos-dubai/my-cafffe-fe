@@ -1,6 +1,7 @@
 import { Component,Input, OnInit  } from '@angular/core';
 import { ShopService } from '~/shared/services/shop/shop.service';
 import {Router} from "@angular/router";
+import { NativeScriptRouterModule, RouterExtensions } from "nativescript-angular/router";
 import { ProductService } from '~/shared/services/product/product.service';
 
 import { ListView } from "tns-core-modules/ui/list-view";
@@ -32,12 +33,7 @@ export class LocationListComponent implements OnInit {
 
   private listView: ListView;
 
-
-
-
-  constructor(private shopService: ShopService,private productService: ProductService, private router:Router, ) { 
-  }
-
+  constructor(private shopService: ShopService,private productService: ProductService, private router:Router,private routerExtensions: RouterExtensions) { }
 
   ngOnInit() { 
     this.shopService.searchedLocation.subscribe(result =>{
@@ -64,9 +60,15 @@ export class LocationListComponent implements OnInit {
       this.shopService.changeCafe(item);
       this.shopService.changeSeletedShopName(item.shop.name);
       this.shopService.changeRatebyShop(price);
-      this.router.navigate(["confirm-order"]);
-
-  }
+      // this.router.navigate(["confirm-order"]);
+        this.routerExtensions.navigate(["confirm-order"], {
+            transition: {
+                name: "slideLeft",
+                duration: 300,
+                curve: "easeOut"
+            }
+        });
+    }
 
   getSelectedFilters(){
     this.selectedFilterOptions = [];
