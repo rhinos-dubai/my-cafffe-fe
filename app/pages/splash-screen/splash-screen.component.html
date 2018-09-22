@@ -1,4 +1,4 @@
-<GridLayout columns="auto" rows="auto">
+<GridLayout columns="*" rows="*" >
 
     <!--<WebView col="0" row="0" id="webViewID" (loadStarted)="onLoadStarted()" (loadFinished)="onLoadFinished()" src="https://codepen.io/anon/pen/wENPmY"></WebView>-->
     <!--<WebView col="0" row="0" id="webViewID" (loadStarted)="onLoadStarted()" (loadFinished)="onLoadFinished()" src="./splashscreen/index.html"></WebView>-->
@@ -9,5 +9,6 @@
 
 
 
+    <LottieView horizontalAlignment="center" verticalAlignment="center" width="200" height="200" [src]="src" [loop]="loop" [autoPlay]="autoPlay" (loaded)="lottieViewLoaded($event)">     </LottieView>
 
 </GridLayout>
