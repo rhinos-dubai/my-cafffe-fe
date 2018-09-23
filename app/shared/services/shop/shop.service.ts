@@ -113,6 +113,9 @@ export class ShopService {
           id
           name
           address
+          image{
+            secure_url
+          }
         }
       }   
       `,
@@ -143,7 +146,9 @@ export class ShopService {
           name
           phone
           address
-          image
+          image{
+            secure_url
+          }
           full_time
           opensAt
           closesAt
@@ -153,9 +158,7 @@ export class ShopService {
           currency
           createdAt
           updatedAt
-          categories{
-            category
-          }
+
           products {
             id
             isActive

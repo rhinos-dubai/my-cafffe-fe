@@ -116,7 +116,7 @@ export class ProductService {
               shops(
                 includeInactive: false
                 filters: [${filters}]
-                perPage: 10
+                perPage: 4
                 paginate: true
                 pageNumber: ${pageNumber}
               ) {

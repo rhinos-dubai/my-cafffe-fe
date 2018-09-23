@@ -32,8 +32,8 @@ import { ScrollEventData } from 'tns-core-modules/ui/scroll-view/scroll-view';
   styleUrls: ['./selection.component.scss']
 })
 export class SelectionComponent implements OnInit {
-    shopListHeight = platformModule.screen.mainScreen.heightDIPs;
-    selectedItem = this.productService.currentItemName;
+  shopListHeight = platformModule.screen.mainScreen.heightDIPs;
+  selectedItem = this.productService.currentItemName;
   genericProperties: any;
   tempItemsService: any;
   genericProperties_values: Array<any> = [];
@@ -57,45 +57,46 @@ export class SelectionComponent implements OnInit {
   constructor(private page: Page, private route: ActivatedRoute, private productService:ProductService, private shopService:ShopService) { }
 
 
-  ngOnInit() {
-      this.shopService.changeShopsAvailbilityStatus(true);
+  ngOnInit() {}
 
-      this.productService.getAllProducts().subscribe( result => {
-        this.products = result;
-        this.shopService.changesearchLocationStatus(true);
+  ngAfterViewInit() {
+        this.shopService.changeShopsAvailbilityStatus(true);
+
+        this.productService.getAllProducts().subscribe( result => {
+          this.products = result;
+          this.shopService.changesearchLocationStatus(true);
+        });
+
+        this.productService.currentPageNumber.subscribe(result => {
+          this.pageNumber = result;
+        })
+
+        this.shopService.checkForAvailableShops.subscribe(result => {
+          this.MoreShops = result;
+        })
+      
+
+
+
+
+      filterListView = this.page.getViewById<View>("filterlist");
+      shopListView = this.page.getViewById<View>("locationList");
+      floatingButton = this.page.getViewById<View>("floatingButton");
+      // locationList.translateY = 0;
+      // floatingButton.translateY = -325
+
+
+      this.route.params.subscribe(params => {
+        this.id = +params['id'];
+        this.productService.changeSelectedItemID(this.id);
+        // console.log(this.id);
       });
 
-      this.productService.currentPageNumber.subscribe(result => {
-        this.pageNumber = result;
-      })
+      this.getGenericProperties();
+      this.getLocations();
+      this.getSelectedFilters();
 
-      this.shopService.checkForAvailableShops.subscribe(result => {
-        this.MoreShops = result;
-      })
-    
-
-
-
-
-    filterListView = this.page.getViewById<View>("filterlist");
-    shopListView = this.page.getViewById<View>("locationList");
-    floatingButton = this.page.getViewById<View>("floatingButton");
-    // locationList.translateY = 0;
-    // floatingButton.translateY = -325
-
-
-    this.route.params.subscribe(params => {
-      this.id = +params['id'];
-      this.productService.changeSelectedItemID(this.id);
-      // console.log(this.id);
-    });
-
-    this.getGenericProperties();
-    this.getLocations();
-    this.getSelectedFilters();
-
-    this.getLocationSize();
-
+      this.getLocationSize();
   }
 
   getLocationSize() {
@@ -136,6 +137,7 @@ export class SelectionComponent implements OnInit {
   getLocations(){
     this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(data => {
       // console.log(data.shops.result)
+      this.filteredShops = true;
       this.shopService.changeTotalLocations(data.shops.resultCount);
       this.shopService.changeAvailableShops(data.shops.result);
 

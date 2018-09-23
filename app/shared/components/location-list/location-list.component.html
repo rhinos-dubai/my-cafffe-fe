@@ -1,5 +1,5 @@
         
-        <RadListView backgroundColor="transparent" [items]="Locations" height="500" loadOnDemandMode="Manual" (loadMoreDataRequested)="onLoadMoreItemsRequested($event)">
+        <RadListView class="listView" [items]="Locations" height="500" loadOnDemandMode="Manual" (loadMoreDataRequested)="onLoadMoreItemsRequested($event)">
                 <ng-template let-item="item" let-i="index">
                                 <StackLayout orientation="vertical" >
                                         <CardView class="single-outlet-location"
@@ -9,10 +9,10 @@
                   
                                       <GridLayout columns="80, *, auto" row="auto" class="single-outlet-location-main-div">
                   
-                                          <StackLayout col="0" row="0" >
-                                              <Image src="{{item.shop.image.secure_url}}"></Image>
+                                          
+                                              <Image col="0" row="0" height="80" src="{{item.shop.image.secure_url}}" loadAsync="true"></Image>
                                               
-                                          </StackLayout>
+                                          
                   
                                           <StackLayout col="1" row="0">
                                               <GridLayout columns="auto, auto" rows="auto, auto, auto"

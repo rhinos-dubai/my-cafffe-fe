@@ -7,6 +7,8 @@ import { ProductService } from '~/shared/services/product/product.service';
 import { ListView } from "tns-core-modules/ui/list-view";
 import { isIOS } from 'tns-core-modules/platform/platform';
 import { RadListView } from 'nativescript-ui-listview';
+import * as applicationModule from 'application';
+import { Color } from 'color';
 
 
 @Component({
@@ -30,12 +32,16 @@ export class LocationListComponent implements OnInit {
   loading: Boolean = false;
   scrollHeight: number;
   differ: any;
+  myRadListView: RadListView;
 
   private listView: ListView;
 
   constructor(private shopService: ShopService,private productService: ProductService, private router:Router,private routerExtensions: RouterExtensions) { }
 
-  ngOnInit() { 
+  ngOnInit() { }
+
+  ngAfterViewInit(){
+
     this.shopService.searchedLocation.subscribe(result =>{
       this.isBusy = result;
       // console.log(result);
@@ -52,6 +58,8 @@ export class LocationListComponent implements OnInit {
     this.shopService.checkForAvailableShops.subscribe(result => {
       this.MoreShops = result;
     });
+
+
   }
 
 

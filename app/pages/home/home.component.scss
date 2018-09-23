@@ -13,6 +13,19 @@
     }
 }
 
+.shop-card {
+    @extend .card-general;
+    margin: 5;
+    Image{
+       
+        margin-top: 15;
+    }
+
+    Label {
+        font-size: 15;
+    }
+}
+
 
 //button {
 //    font-size: 15;

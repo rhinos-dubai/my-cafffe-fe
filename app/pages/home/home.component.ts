@@ -27,10 +27,7 @@ export class HomeComponent implements OnInit {
   filteredShops = false;
   products;
 
-  public ngOnInit() {
-    // this.shopService.changesearchLocationStatus(true);
-
-  }
+  public ngOnInit() {  }
 
     ngAfterViewInit() {
 
@@ -38,12 +35,6 @@ export class HomeComponent implements OnInit {
 
         this.shopService.getShopsNearme().subscribe(result => {
             this.locations = result;
-            if(this.locations){
-                setTimeout(()=>{
-                    this.shopService.changesearchLocationStatus(false);
-                }, 100);
-
-            }
         });
 
         this.prodcutServive.getAllProducts().subscribe( result => {
@@ -65,5 +56,16 @@ export class HomeComponent implements OnInit {
           }
       });
 }
+
+    routeToShopPage(shop){
+        console.log(shop)
+        this.routerExtensions.navigate(['shop', shop.id], {
+            transition: {
+                name: "slideLeft",
+                duration: 300,
+                curve: "easeOut"
+            }
+        });
+    }
 
 }
