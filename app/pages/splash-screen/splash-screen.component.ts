@@ -20,10 +20,11 @@ registerElement('LottieView', () => LottieView);
 })
 export class SplashScreenComponent implements OnInit {
 
-    public loop: boolean = true;
+    public loop: boolean = false;
     public src: string;
     public autoPlay: boolean = true;
     public animations: Array<string>;
+    public progress: number = 0;
 
     private _lottieView: LottieView;
 
@@ -33,22 +34,24 @@ export class SplashScreenComponent implements OnInit {
     constructor(private page: Page,private routerExtensions: RouterExtensions)
     {
         this.page.actionBarHidden = true;
-        this.animations = ['Mobilo/A.json', 'Mobilo/D.json', 'Mobilo/N.json', 'Mobilo/S.json'];
-        this.src = this.animations[1];
+        this.animations = ['Mobilo/A.json', 'Mobilo/D.json', 'Mobilo/N.json', 'Mobilo/S.json', 'Mobilo/data.json'];
+        this.src = this.animations[4];
     }
+
 
     ngOnInit() {
 
         setTimeout(() => {
+            this._lottieView.progress=1;
 
             this.routerExtensions.navigate(["/home"], {
                 transition: {
                     name: "slideLeft",
                     duration: 300,
-                    curve: "easeOut"
+                    curve: "easeIn"
                 }
             });
-        }, 5000);
+        }, 9000);
 
         // setTimeout(() => {
         //     this.routerExtensions.navigate(["/home"], {
@@ -60,6 +63,10 @@ export class SplashScreenComponent implements OnInit {
         //     });
         // }, 5000);
 
+        // setTimeout(() => {
+        //     this._lottieView.progress = .7;
+        // }, 3000);
+
 
 
 
@@ -68,27 +75,29 @@ export class SplashScreenComponent implements OnInit {
     }
 
     lottieViewLoaded(event) {
+        console.dir( event);
         this._lottieView = <LottieView>event.object;
+
     }
 
-    onLoadStarted() {
-        let webView :WebView = <WebView>this.page.getViewById('webViewID');
-        if(webView.android) { // in IOS android will be undefined
-            webView.android.getSettings().setBuiltInZoomControls(false);
-        }
-    }
-
-    onLoadFinished() {
-        setTimeout(() => {
-            this.routerExtensions.navigate(["/home"], {
-                transition: {
-                    name: "slideLeft",
-                    duration: 500,
-                    curve: "linear"
-                }
-            });
-        }, 5000);
-    }
+    // onLoadStarted() {
+    //     let webView :WebView = <WebView>this.page.getViewById('webViewID');
+    //     if(webView.android) { // in IOS android will be undefined
+    //         webView.android.getSettings().setBuiltInZoomControls(false);
+    //     }
+    // }
+    //
+    // onLoadFinished() {
+    //     setTimeout(() => {
+    //         this.routerExtensions.navigate(["/home"], {
+    //             transition: {
+    //                 name: "slideLeft",
+    //                 duration: 500,
+    //                 curve: "linear"
+    //             }
+    //         });
+    //     }, 5000);
+    // }
 
 
 
