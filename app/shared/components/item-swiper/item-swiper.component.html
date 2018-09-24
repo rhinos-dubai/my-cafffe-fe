@@ -1,12 +1,13 @@
 <ScrollView orientation="horizontal" height="auto" scrollBarIndicatorVisible="false">
 <StackLayout orientation="horizontal">
-    <CardView class="singleItem" shadowOffsetWidth="0" shadowOffsetHeight="0" *ngFor="let item of data;" (tap)="getSelectedName(item.name, item.id);"  >
+    <CardView class="singleItem" shadowOffsetWidth="0" shadowOffsetHeight="0" *ngFor="let item of viewProducts; index as i" (tap)="getSelectedName(item.name, item.id);"  >
 
       <StackLayout >
           <GridLayout rows="60,*,*" columns="*">
               <StackLayout col="0" row="0">
                   <!--<Image src="~/images/coffee/coffee.png"></Image>-->
-                  <Label text="&#xe901;" class="icomoon text-center item-icon" col="0"></Label>
+
+                  <Label  [text]="icons[i]" class="icomoon text-center item-icon" col="0"></Label >
 
               </StackLayout>
               <StackLayout col="0" row="1" >

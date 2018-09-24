@@ -41,6 +41,13 @@ export class ProductService {
   private PageNumber = new BehaviorSubject(1);
   currentPageNumber = this.PageNumber.asObservable();
 
+  private swipeProducts = new BehaviorSubject([]);
+  currentSwipeProducts = this.swipeProducts.asObservable();
+
+  changeSwipeProducts(products: Array<any>){
+    this.swipeProducts.next(products);
+  }
+
   changeSelectedItemID(id: number) {
     this.itemSource.next(id)
   }

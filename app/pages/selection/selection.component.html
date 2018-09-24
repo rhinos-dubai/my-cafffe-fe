@@ -5,8 +5,8 @@
     <!--<GridLayout rows="*,120" minHeight="500">-->
     <!--<StackLayout orientation="vertical" backgroundColor="lightgray" width="100%">-->
     <GridLayout rows="auto, auto" row="0" width="100%" height="100%">
-      <ScrollView row="0" orientation="vertical" id="filterlist">
-        <StackLayout orientation="vertical">
+      <ScrollView row="0" orientation="vertical" id="filterlist"> >
+        <StackLayout orientation="vertical" >
           <!--<label class="h3 p-15" horizontalAlignment="center"-->
           <!--[text]="selectedItem | async"></label>-->
           <!---->
@@ -22,9 +22,9 @@
           <Label [text]="totalLocations + ' Locations'" class="label-text-gray text-right"></Label>
         </GridLayout>
         <StackLayout orientation="vertical" [height]="shopListHeight/1.45">
-          <ScrollView orientation="vertical" row="1" scrollBarIndicatorVisible="false">
-            <StackLayout orientation="vertical" >
-              <location-list [Locations]="locationList | async"
+          <ScrollView orientation="vertical" row="1" scrollBarIndicatorVisible="false" >
+            <StackLayout orientation="vertical"  >
+              <location-list *ngIf="filteredShops" [Locations]="locationList | async"
                        ></location-list>
               <!--<Button text="Load More" (tap)="loadMore()" *ngIf="!noMoreShops"></Button>-->
             </StackLayout>

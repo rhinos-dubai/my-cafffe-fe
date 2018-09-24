@@ -35,6 +35,7 @@ export class ConfirmOrderComponent implements OnInit {
   seletedItem = this.productService.currentItemName;
   seletedShop = this.shopService.SeletedShopName;
   selectedRate;
+  itemRate;
   selectedCafe = this.shopService.selectedCafe;
   selectedFilters: Array<any> = [];
   genericProperties: any;
@@ -58,9 +59,13 @@ export class ConfirmOrderComponent implements OnInit {
         console.log("checkedChange:", modelRef.checked);
         if(modelRef.checked){
             this.selectedRate = this.selectedRate + option.price;
+            this.itemRate = this.itemRate + option.price;
         }
         else {
             this.selectedRate = this.selectedRate - option.price;
+            this.itemRate = this.itemRate - option.price;
+
+
         }
       }
 
@@ -77,6 +82,7 @@ export class ConfirmOrderComponent implements OnInit {
 
     this.shopService.currentShopItemRate.subscribe(result => {
         this.selectedRate = result;
+        this.itemRate = result;
     })
 
      
@@ -203,7 +209,18 @@ export class ConfirmOrderComponent implements OnInit {
           });
 
       } else {
-          this.itemQty+=number;
+          // this.itemQty+=number;
+          console.log(number);
+          if(number == +1){
+            this.itemQty = this.itemQty + 1
+            this.selectedRate = this.itemRate * this.itemQty;
+          }
+          else{
+            console.log(this.itemQty);
+            this.selectedRate = this.selectedRate - this.itemRate;
+            this.itemQty = this.itemQty - 1
+          }
+          
       }
    }
 

@@ -21,11 +21,13 @@ import set = Reflect.set;
 
 
 export class HomeComponent implements OnInit {
+    
   constructor( private router:Router, private shopService:ShopService, private prodcutServive:ProductService,private routerExtensions: RouterExtensions) {}
 
   locations;
   filteredShops = false;
   products;
+  icons: any = [];
 
   public ngOnInit() {  }
 
@@ -39,7 +41,10 @@ export class HomeComponent implements OnInit {
 
         this.prodcutServive.getAllProducts().subscribe( result => {
             this.products = result;
+            this.prodcutServive.changeSwipeProducts(result);
         });
+
+        console.log(this.products);
 
     }, 1000);
 

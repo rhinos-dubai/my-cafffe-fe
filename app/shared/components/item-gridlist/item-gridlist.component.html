@@ -5,19 +5,19 @@
 <GridLayout  orientation="vertical" class="page">
 
 
-  <GridView [items]="data" colWidth="33%" rowHeight="120">
+  <GridView [items]="viewProducts" colWidth="33%" rowHeight="120">
 
 
-    <ng-template let-item="item" let-odd="odd">
+    <ng-template let-item="item" let-odd="odd" let-i="index">
 
 
         <CardView class="singleItem" shadowOffsetWidth="0" shadowOffsetHeight="0"  [nsRouterLink]="['/selection',item.id]"  >
 
           <StackLayout >
-              <GridLayout rows="60,*" columns="*">
+              <GridLayout rows="*,*" columns="*">
                   <StackLayout col="0" row="0">
-                      <Image src="~/images/coffee/coffee.png"></Image>
-                  </StackLayout>
+                        <Label  class="icomoon text-center item-icon" [text]="icons[i]" ></Label>                  
+                    </StackLayout>
                   <StackLayout col="0" row="1"  >
                       <Label  [text]="item.name" marginTop="15" textWrap="false" class="item-name-label text-center"></Label>
                   </StackLayout>

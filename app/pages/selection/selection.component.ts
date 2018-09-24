@@ -23,7 +23,7 @@ let floatingButton: View;
 
 import {ProductService} from "~/shared/services/product/product.service"
 import { ShopService } from "~/shared/services/shop/shop.service"
-import { ScrollEventData } from 'tns-core-modules/ui/scroll-view/scroll-view';
+import { ScrollEventData, ScrollView } from 'tns-core-modules/ui/scroll-view/scroll-view';
 
 @Component({
   moduleId: module.id,
@@ -50,6 +50,7 @@ export class SelectionComponent implements OnInit {
   selectedFilters: any[];
   selectedFilterOptions: Array<any> = [];
   totalLocations: any = 0;
+  scrollView: ScrollView;
   
 
   
@@ -134,6 +135,8 @@ export class SelectionComponent implements OnInit {
 
   }
 
+
+
   getLocations(){
     this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(data => {
       // console.log(data.shops.result)
@@ -165,6 +168,21 @@ export class SelectionComponent implements OnInit {
       });
     })
   }
+
+  onScroll(event: ScrollEventData, scrollView: ScrollView, topView: View) {
+    // If the header content is still visiible
+    // console.log(scrollView.verticalOffset);
+    if (scrollView.verticalOffset < 250) {
+        const offset = scrollView.verticalOffset / 2;
+        if (scrollView.ios) {
+            // iOS adjust the position with an animation to create a smother scrolling effect. 
+            topView.animate({ translate: { x: 0, y: offset } }).then(() => { }, () => { });
+        } else {
+            // Android, animations are jerky so instead just adjust the position without animation.
+            topView.translateY = Math.floor(offset);
+        }
+    }
+}
 
 
   animate() {

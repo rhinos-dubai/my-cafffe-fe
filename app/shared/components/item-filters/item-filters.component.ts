@@ -56,13 +56,26 @@ export class ItemFiltersComponent implements OnInit {
       } else {
           this.SelectedoptionsName['data'][itemIndex] = filterName;
       }
-
   }
 
   filtersSelectedByUser(item){
-    this.filtersbyUser.push(item);
+    // console.log(this.filtersbyUser);
+    if(this.filtersbyUser == []){
+      this.filtersbyUser.push(item);
+    }
+    else{
+      this.filtersbyUser.forEach(element =>{
+        console.log(element)
+        if(element.id == item.id){
+          alert("Already Selected");
+        }
+        //console.log(element);
+      });
+
+    }
+  
     // console.log(item);
-    console.log(this.filtersbyUser);
+    // console.log(this.filtersbyUser);
     this.productService.changeSelectedFilters(this.filtersbyUser);
   }
 
@@ -74,7 +87,7 @@ export class ItemFiltersComponent implements OnInit {
         data =>{
             this.shopService.changeTotalLocations(data.shops.resultCount);
             this.shopService.changeAvailableShops(data.shops.result);
-            console.log(data.shops.result);
+            // console.log(data.shops.result);
             data.shops.result.forEach(element => {
               let count = [];
               count.push(element);

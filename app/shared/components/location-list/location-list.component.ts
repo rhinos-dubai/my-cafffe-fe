@@ -9,6 +9,7 @@ import { isIOS } from 'tns-core-modules/platform/platform';
 import { RadListView } from 'nativescript-ui-listview';
 import * as applicationModule from 'application';
 import { Color } from 'color';
+import { ScrollView } from 'tns-core-modules/ui/scroll-view/scroll-view';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class LocationListComponent implements OnInit {
 
   @Input() Locations: any;
   @Input() filteredShops;
+  scrollView: ScrollView;
   isBusy;
   pageNumber;
   selectedFilters: any[];
@@ -44,7 +46,7 @@ export class LocationListComponent implements OnInit {
 
     this.shopService.searchedLocation.subscribe(result =>{
       this.isBusy = result;
-      // console.log(result);
+      console.log(result);
     });
 
     this.productService.currentItem.subscribe(result => {
@@ -113,6 +115,7 @@ export class LocationListComponent implements OnInit {
   }
 
   onLoadMoreItemsRequested(args){
+    this.loading = true;
     console.log("loaded");
     this.pageNumber += 1;
     this.getSelectedFilters();
@@ -128,6 +131,8 @@ export class LocationListComponent implements OnInit {
          this.shopService.addPagination(element);
          // console.log(element);
          //  this.shops.push(element);
+         this.loading = false;
+
          });
        }      
        }, 200)   

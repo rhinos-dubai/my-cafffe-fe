@@ -11,10 +11,52 @@ import { ProductService } from '~/shared/services/product/product.service';
 })
 export class ItemSwiperComponent implements OnInit {
 
-  constructor(private productService:ProductService, private router:Router,private routerExtensions: RouterExtensions) { }
-  @Input() data: any;
+  constructor(private productService:ProductService, private router:Router,private routerExtensions: RouterExtensions) {
+   }
+  @Input() data;
+  icons = [];
+  products = this.productService.currentSwipeProducts;
+  viewProducts = []
+  productsAvailable = []
 
-  ngOnInit() { }
+  ngOnInit() {
+   }
+
+   ngAfterViewInit() {
+     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+     //Add 'implements AfterViewInit' to the class.
+     this.products.subscribe(result => {
+       result.forEach(element => {
+         this.viewProducts.push(element);
+       });
+     }); 
+
+     setTimeout(() =>{
+      this.getIcons();
+     }, 2000);
+
+     
+   }
+
+   value(icon){
+     alert(icon);
+   }
+
+   getIcons() {
+    this.viewProducts.forEach(element => {
+      let icon = element['icon'];
+      icon = "&#x" + element['icon'] + ";" ;
+      let ico = icon.toString(16);
+      this.icons.push(String.fromCharCode(parseInt( element['icon'] , 16)));
+      //console.log(icon);
+      });
+
+      console.log(this.icons);
+
+
+   }
+
+
 
   getSelectedName(name, id){
     this.productService.changeSelectedItemName(name);

@@ -58,7 +58,7 @@
                     <StackLayout>
                         <Label text="Favourite Items" class="h5"></Label>
                         <StackLayout class="seperator-10"></StackLayout>
-                        <item-swiper [data]="products" ></item-swiper>
+                        <item-swiper [data]="products"  ></item-swiper>
                     </StackLayout>
                     <StackLayout class="seperator-30"></StackLayout>
 
@@ -66,9 +66,8 @@
                     <StackLayout>
                         <Label text="Featured Outlets" class="h4 text-center"></Label>
                         <StackLayout class="seperator-10"></StackLayout>
-                        <ListView [items]="locations">
-                                <ng-template let-item="item" let-i="index">
-                                        <CardView class="shop-card" margin="10" elevation="40" radius="1" (tap)=routeToShopPage(item)>
+                        
+                                        <CardView *ngFor="let item of locations" class="shop-card" margin="10" elevation="40" radius="1" (tap)=routeToShopPage(item)>
                                                 <GridLayout rows="200,30,30" columns="*">
                                                    
                                                     <Image height="200" [src]="item.image.secure_url" stretch="aspectFit" colSpan="3" col="1" row="0" loadAsync="true"></Image>
@@ -76,8 +75,7 @@
                                                     <Label  horizontalAlignment="center" [text]="item.address" textWrap="true" col="1" row="2" colSpan="3"></Label>
                                                 </GridLayout>
                                             </CardView>
-                                </ng-template>
-                        </ListView>
+                               
                                             
                     </StackLayout>
 
