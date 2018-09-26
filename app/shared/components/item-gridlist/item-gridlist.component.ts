@@ -18,7 +18,7 @@ export class ItemGridlistComponent implements OnInit {
 
   ngOnInit() { }
 
-  ngAfterContentInit() {
+  ngAfterViewInit() {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
     this.products.subscribe(result => {
@@ -34,9 +34,9 @@ export class ItemGridlistComponent implements OnInit {
   }
 
   getIcons() {
+    console.log("icons hit")
     this.viewProducts.forEach(element => {
       let icon = element['icon'];
-      icon = "&#x" + element['icon'] + ";" ;
       let ico = icon.toString(16);
       this.icons.push(String.fromCharCode(parseInt( element['icon'] , 16)));
       //console.log(icon);

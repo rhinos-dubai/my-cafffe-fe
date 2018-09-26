@@ -29,34 +29,11 @@ export class ItemSwiperComponent implements OnInit {
        result.forEach(element => {
          this.viewProducts.push(element);
        });
-     }); 
-
-     setTimeout(() =>{
-      this.getIcons();
-     }, 2000);
-
-     
+       this.viewProducts.forEach(element => {
+        this.icons.push(String.fromCharCode(parseInt( element['icon'] , 16)));
+        });
+     });    
    }
-
-   value(icon){
-     alert(icon);
-   }
-
-   getIcons() {
-    this.viewProducts.forEach(element => {
-      let icon = element['icon'];
-      icon = "&#x" + element['icon'] + ";" ;
-      let ico = icon.toString(16);
-      this.icons.push(String.fromCharCode(parseInt( element['icon'] , 16)));
-      //console.log(icon);
-      });
-
-      console.log(this.icons);
-
-
-   }
-
-
 
   getSelectedName(name, id){
     this.productService.changeSelectedItemName(name);

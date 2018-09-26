@@ -124,19 +124,22 @@
 
                         <GridLayout columns="auto, auto" rows="auto" *ngFor="let option of Cafe.filters"
                                 class="single-filter-selected-label">
-                        <Label col="0" text="{{option.property}}: " class="label-text-gray"></Label>
-                        <Label col="1" text="{{option.property_group}}" class="body-text"></Label>
+                        <Label col="0" text="{{option.property_group}}: " class="label-text-gray"></Label>
+                        <Label col="1" text="{{option.property}}" class="body-text"></Label>
                         </GridLayout>
 
                         </WrapLayout>
 
                     </GridLayout>
 
-                    <StackLayout *ngFor="let option of Cafe.addons" margin="10">
+                    <StackLayout *ngFor="let option of addonsGroup" margin="10">
+                        <Stacklayout *ngFor="let item of option">
+                            <Label marginBottom="10"  [text]="item.addon"></Label>
                             <GridLayout rows="*" columns="300 auto">
-                                    <CheckBox #modelCheck (checkedChange)="checkedChange(modelCheck,option)" text="{{option.addon}}"></CheckBox>
-                                    <Label row="0" col="1" HorizontalAlignment="right" text="{{option.price}} AED"></Label>
+                                    <CheckBox marginBottom="10" #modelCheck (checkedChange)="checkedChange(modelCheck,item)" text="{{item.addon}}"></CheckBox>
+                                    <Label row="0" col="1" HorizontalAlignment="right" text="{{item.price}} AED"></Label>
                             </GridLayout>
+                        </Stacklayout>
                     </StackLayout>
 
                 </StackLayout>
@@ -175,9 +178,9 @@
             </GridLayout>
 
             <GridLayout columns="*" rows="*">
-                <Button *ngIf="!animateFor" col="0" row="0" text="&#xf00c;" (tap)="editFilters()"
+                <Button *ngIf="!animateFor" col="0" row="0" text="&#xf00c;" 
                         class="font-awesome check-btn" marginBottom="10"></Button>
-                <Button *ngIf="animateFor" col="0" row="0" text="Add to Cart" (tap)="editFilters()" class="btn-block" marginBottom="10"></Button>
+                <Button *ngIf="animateFor" col="0" row="0" text="Add to Cart"  class="btn-block" marginBottom="10"></Button>
 
             </GridLayout>
 

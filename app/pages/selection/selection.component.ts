@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { from } from 'rxjs';
-import { groupBy, mergeMap, toArray } from 'rxjs/operators';
+import { from, Subscription } from 'rxjs';
+import { groupBy, mergeMap, toArray, take } from 'rxjs/operators';
 import {AnimationCurve} from "ui/enums";
 
 
@@ -31,12 +31,12 @@ import { ScrollEventData, ScrollView } from 'tns-core-modules/ui/scroll-view/scr
   templateUrl: './selection.component.html',
   styleUrls: ['./selection.component.scss']
 })
-export class SelectionComponent implements OnInit {
+export class SelectionComponent implements OnInit, OnDestroy {
   shopListHeight = platformModule.screen.mainScreen.heightDIPs;
   selectedItem = this.productService.currentItemName;
   genericProperties: any;
   tempItemsService: any;
-  genericProperties_values: Array<any> = [];
+  public genericProperties_values = [];
   products;
   animateFor = true;
   id: number;
@@ -51,7 +51,11 @@ export class SelectionComponent implements OnInit {
   selectedFilterOptions: Array<any> = [];
   totalLocations: any = 0;
   scrollView: ScrollView;
-  
+  icons: any = [];
+  defaultFilters = [];
+  private subscriptions = new Subscription();
+  subscription: Subscription;
+
 
   
 
@@ -60,21 +64,29 @@ export class SelectionComponent implements OnInit {
 
   ngOnInit() {}
 
+  ngOnDestroy() {
+    console.log("Destroy from Selection");
+    this.subscription.unsubscribe();
+  }
+
   ngAfterViewInit() {
+
+
+        
         this.shopService.changeShopsAvailbilityStatus(true);
 
-        this.productService.getAllProducts().subscribe( result => {
+        this.subscriptions.add(this.productService.getAllProducts().subscribe( result => {
           this.products = result;
           this.shopService.changesearchLocationStatus(true);
-        });
+        }));
 
-        this.productService.currentPageNumber.subscribe(result => {
+        this.subscriptions.add(this.productService.currentPageNumber.subscribe(result => {
           this.pageNumber = result;
-        })
+        }))
 
-        this.shopService.checkForAvailableShops.subscribe(result => {
+        this.subscriptions.add(this.shopService.checkForAvailableShops.subscribe(result => {
           this.MoreShops = result;
-        })
+        }))
       
 
 
@@ -94,10 +106,16 @@ export class SelectionComponent implements OnInit {
       });
 
       this.getGenericProperties();
-      this.getLocations();
-      this.getSelectedFilters();
+      setTimeout(() => {
+        this.getLocationSize();
+        this.getLocations();
+        this.getSelectedFilters();
+      }, 1000)
 
-      this.getLocationSize();
+      
+
+
+ 
   }
 
   getLocationSize() {
@@ -114,12 +132,21 @@ export class SelectionComponent implements OnInit {
 
   getGenericProperties(){
 
-    this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(result => {
+    this.productService.currentDefaultFilters.pipe(take(1))
+    .subscribe(result =>{
+      this.selectedFilters = result;
+    })
+    this.productService.getSelectedItem(this.id,this.selectedFilters,this.pageNumber).pipe(take(1))
+    .subscribe(result => {
       setTimeout(() => {
       this.shopService.changeAvailableShops(result.shops.result);
       }, 200)
       this.genericProperties = result.generic_properties;
-      const source = from(this.genericProperties);
+
+        this.productService.changefiltersAvailable(result.generic_properties);
+
+      //this.productService.addIcons()
+      /*const source = from(this.genericProperties);
 
       const groupByProperties = source.pipe(
           groupBy(result => result['property_group']),
@@ -127,19 +154,55 @@ export class SelectionComponent implements OnInit {
           mergeMap(group => group.pipe(toArray()))
         );
 
-        const subscribeToProperties = groupByProperties.subscribe(val => {
-          // console.log(val);
+        let subscribeToProperties = groupByProperties.subscribe(val => {
+
           this.genericProperties_values.push(val);
-        });
+          //this.productService.changefiltersAvailable(val);
+        });*/
+
     });
+
+    setTimeout(() => {
+
+
+    this.productService.currentfiltersAvailable.pipe(take(1))
+    .subscribe(result => {
+      // this.genericProperties_values.push(result);
+      this.genericProperties = result;
+
+      const source = from(this.genericProperties);
+
+      const groupByProperties = source.pipe(
+        groupBy(result => result['property_group']),
+        // return each item in group as array
+        mergeMap(group => group.pipe(toArray()))
+      );
+
+      this.subscription = groupByProperties
+      .subscribe(result => {
+        // console.log(result);
+        this.genericProperties_values.push(result);
+            this.defaultFilters.push(result[0]['id']);
+            console.log(this.defaultFilters);
+            this.productService.changeDefaultFilters(this.defaultFilters);
+        // this.productService.changefiltersAvailable(result);
+        // console.log(this.ObservableFilters)
+      })
+    })
+  }, 1000)
 
   }
 
 
 
   getLocations(){
-    this.productService.getSelectedItem(this.id,[],this.pageNumber).subscribe(data => {
+    this.shopService.changesearchLocationStatus(true);
+    this.subscriptions.add(this.productService.currentDefaultFilters.subscribe(result =>{
+      this.selectedFilters = result;
+    }))
+    this.productService.getSelectedItem(this.id,this.selectedFilters,this.pageNumber).subscribe(data => {
       // console.log(data.shops.result)
+      // this.shopService.changesearchLocationStatus(true);
       this.filteredShops = true;
       this.shopService.changeTotalLocations(data.shops.resultCount);
       this.shopService.changeAvailableShops(data.shops.result);
@@ -156,7 +219,7 @@ export class SelectionComponent implements OnInit {
 
 
             this.filteredShops = true;
-        })
+        });
     }
 
   getSelectedFilters(){

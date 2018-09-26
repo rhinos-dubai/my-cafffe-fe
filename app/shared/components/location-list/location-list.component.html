@@ -1,7 +1,10 @@
         
 
+<ActivityIndicator *ngIf="isBusy" row="1" #activityIndicator [busy]="isBusy"  width="100" height="100" class="activity-indicator"></ActivityIndicator>
+
+
                                     <StackLayout *ngFor="let item of Locations" >
-                                        <CardView  class="single-outlet-location" 
+                                        <CardView *ngIf="!isBusy"  class="single-outlet-location" 
                                         (tap)="changeShopName(item,item.base_price,filteredShops)">
                   
                                   <StackLayout>
@@ -9,7 +12,7 @@
                                       <GridLayout columns="80, *, auto" row="auto" class="single-outlet-location-main-div">
                   
                                           
-                                              <Image col="0" row="0" width="100" height="100" stretch="aspectFill" src="{{item.shop.image.secure_url}}" loadAsync="true"></Image>
+                                              <Image col="0" row="0" class="logo" stretch="aspectFill" src="{{item.shop.image.secure_url}}" loadAsync="true"></Image>
                                               
                                           
                   
@@ -42,7 +45,7 @@
                                           </StackLayout>
                   
                   
-                                          <StackLayout orientation="vertical" col="2" row="0" class="action-buttons">
+                                          <StackLayout marginTop="10" orientation="vertical" col="2" row="0" class="action-buttons">
                   
                                               <GridLayout columns="auto, auto" rows="auto, auto" >
                   
@@ -83,8 +86,8 @@
                               </CardView>
                             </StackLayout> 
 
-                              <Button *ngIf="!loading" text="Load More Items" horizontalAlignment="center" (tap)=onLoadMoreItemsRequested()></Button>
-                              <ActivityIndicator row="1" #activityIndicator [busy]="loading"  width="100" height="100" class="activity-indicator"></ActivityIndicator>
+                              <Button *ngIf="!loading && !isBusy" text="Load More Items" horizontalAlignment="center" (tap)=onLoadMoreItemsRequested()></Button>
+                              <ActivityIndicator row="1" #loadMore [busy]="loading"  width="100" height="100" class="activity-indicator"></ActivityIndicator>
 
 
 

@@ -1,6 +1,8 @@
-import { Component,Input, OnInit } from '@angular/core';
+import { Component,Input, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { ProductService } from '~/shared/services/product/product.service';
 import { ShopService } from '~/shared/services/shop/shop.service';
+import {  takeWhile, takeUntil, take } from 'rxjs/operators';
+import { from, Subject, Subscription } from 'rxjs';
 
 @Component({
   moduleId: module.id,
@@ -8,7 +10,7 @@ import { ShopService } from '~/shared/services/shop/shop.service';
   templateUrl: './item-filters.component.html',
   styleUrls: ['./item-filters.component.scss']
 })
-export class ItemFiltersComponent implements OnInit {
+export class ItemFiltersComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() filters;
   @Input() showActionButtons;
@@ -20,13 +22,92 @@ export class ItemFiltersComponent implements OnInit {
   showOptionButtons = false;
   pageNumber;
   selectedID;
+  ObservableFilters: Array<any> = [];
+  AvailableFilters: Array<any> = [];
+  public icons = [];
+  genericProperties: any;
+  showIcon: any;
+  showIconClass: boolean;
+  allSelectedFilters: Array<any> = [];
+  resultSize: any[] = [];
+  subscription: Subscription
+  private unsubscribe$ = new Subject();
+  alive: boolean = true;
+
+
+
 
   constructor(private productService:ProductService, private shopService:ShopService) { }
 
   ngOnInit() { 
-    this.productService.currentPageNumber.subscribe(result => {
-      this.pageNumber = result;
-    })
+    console.log("initiated filters")
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe();
+
+  console.log("destroying")
+};
+
+unsubscribe(){
+  
+}
+
+  
+
+  ngAfterViewInit() {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+
+
+      this.productService.currentPageNumber.pipe()
+      .subscribe(result => {
+        this.pageNumber = result;
+      });
+      
+        this.productService.currentfiltersAvailable.pipe()
+        .subscribe(result => {
+          this.resultSize.push(result);    
+      })
+
+      setTimeout(() => {
+        this.productService.currentDefaultFilters.pipe(take(2))
+      
+        .subscribe(result => {
+            //console.log(result);
+            this.Selectedoptions = result;
+          // console.log(this.Selectedoptions);
+            if(this.resultSize.length == 0){
+              console.log("dont run")
+            }
+            else{
+              this.resultSize.forEach(element => {
+                //console.log(element.length);
+              for(let i =0 ; i < element.length; i++){
+               // console.log(element[i].id);
+                for(let j = 0; j < result.length; j++){
+                  if(result[j] == element[i].id){
+                    console.log(result[j], element[i]);
+                    this.allSelectedFilters.push(element[i]);
+                  }
+                }
+              };
+            });
+            //this.resultSize = [];
+            
+          }
+
+      });
+
+      this.productService.changeSelectedFilters(this.allSelectedFilters);
+
+      }, 1000)
+
+      
+
+
+
+
   }
 
     
@@ -59,24 +140,37 @@ export class ItemFiltersComponent implements OnInit {
   }
 
   filtersSelectedByUser(item){
-    // console.log(this.filtersbyUser);
-    if(this.filtersbyUser == []){
-      this.filtersbyUser.push(item);
-    }
-    else{
-      this.filtersbyUser.forEach(element =>{
-        console.log(element)
-        if(element.id == item.id){
-          alert("Already Selected");
-        }
-        //console.log(element);
-      });
 
-    }
-  
-    // console.log(item);
-    // console.log(this.filtersbyUser);
-    this.productService.changeSelectedFilters(this.filtersbyUser);
+    console.log(item.id, this.Selectedoptions);
+    this.productService.currentfiltersAvailable.subscribe(result => {
+      let resultSize = [];
+          resultSize.push(result);
+          setTimeout(() => {
+            
+            if(resultSize.length == 0){
+              console.log("dont run")
+            }
+            else{
+              resultSize.forEach(element => {
+                console.log(element.length)
+              for(let i =0 ; i < element.length; i++){
+                console.log(element[i].id);
+                for(let j = 0; j < this.Selectedoptions.length; j++){
+                  if(result[j] == element[i].id){
+                    
+                    this.allSelectedFilters.push(element[i]);
+                    this.productService.changeSelectedFilters(this.allSelectedFilters);
+                  }
+                }
+              };
+            });
+        }
+
+         
+        }, 1000)
+
+    });
+
   }
 
   filterProducts(){

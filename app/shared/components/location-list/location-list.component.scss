@@ -34,12 +34,14 @@
         //}
 
         .single-outlet-location-title{
-            margin-bottom: 5;
+            font-size: 15;
+            margin : 8px;
             //@extend .button-text;
         }
 
         .single-outlet-location-label{
-            margin-bottom: 1;
+            font-size: 12;
+            margin : 8px;
             //@extend .label-text-gray;
             //margin-bottom: 5;
 
@@ -48,6 +50,8 @@
         .single-outlet-location-price{
             font-family: $font-family-bold;
             color:$secondary-color-light;
+            font-size: 15;
+            margin : 8px;
 
         }
     }
@@ -120,6 +124,15 @@
     .btn-primary{
         background:lightblue;
         width:100px;
+    }
+
+    .logo {
+        margin: 15px 0 0 15px;
+        border-radius: 10;
+        border-color: gray;
+        border-width: 0.5;
+        height:70;
+        width:70; 
     }
 
 

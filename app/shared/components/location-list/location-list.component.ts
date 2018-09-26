@@ -10,6 +10,7 @@ import { RadListView } from 'nativescript-ui-listview';
 import * as applicationModule from 'application';
 import { Color } from 'color';
 import { ScrollView } from 'tns-core-modules/ui/scroll-view/scroll-view';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -44,10 +45,16 @@ export class LocationListComponent implements OnInit {
 
   ngAfterViewInit(){
 
-    this.shopService.searchedLocation.subscribe(result =>{
-      this.isBusy = result;
-      console.log(result);
-    });
+    setTimeout(() => {
+
+      this.shopService.searchedLocation.subscribe(result =>{
+        this.isBusy = result;
+        console.log(result);
+      });
+
+    }, 200)
+
+
 
     this.productService.currentItem.subscribe(result => {
       this.id = result;
@@ -82,39 +89,19 @@ export class LocationListComponent implements OnInit {
 
   getSelectedFilters(){
     this.selectedFilterOptions = [];
-    this.productService.currentSelectedFilters.subscribe(result => {
+    this.productService.currentSelectedFilters.pipe(take(1))
+    .subscribe(result => {
       this.selectedFilters = result;
       this.selectedFilters.forEach(element => {
         this.selectedFilterOptions.push(element.id);
       });
+      console.log(this.selectedFilterOptions);
     })
   }
 
-  load(){
-    console.log("loading");
-    this.pageNumber += 1;
-    this.getSelectedFilters();
-      /*this.productService.getSelectedItem(this.id, this.selectedFilterOptions,this.pageNumber).subscribe(result => {
-       setTimeout(() => {
-         console.log(result.shops.result);
-         if(result.shops.result == ''){
-           alert("No More Shops");
-         }
-         else{
-         result.shops.result.forEach(element => {
-          this.shopService.addPagination(element);
-          console.log(element);
-          setTimeout(() => {
-          this.shops.push(element);
-            }, 1000)
-          });
-        }          
-        }, 1000)
-      });*/
-      
-  }
 
-  onLoadMoreItemsRequested(args){
+
+  onLoadMoreItemsRequested(){
     this.loading = true;
     console.log("loaded");
     this.pageNumber += 1;
@@ -122,7 +109,7 @@ export class LocationListComponent implements OnInit {
 
     this.productService.getSelectedItem(this.id, this.selectedFilterOptions,this.pageNumber).subscribe(result => {
       setTimeout(() => {
-        console.log(result.shops.result);
+        console.log(result.shops);
         if(result.shops.result == ''){
           alert("No More Shops");
         }
@@ -137,11 +124,6 @@ export class LocationListComponent implements OnInit {
        }      
        }, 200)   
     });
-
-    setTimeout(() => {
-    const listView: RadListView = args.object;
-    listView.notifyLoadOnDemandFinished(); 
-    }, 1000) 
   }
 
   

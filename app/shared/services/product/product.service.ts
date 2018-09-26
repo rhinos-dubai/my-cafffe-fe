@@ -28,6 +28,7 @@ export class ProductService {
   public genericProperties;
   public AllPosts: any[];
   public genereic: any[] = [];
+  public updatedItems = [];
 
   private itemSource = new BehaviorSubject(0);
   currentItem = this.itemSource.asObservable();
@@ -43,6 +44,29 @@ export class ProductService {
 
   private swipeProducts = new BehaviorSubject([]);
   currentSwipeProducts = this.swipeProducts.asObservable();
+
+  private filtersAvailable = new BehaviorSubject({});
+  currentfiltersAvailable = this.filtersAvailable.asObservable();
+
+  private defaultFilters = new BehaviorSubject([]);
+  currentDefaultFilters = this.defaultFilters.asObservable();
+
+  changeDefaultFilters(filters: Array<any>){
+    // console.log(filters);
+    this.defaultFilters.next(filters);
+  }
+
+  changefiltersAvailable(filters: Array<any>){
+    //console.log(filters);
+    this.updatedItems = [];
+    filters.forEach(element => {
+      let currentValue = element;
+      
+      this.updatedItems.push({...currentValue, icons : String.fromCharCode(parseInt( element.icon , 16)) });
+    });
+    // console.log(this.updatedItems);
+    this.filtersAvailable.next(this.updatedItems);
+  }
 
   changeSwipeProducts(products: Array<any>){
     this.swipeProducts.next(products);
@@ -62,6 +86,23 @@ export class ProductService {
 
   changePageNumber(pageNumberFromComponent: number){
     this.PageNumber.next(pageNumberFromComponent);
+  }
+
+  addIcons(item) {
+
+      /*this.filtersAvailable.value.forEach(element => {
+      let currentValue = element;
+      let updatedValue = [...currentValue, {obs : item }];
+      console.log(updatedValue);
+    });*/
+
+ 
+      // console.log(this.filtersAvailable.value[i]);
+      let currentValue = this.filtersAvailable.value;
+      let updatedValue = {...currentValue, icons : item };
+      console.log(updatedValue);
+      //this.filtersAvailable.next(updatedValue);
+    
   }
 
 
@@ -118,12 +159,13 @@ export class ProductService {
                 property_group
                 property
                 id
+                icon
               }
           
               shops(
                 includeInactive: false
                 filters: [${filters}]
-                perPage: 4
+                perPage: 8
                 paginate: true
                 pageNumber: ${pageNumber}
               ) {
@@ -153,6 +195,7 @@ export class ProductService {
                     generic_property {
                       id
                       property
+                      icon
                     }
                   }
                 }
@@ -164,7 +207,7 @@ export class ProductService {
   
       this.product = this.Ref
         .valueChanges
-        .pipe(debounceTime(1000),map(r => {
+        .pipe(map(r => {
             //console.log(r.data.getProduct);
             // getLocationListWithItems(r.data.getShops);
             // console.log(r.data);
@@ -181,5 +224,6 @@ export class ProductService {
   private handleErrors(error: HttpErrorResponse) {
     // console.log(error);
     return throwError(error);
+
   }
 }

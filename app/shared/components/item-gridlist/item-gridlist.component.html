@@ -16,7 +16,7 @@
           <StackLayout >
               <GridLayout rows="*,*" columns="*">
                   <StackLayout col="0" row="0">
-                        <Label  class="icomoon text-center item-icon" [text]="icons[i]" ></Label>                  
+                        <Button [nsRouterLink]="['/selection',item.id]" marginTop="15" textWrap="false"  class="icomoon text-center item-icon" [text]="icons[i]" ></Button>                  
                     </StackLayout>
                   <StackLayout col="0" row="1"  >
                       <Label  [text]="item.name" marginTop="15" textWrap="false" class="item-name-label text-center"></Label>

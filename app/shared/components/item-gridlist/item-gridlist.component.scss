@@ -14,16 +14,18 @@
     @extend .button-text;
   }
 
+  .item-icon{
+    font-size: 50;
+    color:$icons-color;
+  }
+
   .item-name-label{
     width: 100%;
+    @extend .button-text;
     //background-color: red;
   }
 
   .item-location-label{
     @extend .label-text-gray;
-  }
-
-  .item-icon{
-    font-size:50px;
   }
 }

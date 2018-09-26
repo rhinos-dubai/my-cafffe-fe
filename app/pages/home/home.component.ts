@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import {Router} from '@angular/router';
 import { NativeScriptRouterModule, RouterExtensions } from "nativescript-angular/router";
 import { registerElement } from "nativescript-angular/element-registry";
@@ -20,7 +20,7 @@ import set = Reflect.set;
 
 
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
     
   constructor( private router:Router, private shopService:ShopService, private prodcutServive:ProductService,private routerExtensions: RouterExtensions) {}
 
@@ -33,20 +33,25 @@ export class HomeComponent implements OnInit {
 
     ngAfterViewInit() {
 
-    setTimeout(() => {
+ 
 
+
+        
         this.shopService.getShopsNearme().subscribe(result => {
             this.locations = result;
         });
 
         this.prodcutServive.getAllProducts().subscribe( result => {
             this.products = result;
+            // console.log(result);
             this.prodcutServive.changeSwipeProducts(result);
         });
 
-        console.log(this.products);
 
-    }, 1000);
+
+        // console.log(this.products);
+
+
 
     }
 

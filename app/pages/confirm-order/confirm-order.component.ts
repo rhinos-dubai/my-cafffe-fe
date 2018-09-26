@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ProductService } from '~/shared/services/product/product.service';
 import { ShopService } from '~/shared/services/shop/shop.service';
 import { from } from 'rxjs';
-import { groupBy, mergeMap, toArray } from 'rxjs/operators';
+import { groupBy, mergeMap, toArray, take } from 'rxjs/operators';
 import { Page } from "ui/page";
 import { NativeScriptRouterModule, RouterExtensions } from "nativescript-angular/router";
 import * as dialogs from "ui/dialogs";
@@ -33,6 +33,7 @@ export class ConfirmOrderComponent implements OnInit {
   constructor(private productService:ProductService, private shopService: ShopService, private page: Page, private routerExtensions: RouterExtensions , private _page: Page) {this.page.actionBarHidden = true; }
 
   seletedItem = this.productService.currentItemName;
+  selectedId;
   seletedShop = this.shopService.SeletedShopName;
   selectedRate;
   itemRate;
@@ -40,6 +41,7 @@ export class ConfirmOrderComponent implements OnInit {
   selectedFilters: Array<any> = [];
   genericProperties: any;
   genericProperties_values: Array<any> = [];
+  addonsGroup: Array<any> = []
   itemQty: number = 1;
   animateFor = true;
   Cafe: Object = {name:"Cafe Name",
@@ -70,56 +72,55 @@ export class ConfirmOrderComponent implements OnInit {
       }
 
   ngOnInit() {
-      
-
     this.selectedCafe.subscribe(result => {
         this.Cafe['name'] = result['shop'].name;
         this.Cafe['location'] = result['shop'].address;
         this.Cafe['image'] = result['shop'].image.secure_url;
         this.Cafe['addons'] = result['addons'];
+        this.selectedId = result['id'];
 
+        console.log(result['addons'])
+        const source = from(result['addons']);
+            const groupByProperties = source.pipe(
+                groupBy(result => result['addon_group']),
+                // return each item in group as array
+                mergeMap(group => group.pipe(toArray()))
+            );
+            groupByProperties.subscribe(val => {
+                console.log(val);
+                this.addonsGroup.push(val);
+            });
+        // console.log("selected Id:" ,this.selectedId);
     });
 
-    this.shopService.currentShopItemRate.subscribe(result => {
+
+
+
+
+
+
+
+      this.shopService.currentShopItemRate.subscribe(result => {
         this.selectedRate = result;
         this.itemRate = result;
     })
+  
+   }
 
+   ngAfterViewInit() {
+       //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+       //Add 'implements AfterViewInit' to the class.
+
+
+
+       setTimeout(() =>{
+        this.productService.currentSelectedFilters.subscribe(result => {
+
+            this.Cafe['filters'] = result;
+           // console.log(this.Cafe['filters']);
+        })
+    }, 2000)
      
-    this.productService.currentSelectedFilters.subscribe(result => {
-    
-      const source = from(result);
-
-      result.forEach(element => {
-          this.selectedFilters.push(element);
-      });
-         this.Cafe['filters'] = this.selectedFilters;
-    });
-
-
-    // Temporary Start
-    //   this.productService.getSelectedItem(1,null,null).subscribe(result => {
-    //
-    //       this.genericProperties = result.generic_properties;
-    //       this.shopService.changeAvailableShops(result.shops);
-    //
-    //       const source = from(this.genericProperties);
-    //
-    //       const groupByProperties = source.pipe(
-    //           groupBy(result => result['property_group']),
-    //           // return each item in group as array
-    //           mergeMap(group => group.pipe(toArray()))
-    //       );
-    //
-    //       const subscribeToProperties = groupByProperties.subscribe(val => {
-    //           // console.log(val);
-    //           this.genericProperties_values.push(val);
-    //       });
-    //   });
-    // Temporary End
-
-
-
       selectedFiltersView = this.page.getViewById<View>("view-selectedFilters");
       selectedOptionsAddonsView = this.page.getViewById<View>("view-selectedOptions-addOns");
 
@@ -127,24 +128,7 @@ export class ConfirmOrderComponent implements OnInit {
       selectedFiltersView.scaleX = 0;
       selectedFiltersView.visibility = 'collapse';
 
-      // selectedOptionsAddonsView.translateY = -300;
-      // console.log('getActualSize() in Confirm: ' + -selectedFiltersView.getActualSize().height);
-
-
-      // Temp-Fooqi Static Data Start
       this.getGenericProperties();
-
-    /*  this.selectedFilters= [
-        { id: 10, name: 'Size', value: 'small' },
-        { id: 11, name: 'Sugar', value: '3' },
-        { id: 12, name: 'Strength', value: 'Decaf' },
-        { id: 13, name: 'Milk', value: 'regular' },
-        // { id: 14, name: 'This is Long', value: 'Long Value' },
-        { id: 15, name: 'Shot', value: 'Double' },
-
-    ]; */
-
-      // Temp-Fooqi Static Data End
    }
 
     // Temp-Fooqi Static Data Start
@@ -166,7 +150,13 @@ export class ConfirmOrderComponent implements OnInit {
 
     getGenericProperties(){
 
-        this.productService.getSelectedItem(1,null,1).subscribe(result => {
+        this.productService.currentDefaultFilters.pipe(take(1))
+        .subscribe(result =>{
+          this.selectedFilters = result;
+        })
+
+        this.productService.getSelectedItem(this.selectedId,this.selectedFilters,1).subscribe(result => {
+            console.log(result);
             this.genericProperties = result.generic_properties;
             const source = from(this.genericProperties);
             const groupByProperties = source.pipe(
@@ -226,7 +216,11 @@ export class ConfirmOrderComponent implements OnInit {
 
    editFilters(){
 
-      if(this.animateFor) {
+
+    this.routerExtensions.backToPreviousPage();
+
+
+      /*if(this.animateFor) {
 
           this.animateFor = false;
           selectedFiltersView.visibility = 'visible';
@@ -278,7 +272,7 @@ export class ConfirmOrderComponent implements OnInit {
 
       // console.log('Test ANimate');
        // selectedOptionsAddonsView.translateY = -selectedFiltersView.getActualSize().height;
-       // console.log('getActualSize() in Confirm: ' + -selectedFiltersView.getActualSize().height);
+       // console.log('getActualSize() in Confirm: ' + -selectedFiltersView.getActualSize().height);*/
 
    }
 

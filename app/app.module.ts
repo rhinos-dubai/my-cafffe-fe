@@ -43,7 +43,7 @@ import {ActionBarComponent} from '~/shared/components/action-bar/action-bar.comp
 import {AllUiComponent} from '~/pages/all-ui/all-ui.component';
 import {SplashScreenComponent} from '~/pages/splash-screen/splash-screen.component';
 
-const uri = "http://142.93.129.34:4000/my-cafffe-graphql-api";
+const uri = "https://yq-api.rhinosme-stagging.com/my-cafffe-graphql-api/"
 
 @NgModule({
   imports: [

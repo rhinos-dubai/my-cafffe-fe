@@ -61,21 +61,29 @@
             </StackLayout>
 
             <ScrollView orientation="horizontal" row="0" col="1" scrollBarIndicatorVisible="false">
-                <StackLayout orientation="horizontal">
+                <StackLayout orientation="horizontal" >
 
-                    <!--<Button  class="btn btn-pill" -->
-                                <!--*ngFor="let options of item; index as i"-->
-                                <!--text="{{options.property}}"-->
-                                <!--(tap)="onSelectionTap(options.id,options.property,j);filtersSelectedByUser(item[i]);filterProducts();"-->
-                                <!--&gt;-->
-                    <!--</Button> -->
-
-                    <Button width="75"  [ngClass]="{ 'btn-pill-active': (options.id == Selectedoptions[j]), 'btn btn-pill': (options.id != Selectedoptions[j])}"
-                                *ngFor="let options of item; index as i"
-                                text="{{options.property}}"
+                    <StackLayout *ngFor="let options of item; index as i">
+                    <StackLayout *ngIf="options.icon !== null">
+                    <Button width="75"     [ngClass]="{'btn-pill-active': (options.id == Selectedoptions[j]), 'btn btn-pill': (options.id != Selectedoptions[j]), 'icomoon item-icon': true}"
+                                
+                                text="{{options.icons}}"
                                 (tap)="onSelectionTap(options.id,options.property,j);filtersSelectedByUser(item[i]);filterProducts();"
                                 >
                     </Button>
+                    </StackLayout>
+                    </StackLayout>
+                    <StackLayout *ngFor="let options of item; index as i">
+                    <StackLayout *ngIf="options.icon === null">
+
+                    <Button width="75"     [ngClass]="{'btn-pill-active': (options.id == Selectedoptions[j]), 'btn btn-pill': (options.id != Selectedoptions[j])}"
+                    text="{{options.property}}"
+                    (tap)="onSelectionTap(options.id,options.property,j);filtersSelectedByUser(item[i]);filterProducts();"
+                    >
+                    </Button>
+                    </StackLayout>
+                    </StackLayout>
+        
 
                 </StackLayout>
             </ScrollView>
