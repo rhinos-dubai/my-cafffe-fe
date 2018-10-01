@@ -41,19 +41,23 @@ export class LocationListComponent implements OnInit {
 
   constructor(private shopService: ShopService,private productService: ProductService, private router:Router,private routerExtensions: RouterExtensions) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    /**/
+   }
 
   ngAfterViewInit(){
 
+
+
     setTimeout(() => {
 
-      this.shopService.searchedLocation.subscribe(result =>{
-        this.isBusy = result;
-        console.log(result);
-      });
-
-    }, 200)
-
+      this.shopService.searchedLocation.
+    subscribe(result =>{
+      this.isBusy = result;
+      console.log(result);
+    });
+      
+    }, 2000);
 
 
     this.productService.currentItem.subscribe(result => {
@@ -62,6 +66,7 @@ export class LocationListComponent implements OnInit {
 
     this.productService.currentPageNumber.subscribe(result => {
       this.pageNumber = result;
+      console.log(result);
     });
 
     this.shopService.checkForAvailableShops.subscribe(result => {
@@ -88,15 +93,19 @@ export class LocationListComponent implements OnInit {
     }
 
   getSelectedFilters(){
-    this.selectedFilterOptions = [];
-    this.productService.currentSelectedFilters.pipe(take(1))
-    .subscribe(result => {
-      this.selectedFilters = result;
-      this.selectedFilters.forEach(element => {
-        this.selectedFilterOptions.push(element.id);
-      });
-      console.log(this.selectedFilterOptions);
-    })
+    
+      this.selectedFilterOptions = [];
+      this.productService.currentSelectedFilters.pipe(take(1))
+      .subscribe(result => {
+        console.log(result); 
+        this.selectedFilters = result;
+        this.selectedFilters.forEach(element => {
+          this.selectedFilterOptions.push(element);
+        });
+        console.log(this.selectedFilterOptions);
+        })
+
+    
   }
 
 
@@ -105,13 +114,16 @@ export class LocationListComponent implements OnInit {
     this.loading = true;
     console.log("loaded");
     this.pageNumber += 1;
+    this.productService.changePageNumber(this.pageNumber);
     this.getSelectedFilters();
-
+    console.log(this.selectedFilterOptions);
     this.productService.getSelectedItem(this.id, this.selectedFilterOptions,this.pageNumber).subscribe(result => {
       setTimeout(() => {
-        console.log(result.shops);
+        // console.log(result.shops);
         if(result.shops.result == ''){
           alert("No More Shops");
+          this.shopService.changesearchLocationStatus(false);
+          this.loading = false;
         }
         else{
         result.shops.result.forEach(element => {

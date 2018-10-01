@@ -1,10 +1,10 @@
         
-
-<ActivityIndicator *ngIf="isBusy" row="1" #activityIndicator [busy]="isBusy"  width="100" height="100" class="activity-indicator"></ActivityIndicator>
+<Label [text]="isBusy"></Label>
+<ActivityIndicator *ngIf="(isBusy)"   row="1" #activityIndicator [busy]="(isBusy)"  width="100" height="100" class="activity-indicator"></ActivityIndicator>
 
 
                                     <StackLayout *ngFor="let item of Locations" >
-                                        <CardView *ngIf="!isBusy"  class="single-outlet-location" 
+                                        <CardView *ngIf="(!isBusy)"  class="single-outlet-location" 
                                         (tap)="changeShopName(item,item.base_price,filteredShops)">
                   
                                   <StackLayout>
@@ -86,7 +86,7 @@
                               </CardView>
                             </StackLayout> 
 
-                              <Button *ngIf="!loading && !isBusy" text="Load More Items" horizontalAlignment="center" (tap)=onLoadMoreItemsRequested()></Button>
+                              <Button *ngIf="!loading" text="Load More Items" horizontalAlignment="center" (tap)=onLoadMoreItemsRequested()></Button>
                               <ActivityIndicator row="1" #loadMore [busy]="loading"  width="100" height="100" class="activity-indicator"></ActivityIndicator>
 
 

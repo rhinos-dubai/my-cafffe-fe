@@ -5,7 +5,9 @@ import { AppRoutingModule } from "./app.routing";
 import { HttpModule } from "@angular/http";
 
 import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
+ 
 import { Apollo, ApolloModule } from "apollo-angular";
 
 import { HttpLink, HttpLinkModule } from "apollo-angular-link-http";
@@ -16,11 +18,14 @@ import { GridViewModule } from 'nativescript-grid-view/angular';
 
 import { ProductService } from "./shared/services/product/product.service";
 import { ShopService } from "./shared/services/shop/shop.service";
+import { UserService } from "./shared/services/user/user.service";
+
 import { SelectItemComponent } from "./pages/select-item/select-item.component";
 import { SelectionComponent } from "./pages/selection/selection.component";
 import { ConfirmOrderComponent } from "./pages/confirm-order/confirm-order.component";
 import { ShopComponent } from "./pages/shop/shop.component";
 import { LoginComponent } from "./pages/login/login.component";
+import { SignupComponent } from './pages/signup/signup.component'
 
 
 import { ItemGridlistComponent } from "./shared/components/item-gridlist/item-gridlist.component";
@@ -56,7 +61,8 @@ const uri = "https://yq-api.rhinosme-stagging.com/my-cafffe-graphql-api/"
     GridViewModule,
     NativeScriptUIListViewModule,
     NativeScriptFacebookModule,
-    TNSCheckBoxModule
+    TNSCheckBoxModule,
+    NativeScriptFormsModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   // tslint:disable-next-line:object-literal-sort-keys
@@ -74,10 +80,10 @@ const uri = "https://yq-api.rhinosme-stagging.com/my-cafffe-graphql-api/"
     ActionBarComponent,
     LoginComponent,
     AllUiComponent,
-    SplashScreenComponent
-    
+    SplashScreenComponent,
+    SignupComponent
   ],
-  providers: [ProductService, ShopService],
+  providers: [ProductService, ShopService, UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

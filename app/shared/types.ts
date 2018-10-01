@@ -19,6 +19,31 @@ export type GenericProperty = {
   updatedAt: string;
 };
 
+export type User = {
+  id: number;
+  type: string;
+  isActive: boolean;
+  profile: UserProfile;
+  createdAt: String;
+  updatedAt: String;
+}
+
+export type UserProfile = {
+  id: number;
+  f_name: string;
+  l_name: string;
+  email: string;
+  phone: string;
+  country: string;
+  dob: string;
+  address: string;
+  photo: string;
+  createdAt: string;
+  updatedAt: string;
+  //orders: [Order]
+  //cart: [CartProduct]
+}
+
 // tslint:disable-next-line:interface-over-type-literal
 export type Shop = {
     id: number;
@@ -79,5 +104,7 @@ export type Query = {
     getMainCategory: Category;
     getClosestShops:Shop[];
     getShop:Shop[];
+    getUser:User;
+    signUp:User;
 // tslint:disable-next-line:eofline
 };

@@ -47,7 +47,7 @@ export class SelectionComponent implements OnInit, OnDestroy {
   pageNumber;
   shops: Array<any> = [];
   MoreShops: boolean = false;
-  selectedFilters: any[];
+  selectedFilters: any[] = [];
   selectedFilterOptions: Array<any> = [];
   totalLocations: any = 0;
   scrollView: ScrollView;
@@ -62,11 +62,11 @@ export class SelectionComponent implements OnInit, OnDestroy {
   constructor(private page: Page, private route: ActivatedRoute, private productService:ProductService, private shopService:ShopService) { }
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.productService.changePageNumber(1);
+  }
 
   ngOnDestroy() {
-    console.log("Destroy from Selection");
-    this.subscription.unsubscribe();
   }
 
   ngAfterViewInit() {
@@ -104,13 +104,13 @@ export class SelectionComponent implements OnInit, OnDestroy {
         this.productService.changeSelectedItemID(this.id);
         // console.log(this.id);
       });
+        this.getGenericProperties();
+          this.getSelectedFilters();
+          this.getLocationSize();
+          this.getLocations();
 
-      this.getGenericProperties();
-      setTimeout(() => {
-        this.getLocationSize();
-        this.getLocations();
-        this.getSelectedFilters();
-      }, 1000)
+
+
 
       
 
@@ -125,71 +125,58 @@ export class SelectionComponent implements OnInit, OnDestroy {
           data.forEach(element => {
           // console.log(element.shop);
           this.locationListSize.push(element.shop);
-        }, 200)
+        }, 1000)
       });
     })
   }
 
   getGenericProperties(){
 
-    this.productService.currentDefaultFilters.pipe(take(1))
+    /*this.productService.currentDefaultFilters
     .subscribe(result =>{
+      console.log(result);
       this.selectedFilters = result;
-    })
-    this.productService.getSelectedItem(this.id,this.selectedFilters,this.pageNumber).pipe(take(1))
+    })*/
+    this.productService.getSelectedItem(this.id,null,this.pageNumber)
     .subscribe(result => {
-      setTimeout(() => {
-      this.shopService.changeAvailableShops(result.shops.result);
-      }, 200)
-      this.genericProperties = result.generic_properties;
 
+      this.shopService.changeAvailableShops(result.shops.result);
+
+      this.genericProperties = result.generic_properties;
+      console.log(result);
         this.productService.changefiltersAvailable(result.generic_properties);
 
-      //this.productService.addIcons()
-      /*const source = from(this.genericProperties);
+        this.productService.currentfiltersAvailable.pipe(take(1))
+      .subscribe(result => {
+        
+        // this.genericProperties_values.push(result);
+        this.genericProperties = result;
 
-      const groupByProperties = source.pipe(
+        const source = from(this.genericProperties);
+
+        const groupByProperties = source.pipe(
           groupBy(result => result['property_group']),
           // return each item in group as array
           mergeMap(group => group.pipe(toArray()))
         );
 
-        let subscribeToProperties = groupByProperties.subscribe(val => {
-
-          this.genericProperties_values.push(val);
-          //this.productService.changefiltersAvailable(val);
-        });*/
+        groupByProperties.pipe()
+        .subscribe(result => {
+          // console.log(result);
+          this.genericProperties_values.push(result);
+              this.defaultFilters.push(result[0]['id']);
+              console.log(this.defaultFilters);
+          // this.productService.changefiltersAvailable(result);
+          // console.log(this.ObservableFilters)
+        })
+      });
 
     });
 
-    setTimeout(() => {
 
+    this.productService.changeDefaultFilters(this.defaultFilters);
+    this.productService.changeSelectedFilters(this.defaultFilters);
 
-    this.productService.currentfiltersAvailable.pipe(take(1))
-    .subscribe(result => {
-      // this.genericProperties_values.push(result);
-      this.genericProperties = result;
-
-      const source = from(this.genericProperties);
-
-      const groupByProperties = source.pipe(
-        groupBy(result => result['property_group']),
-        // return each item in group as array
-        mergeMap(group => group.pipe(toArray()))
-      );
-
-      this.subscription = groupByProperties
-      .subscribe(result => {
-        // console.log(result);
-        this.genericProperties_values.push(result);
-            this.defaultFilters.push(result[0]['id']);
-            console.log(this.defaultFilters);
-            this.productService.changeDefaultFilters(this.defaultFilters);
-        // this.productService.changefiltersAvailable(result);
-        // console.log(this.ObservableFilters)
-      })
-    })
-  }, 1000)
 
   }
 
@@ -224,7 +211,10 @@ export class SelectionComponent implements OnInit, OnDestroy {
 
   getSelectedFilters(){
     this.selectedFilterOptions = [];
-    this.productService.currentSelectedFilters.subscribe(result => {
+    
+    this.productService.currentSelectedFilters.
+    subscribe(result => {
+      console.log(result);
       this.selectedFilters = result;
       this.selectedFilters.forEach(element => {
         this.selectedFilterOptions.push(element.id);

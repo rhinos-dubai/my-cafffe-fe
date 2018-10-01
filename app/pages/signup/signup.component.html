@@ -1,4 +1,33 @@
-<StackLayout>
-  <Label class="h1 title"
-    text="signup Is working"></Label>
-</StackLayout>
+<ActionBar title="YQ SignUP">
+  <NavigationButton text="Back" ios.position="left"></NavigationButton>
+</ActionBar>
+<GridLayout backgroundColor="#CCCCCC">
+  <ScrollView>
+      <StackLayout margin="10" verticalAlignment="center">
+          <StackLayout class="form" padding="15" backgroundColor="#FFFFFF">
+              <StackLayout class="input-field">
+                  <Label text="First Name" class="label font-weight-bold m-b-5"></Label>
+                  <TextField class="input" name="firstname" ngDefaultControl  [(ngModel)]="input.firstname"></TextField>
+                  <StackLayout class="hr-light"></StackLayout>
+              </StackLayout>
+              <StackLayout class="input-field">
+                  <Label text="Last Name" class="label font-weight-bold m-b-5"></Label>
+                  <TextField class="input" name="lastname" ngDefaultControl  [(ngModel)]="input.lastname"></TextField>
+                  <StackLayout class="hr-light"></StackLayout>
+              </StackLayout>
+              <StackLayout class="input-field">
+                  <Label text="Email" class="label font-weight-bold m-b-5"></Label>
+                  <TextField class="input" name="email" ngDefaultControl [(ngModel)]="input.email"></TextField>
+                  <StackLayout class="hr-light"></StackLayout>
+              </StackLayout>
+              <StackLayout class="input-field">
+                  <Label text="Password" class="label font-weight-bold m-b-5"></Label>
+                  <TextField secure="true" name="password" ngDefaultControl  class="input" [(ngModel)]="input.password"></TextField>
+                  <StackLayout class="hr-light"></StackLayout>
+              </StackLayout>
+              <Button class="btn btn-primary w-full" text="Register" (tap)="register()"></Button>
+              <Label (tap)="goBack()" text="Already a member? Login here." class="text-center footnote"></Label>
+          </StackLayout>
+      </StackLayout>
+  </ScrollView>
+</GridLayout>

@@ -10,6 +10,7 @@ import { ShopComponent } from "./pages/shop/shop.component";
 import { LoginComponent } from "./pages/login/login.component";
 import {AllUiComponent} from '~/pages/all-ui/all-ui.component';
 import {SplashScreenComponent} from '~/pages/splash-screen/splash-screen.component';
+import { SignupComponent } from '~/pages/signup/signup.component'
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
     { path: "login", component: LoginComponent },
     { path: "allui", component: AllUiComponent },
     { path: "splash-screen", component: SplashScreenComponent },
+    { path: "allui", component: AllUiComponent },
+    { path: "signup", component: SignupComponent },
+
+    
 
 ];
 

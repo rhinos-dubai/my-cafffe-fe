@@ -44,14 +44,7 @@ export class ItemFiltersComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe();
-
-  console.log("destroying")
-};
-
-unsubscribe(){
-  
-}
+  };
 
   
 
@@ -70,11 +63,10 @@ unsubscribe(){
           this.resultSize.push(result);    
       })
 
-      setTimeout(() => {
-        this.productService.currentDefaultFilters.pipe(take(2))
-      
+
+        this.productService.currentDefaultFilters
         .subscribe(result => {
-            //console.log(result);
+            console.log(result);
             this.Selectedoptions = result;
           // console.log(this.Selectedoptions);
             if(this.resultSize.length == 0){
@@ -101,7 +93,7 @@ unsubscribe(){
 
       this.productService.changeSelectedFilters(this.allSelectedFilters);
 
-      }, 1000)
+
 
       
 
@@ -142,7 +134,8 @@ unsubscribe(){
   filtersSelectedByUser(item){
 
     console.log(item.id, this.Selectedoptions);
-    this.productService.currentfiltersAvailable.subscribe(result => {
+    this.productService.currentfiltersAvailable.
+    subscribe(result => {
       let resultSize = [];
           resultSize.push(result);
           setTimeout(() => {
@@ -154,7 +147,7 @@ unsubscribe(){
               resultSize.forEach(element => {
                 console.log(element.length)
               for(let i =0 ; i < element.length; i++){
-                console.log(element[i].id);
+                // console.log(element[i].id);
                 for(let j = 0; j < this.Selectedoptions.length; j++){
                   if(result[j] == element[i].id){
                     
@@ -164,9 +157,7 @@ unsubscribe(){
                 }
               };
             });
-        }
-
-         
+          }
         }, 1000)
 
     });
@@ -177,7 +168,8 @@ unsubscribe(){
     this.shopService.changeShopsAvailbilityStatus(true);
     console.log(this.Selectedoptions);
     this.shopService.changesearchLocationStatus(true);
-    this.productService.getSelectedItem(this.selectedItem,this.Selectedoptions,this.pageNumber).subscribe(
+    this.productService.getSelectedItem(this.selectedItem,this.Selectedoptions,this.pageNumber).pipe(take(1))
+    .subscribe(
         data =>{
             this.shopService.changeTotalLocations(data.shops.resultCount);
             this.shopService.changeAvailableShops(data.shops.result);
